@@ -10,7 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Team7App">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".InfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OTPActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EnterMailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +35,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".WelcomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true" />
 
-        </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

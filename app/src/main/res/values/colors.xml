@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="category_title">#FACE7F</color>
+    <color name="category_background">#B04C52</color>
+    <color name="category_status">#E2CFAD</color>
+    <color name="main_menu_background">#9E272F</color>
+    <color name="red">#FF0909</color>
+    <color name="blue">#0090FF</color>
+    <color name="green">#2FFF00</color>
+    <color name="icon_color">#CFCCCC</color>
+    <color name="title_activity_color">#9E272F</color>
+    <color name="button_background">#FACE7F</color>
+    <color name="text_button">#630A10</color>
+
 </resources>
