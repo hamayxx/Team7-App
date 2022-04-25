@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_mail"
+    tools:context=".OTPActivity">
+
+    <TextView
+        android:id="@+id/a_enter_email_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OTP CODE"
+        android:textSize="28dp"
+        android:textFontWeight="400"
+        android:fontFamily="@font/iciel_smoothy_sans"
+        android:textColor="@color/title_activity_color"
+        android:layout_marginLeft="45dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="245dp" />
+
+    <com.chaos.view.PinView
+        android:id="@+id/a_enter_email_pv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:itemBackground="@color/white"
+        android:layout_marginTop="28dp"
+        android:textColor="@color/title_activity_color"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:itemHeight="57dp"
+        app:itemWidth="57dp"
+        app:lineColor="@color/white"
+        app:itemSpacing="14dp"
+        app:layout_constraintTop_toBottomOf="@id/a_enter_email_tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:hideLineWhenFilled="true"
+        app:itemRadius="15dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/a_enter_email_btn_enter"
+        android:layout_width="132dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/button_background"
+        android:layout_marginTop="33dp"
+        app:cardCornerRadius="238dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a_enter_email_pv_code">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Enter"
+                android:fontFamily="@font/heebo"
+                android:textFontWeight="800"
+                android:textColor="@color/text_button"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_recently"
+            android:title="Recently"
+            android:icon="@drawable/icon_recently"/>
+
+        <item
+            android:id="@+id/nav_trash"
+            android:title="Trash"
+            android:icon="@drawable/icon_trash"/>
+
+        <item
+            android:id="@+id/nav_information"
+            android:title="Information"
+            android:icon="@drawable/icon_information"/>
+
+    </group>
+
+    <group
+        android:id="@+id/menu_bot"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:icon="@drawable/icon_logout" />
+
+    </group>
+</menu>
