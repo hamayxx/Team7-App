@@ -19,6 +19,7 @@ import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.SecurityFragment;
 import com.example.team7_app.fragment.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -109,9 +110,12 @@ public class HomeActivity extends AppCompatActivity {
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewProfile);
         bottomSheetDialog.show();
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
     private void openSecurityFragment() {
