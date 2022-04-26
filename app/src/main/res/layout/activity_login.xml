@@ -141,7 +141,6 @@
         android:layout_height="45dp"
         android:backgroundTint="@color/button_background"
         app:cardCornerRadius="238dp"
-        android:elevation="4dp"
         android:layout_marginTop="21dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

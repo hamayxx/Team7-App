@@ -141,6 +141,8 @@ public class HomeActivity extends AppCompatActivity {
         }
         else {
             super.onBackPressed();
+           // tat ung dung
+            finishAffinity();
         }
     }
 }
