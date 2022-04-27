@@ -39,6 +39,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_tv_name">
@@ -50,6 +52,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_open"
                         android:text="Open"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -70,6 +73,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_open">
@@ -81,6 +85,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_delete"
                         android:text="Delete"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,6 +106,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_delete">
@@ -112,6 +118,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_copy"
                         android:text="Copy to"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -132,6 +139,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_copy">
@@ -143,6 +151,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_cut"
                         android:text="Cut to"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -163,6 +172,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_cut">
@@ -174,6 +184,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_share"
                         android:text="Share to"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -194,6 +205,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_share">
@@ -205,6 +217,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_rename"
                         android:text="Rename"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -225,6 +238,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_rename">
@@ -236,6 +250,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_secure"
                         android:text="Secure"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -256,6 +271,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_secure">
@@ -267,6 +283,7 @@
                     <TextView
                         android:id="@+id/fm_item_options_tv_information"
                         android:text="Information"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +17,12 @@ import android.view.ViewGroup;
 
 import com.example.team7_app.CustomProgressBar.CustomProgressBar;
 import com.example.team7_app.CustomProgressBar.ProgressItem;
+import com.example.team7_app.HomeActivity;
 import com.example.team7_app.R;
 import com.example.team7_app.category.Category;
 import com.example.team7_app.category.CategoryAdapter;
+import com.example.team7_app.my_interface.IClickHomeListener;
+import com.example.team7_app.my_interface.IClickItemCategoryListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +47,7 @@ public class HomeFragment extends Fragment {
     private ProgressItem mProgressItem;
     private RecyclerView rvCategories;
     private CategoryAdapter categoryAdapter;
+    private IClickItemCategoryListener iClickItemCategoryListener;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -89,7 +95,33 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rvCategories.setLayoutManager(linearLayoutManager);
 
-        categoryAdapter = new CategoryAdapter(getContext());
+        categoryAdapter = new CategoryAdapter(getListCategory(), new IClickItemCategoryListener() {
+            @Override
+            public void onClickItemCategory(Category category) {
+                IClickHomeListener iClickHomeListener = (IClickHomeListener) getActivity();
+                switch (category.getTitle()) {
+                    case "Documents":
+                        iClickHomeListener.setCurrentFragment(4);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DocumentsFragment()).addToBackStack(DocumentsFragment.documentTag).commit();
+                        break;
+                    case "Downloads":
+                        iClickHomeListener.setCurrentFragment(4);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DownloadsFragment()).addToBackStack(DownloadsFragment.downloadTag).commit();
+                        break;
+                    case "Media":
+                        iClickHomeListener.setCurrentFragment(4);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MediaFragment()).addToBackStack(MediaFragment.mediaTag).commit();
+                        break;
+                    case "Apps":
+                        iClickHomeListener.setCurrentFragment(4);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AppsFragment()).addToBackStack(AppsFragment.appTag).commit();
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        });
         categoryAdapter.setData(getListCategory());
         rvCategories.setAdapter(categoryAdapter);
 

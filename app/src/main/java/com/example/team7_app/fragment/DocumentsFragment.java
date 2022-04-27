@@ -11,10 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import com.example.team7_app.HomeActivity;
 import com.example.team7_app.R;
 import com.example.team7_app.item.Item;
 import com.example.team7_app.item.ItemAdapter;
+import com.example.team7_app.my_interface.IClickItemOptionListener;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +41,13 @@ public class DocumentsFragment extends Fragment {
     private String mParam2;
     private RecyclerView rvItems;
     private ItemAdapter itemAdapter;
+    private ImageButton ibBack, ibAdjust;
+    public static final String documentTag = DocumentsFragment.class.getName();
 
+    private IClickItemOptionListener iClickItemOptionListener;
     public DocumentsFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -83,9 +92,34 @@ public class DocumentsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rvItems.setLayoutManager(linearLayoutManager);
 
-        itemAdapter = new ItemAdapter(getContext());
+        //mo option item
+        itemAdapter = new ItemAdapter(getListItem(), new IClickItemOptionListener() {
+            @Override
+            public void onClickItemOption(Item item) {
+                clickOpenOptionSheetDialog();
+            }
+        });
         itemAdapter.setData(getListItem());
         rvItems.setAdapter(itemAdapter);
+
+        ibBack = getView().findViewById(R.id.fm_documents_btn_return);
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getFragmentManager() != null)
+                {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
+
+        ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
+        ibAdjust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickOpenAdjustSheetDialog();
+            }
+        });
     }
 
     private List<Item> getListItem() {
@@ -97,5 +131,26 @@ public class DocumentsFragment extends Fragment {
         listItem.add(new Item(R.drawable.icon_pdf, "Draft.txt", "17 March 2022 | Used: 123MB"));
 
         return listItem;
+    }
+    private void clickOpenAdjustSheetDialog() {
+        View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(viewAdjust);
+        bottomSheetDialog.show();
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewAdjust.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    private void clickOpenOptionSheetDialog() {
+        View viewOption = getLayoutInflater().inflate(R.layout.fragment_item_options, null);
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(viewOption);
+        bottomSheetDialog.show();
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 }

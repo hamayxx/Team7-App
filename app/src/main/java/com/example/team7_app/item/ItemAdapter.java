@@ -12,15 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.R;
+import com.example.team7_app.my_interface.IClickItemOptionListener;
 
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private Context mContext;
     private List<Item> mItems;
+    private IClickItemOptionListener iClickItemOptionListener;
 
-    public ItemAdapter(Context context) { this.mContext = context; }
+    public ItemAdapter(List<Item> list, IClickItemOptionListener iClickItemOptionListener)
+    {
+        this.mItems = list;
+        this.iClickItemOptionListener= iClickItemOptionListener;
+    }
 
     public void setData(List<Item> list) {
         this.mItems = list;
@@ -44,6 +49,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.ivIcon.setBackgroundResource(item.getIconId());
         holder.tvName.setText(item.getName());
         holder.tvInfo.setText(item.getInfo());
+        holder.btnOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickItemOptionListener.onClickItemOption(item);
+            }
+        });
     }
 
     @Override

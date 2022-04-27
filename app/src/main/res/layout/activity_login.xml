@@ -24,12 +24,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <!--user-->
+    <!--username-->
     <androidx.cardview.widget.CardView
         android:id="@+id/a_login_cv_user"
         android:layout_width="340dp"
         android:layout_height="57dp"
         android:layout_marginTop="26dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/a_login_tv_title"
@@ -77,6 +78,7 @@
         android:layout_width="340dp"
         android:layout_height="57dp"
         android:layout_marginTop="26dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/a_login_cv_user"

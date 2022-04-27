@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="245dp" />
 
+    //input
     <com.chaos.view.PinView
         android:id="@+id/a_enter_email_pv_code"
         android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
         app:hideLineWhenFilled="true"
         app:itemRadius="15dp"/>
 
+    //button
     <androidx.cardview.widget.CardView
         android:id="@+id/a_enter_email_btn_enter"
         android:layout_width="132dp"
@@ -52,22 +54,22 @@
         app:layout_constraintTop_toBottomOf="@id/a_enter_email_pv_code">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="129dp"
             android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Enter"
                 android:fontFamily="@font/heebo"
-                android:textFontWeight="800"
+                android:text="Enter"
                 android:textColor="@color/text_button"
+                android:textFontWeight="800"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

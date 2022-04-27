@@ -8,19 +8,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.R;
+import com.example.team7_app.my_interface.IClickItemCategoryListener;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
 
-    private Context mContext;
     private List<Category> mCategories;
+    private IClickItemCategoryListener iClickItemCategoryListener;
 
-    public CategoryAdapter(Context context) {
-        this.mContext = context;
+    public CategoryAdapter(List<Category> list, IClickItemCategoryListener iClickItemCategoryListener)
+    {
+        this.mCategories=list;
+        this.iClickItemCategoryListener= iClickItemCategoryListener;
     }
 
     public void setData(List<Category> list) {
@@ -45,6 +49,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.tvTitle.setText(category.getTitle());
         holder.ivIcon.setBackgroundResource(category.getIconId());
         holder.tvStatus.setText(category.getStatus());
+        holder.cvLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickItemCategoryListener.onClickItemCategory(category);
+
+            }
+        });
     }
 
     @Override
@@ -60,6 +71,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         private TextView tvTitle;
         private ImageView ivIcon;
         private TextView tvStatus;
+        private CardView cvLayout;
 
 
         public CategoryViewHolder(@NonNull View itemView) {
@@ -68,6 +80,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             tvTitle = itemView.findViewById(R.id.item_category_tv_title);
             ivIcon = itemView.findViewById(R.id.item_category_iv_icon);
             tvStatus = itemView.findViewById(R.id.item_category_tv_status);
+            cvLayout= itemView.findViewById(R.id.item_category_cv_layout);
         }
     }
 }
