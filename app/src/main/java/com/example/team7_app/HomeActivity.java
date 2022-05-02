@@ -11,11 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
+import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.DocumentsFragment;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
@@ -44,6 +46,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,17 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         init();
+
+        //login
+        Bundle bundleRcvUser= getIntent().getExtras();
+        if( bundleRcvUser != null)
+        {
+            User urs = (User) bundleRcvUser.get("object_user");
+            if(urs != null)
+            {
+                Log.e("User:",urs.getEmail().toString()+"");
+            }
+        }
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

@@ -95,12 +95,12 @@ public class DocumentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView=  inflater.inflate(R.layout.fragment_documents, container, false);
+        runtimePermission();
 
         //feature
         String internalStorage= System.getenv("EXTERNAL_STORAGE");
         storage= new File(internalStorage);
 
-        runtimePermission();
         return mView;
     }
 
