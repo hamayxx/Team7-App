@@ -3,41 +3,53 @@ package com.example.team7_app.File;
 import android.content.Context;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.R;
+import com.example.team7_app.my_interface.IClickItemOptionListener;
+import com.example.team7_app.my_interface.IGetContext;
 
 import java.io.File;
 import java.util.List;
 
-public class FileAdapter extends RecyclerView.Adapter<FileViewHolder> {
-    private Context context;
-    private List<File> file;
+public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> {
 
-    public FileAdapter(Context context, List<File> file) {
-        this.context = context;
+    private List<File> file;
+    private IClickItemOptionListener iClickItemOptionListener;
+    private Context context;
+
+    public FileAdapter(List<File> file, IClickItemOptionListener iClickItemOptionListener, Context context) {
         this.file = file;
+        this.iClickItemOptionListener = iClickItemOptionListener;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public FileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new FileViewHolder(LayoutInflater
-                .from(context)
+                .from(parent.getContext())
                 .inflate(R.layout.item_item,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull FileViewHolder holder, int position) {
-        holder.tvName.setText(file.get(position).getName());
-        holder.tvName.setSelected(true);
-        int items =0;
-        if(file.get(position).isDirectory())
+        File selectedFile = file.get(position);
+
+        holder.tvName.setText(selectedFile.getName());
+
+        int items = 0;
+        if(selectedFile.isDirectory())
         {
-            File[] files = file.get(position).listFiles();
+            File[] files = selectedFile.listFiles();
             for(File singleFiles : files)
             {
                 if(!singleFiles.isHidden())
@@ -45,48 +57,75 @@ public class FileAdapter extends RecyclerView.Adapter<FileViewHolder> {
                     items++;
                 }
             }
-            holder.tvSize.setText(String.valueOf(items)+"Files");
+            holder.tvSize.setText(String.valueOf(items)+" Files");
         }
         else
         {
-            holder.tvSize.setText(Formatter.formatShortFileSize(context, file.get(position).length()));
+            holder.tvSize.setText(Formatter.formatShortFileSize(context, selectedFile.length()));
         }
 
-        if(file.get(position).getName().endsWith(".jpeg"))
+        if(selectedFile.getName().endsWith(".jpeg"))
         {
             holder.ivLogo.setImageResource(R.drawable.ic_image);
         }
-        else if(file.get(position).getName().endsWith(".jpg")){
+        else if(selectedFile.getName().endsWith(".jpg")){
             holder.ivLogo.setImageResource(R.drawable.ic_image);
         }
-        else if(file.get(position).getName().endsWith(".png")){
+        else if(selectedFile.getName().endsWith(".png")){
             holder.ivLogo.setImageResource(R.drawable.ic_image);
         }
-        else if(file.get(position).getName().endsWith(".pdf")){
+        else if(selectedFile.getName().endsWith(".pdf")){
             holder.ivLogo.setImageResource(R.drawable.ic_pdf);
         }
-        else if(file.get(position).getName().endsWith(".doc")){
+        else if(selectedFile.getName().endsWith(".doc")){
             holder.ivLogo.setImageResource(R.drawable.ic_docs);
         }
-        else if(file.get(position).getName().endsWith(".mp3")){
+        else if(selectedFile.getName().endsWith(".mp3")){
             holder.ivLogo.setImageResource(R.drawable.ic_music);
         }
-        else if(file.get(position).getName().endsWith(".wav")){
+        else if(selectedFile.getName().endsWith(".wav")){
             holder.ivLogo.setImageResource(R.drawable.ic_music);
         }
-        else if(file.get(position).getName().endsWith(".mp4")){
+        else if(selectedFile.getName().endsWith(".mp4")){
             holder.ivLogo.setImageResource(R.drawable.ic_play);
         }
-        else if(file.get(position).getName().endsWith(".apk")){
+        else if(selectedFile.getName().endsWith(".apk")){
             holder.ivLogo.setImageResource(R.drawable.ic_android);
         }
         else{
             holder.ivLogo.setImageResource(R.drawable.folder);
         }
+
+        holder.btnOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickItemOptionListener.onClickItemOption(selectedFile);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return file.size();
+        if (file != null) {
+            return file.size();
+        }
+        return 0;
+    }
+
+    public class FileViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvName, tvSize;
+        public CardView item;
+        public ImageView ivLogo;
+        public ImageButton btnOption;
+
+        public FileViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            tvName = itemView.findViewById(R.id.item_item_tv_name);
+            tvSize = itemView.findViewById(R.id.item_item_tv_info);
+            item = itemView.findViewById(R.id.item_item_cv_item);
+            ivLogo = itemView.findViewById(R.id.item_item_iv_logo);
+            btnOption = itemView.findViewById(R.id.item_item_btn_option);
+        }
     }
 }

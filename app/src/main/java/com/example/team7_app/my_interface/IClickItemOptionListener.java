@@ -1,7 +1,7 @@
 package com.example.team7_app.my_interface;
 
-import com.example.team7_app.item.Item;
+import java.io.File;
 
 public interface IClickItemOptionListener {
-    void onClickItemOption(Item item);
+    void onClickItemOption(File file);
 }

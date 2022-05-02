@@ -1,6 +1,7 @@
 package com.example.team7_app.fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +19,8 @@ import android.widget.ImageButton;
 import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.HomeActivity;
 import com.example.team7_app.R;
-import com.example.team7_app.item.Item;
-import com.example.team7_app.item.ItemAdapter;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
+import com.example.team7_app.my_interface.IGetContext;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.karumi.dexter.Dexter;
@@ -48,7 +49,6 @@ public class DocumentsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView rvItems;
-    private ItemAdapter itemAdapter;
     private ImageButton ibBack, ibAdjust;
     public static final String documentTag = DocumentsFragment.class.getName();
 
@@ -94,12 +94,7 @@ public class DocumentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView=  inflater.inflate(R.layout.fragment_documents, container, false);
-        runtimePermission();
-
-        //feature
-        String internalStorage= System.getenv("EXTERNAL_STORAGE");
-        storage= new File(internalStorage);
+        mView = inflater.inflate(R.layout.fragment_documents, container, false);
 
         return mView;
     }
@@ -127,7 +122,7 @@ public class DocumentsFragment extends Fragment {
 
         for(File singleFile: files)
         {
-            if(!singleFile.isDirectory() && !singleFile.isHidden())
+            if(singleFile.isDirectory() && !singleFile.isHidden())
             {
                 arrayList.add(singleFile);
             }
@@ -154,9 +149,14 @@ public class DocumentsFragment extends Fragment {
         rvItems= getView().findViewById(R.id.fm_documents_rv_items);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rvItems.setLayoutManager(linearLayoutManager);
-        fileList= new ArrayList<>();
+        fileList = new ArrayList<>();
         fileList.addAll(findFiles(storage));
-        fileAdapter = new FileAdapter(getContext(),fileList);
+        fileAdapter = new FileAdapter(fileList, new IClickItemOptionListener() {
+            @Override
+            public void onClickItemOption(File file) {
+                clickOpenOptionSheetDialog();
+            }
+        }, getContext());
         rvItems.setAdapter(fileAdapter);
     }
 
@@ -178,6 +178,13 @@ public class DocumentsFragment extends Fragment {
 //        itemAdapter.setData(getListItem());
 //        rvItems.setAdapter(itemAdapter);
 
+        //feature
+        //String internalStorage= System.getenv("EXTERNAL_STORAGE");
+        String internalStorage= Environment.getExternalStorageDirectory().getPath();
+        storage = new File(internalStorage);
+
+        runtimePermission();
+
         ibBack = getView().findViewById(R.id.fm_documents_btn_return);
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,16 +205,6 @@ public class DocumentsFragment extends Fragment {
         });
     }
 
-    private List<Item> getListItem() {
-        List<Item> listItem = new ArrayList<>();
-
-        listItem.add(new Item(R.drawable.icon_pdf, "Draft.txt", "17 March 2022 | Used: 123MB"));
-        listItem.add(new Item(R.drawable.icon_pdf, "Draft.txt", "17 March 2022 | Used: 123MB"));
-        listItem.add(new Item(R.drawable.icon_pdf, "Draft.txt", "17 March 2022 | Used: 123MB"));
-        listItem.add(new Item(R.drawable.icon_pdf, "Draft.txt", "17 March 2022 | Used: 123MB"));
-
-        return listItem;
-    }
     private void clickOpenAdjustSheetDialog() {
         View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
 
