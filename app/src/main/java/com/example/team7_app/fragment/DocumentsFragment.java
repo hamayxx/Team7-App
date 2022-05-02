@@ -1,7 +1,6 @@
 package com.example.team7_app.fragment;
 
 import android.Manifest;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,10 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.team7_app.File.FileAdapter;
-import com.example.team7_app.HomeActivity;
 import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
-import com.example.team7_app.my_interface.IGetContext;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.karumi.dexter.Dexter;

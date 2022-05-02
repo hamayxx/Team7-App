@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
-import com.example.team7_app.my_interface.IGetContext;
 
 import java.io.File;
 import java.util.List;
