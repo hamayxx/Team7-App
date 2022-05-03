@@ -31,6 +31,7 @@
             android:name=".EnterMailActivity"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".HomeActivity"
             android:exported="true">
 

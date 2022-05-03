@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,15 +11,13 @@
         android:id="@+id/a_register_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="180dp"
         android:fontFamily="@font/dosis_semibold"
         android:textFontWeight="600"
         android:text="Register"
         android:textColor="@color/title_activity_color"
-        android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:textSize="40sp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/a_register_cv_user"
@@ -27,13 +25,11 @@
         android:layout_height="57dp"
         android:layout_marginTop="26dp"
         android:backgroundTint="@color/white"
-
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/a_register_tv_title"
+        android:layout_below="@id/a_register_tv_title"
+        android:layout_alignStart="@id/a_register_tv_title"
         app:cardCornerRadius="15dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -43,29 +39,26 @@
                 android:layout_height="30dp"
                 android:background="@drawable/icon_user"
                 android:backgroundTint="@color/icon_color"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="15dp"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
 
             <EditText
                 android:id="@+id/a_register_et_user"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:singleLine="true"
-                android:background="@null"
-                android:fontFamily="@font/dosis_semibold"
-                android:textFontWeight="600"
-                android:textColor="#25252D"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/a_register_icon_user"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/a_register_icon_user"
-                app:layout_constraintRight_toRightOf="parent"/>
+                android:background="@null"
+                android:fontFamily="@font/dosis_semibold"
+                android:singleLine="true"
+                android:textColor="#25252D"
+                android:textFontWeight="600"
+                android:textSize="20sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -75,12 +68,11 @@
         android:layout_height="57dp"
         android:layout_marginTop="26dp"
         android:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/a_register_cv_user"
+        android:layout_below="@id/a_register_cv_user"
+        android:layout_alignStart="@id/a_register_tv_title"
         app:cardCornerRadius="15dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -90,10 +82,8 @@
                 android:layout_height="30dp"
                 android:background="@drawable/icon_email"
                 android:backgroundTint="@color/icon_color"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="15dp"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
 
             <EditText
                 android:id="@+id/a_register_et_mail"
@@ -107,12 +97,11 @@
                 android:textColor="#25252D"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/a_register_icon_mail"
-                app:layout_constraintRight_toRightOf="parent"/>
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/a_register_icon_mail"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -122,12 +111,11 @@
         android:layout_height="57dp"
         android:layout_marginTop="26dp"
         android:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/a_register_cv_mail"
+        android:layout_below="@id/a_register_cv_mail"
+        android:layout_alignStart="@id/a_register_tv_title"
         app:cardCornerRadius="15dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -137,10 +125,8 @@
                 android:layout_height="30dp"
                 android:background="@drawable/icon_pass"
                 android:backgroundTint="@color/icon_color"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="15dp"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
 
             <EditText
                 android:id="@+id/a_register_et_password"
@@ -155,12 +141,11 @@
                 android:inputType="textPassword"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/a_register_icon_password"
-                app:layout_constraintRight_toRightOf="parent"/>
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/a_register_icon_password"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -170,12 +155,11 @@
         android:layout_height="57dp"
         android:layout_marginTop="26dp"
         android:backgroundTint="@color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/a_register_cv_password"
+        android:layout_below="@id/a_register_cv_password"
+        android:layout_alignStart="@id/a_register_tv_title"
         app:cardCornerRadius="15dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -185,10 +169,8 @@
                 android:layout_height="30dp"
                 android:background="@drawable/icon_shield"
                 android:backgroundTint="@color/icon_color"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="15dp"/>
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"/>
 
             <EditText
                 android:id="@+id/a_register_et_repass"
@@ -204,12 +186,11 @@
                 android:hint="Confirm your password"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/a_register_icon_repass"
-                app:layout_constraintRight_toRightOf="parent"/>
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/a_register_icon_repass"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -220,11 +201,10 @@
         android:backgroundTint="@color/button_background"
         app:cardCornerRadius="238dp"
         android:layout_marginTop="21dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/a_register_cv_repass">
+        android:layout_below="@id/a_register_cv_repass"
+        android:layout_centerHorizontal="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -236,13 +216,9 @@
                 android:textColor="@color/text_button"
                 android:textSize="20sp"
                 android:fontFamily="@font/heebo"
-                android:textFontWeight="800"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textFontWeight="800"/>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -14,7 +14,7 @@ public class OTPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpactivity);
 
-        cvToNewPass=findViewById(R.id.a_enter_email_btn_enter);
+        cvToNewPass=findViewById(R.id.a_otp_btn_enter);
         cvToNewPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="650dp">
 
@@ -27,9 +27,7 @@
                 android:fontFamily="@font/iciel_smoothy_sans"
                 android:textColor="@color/category_title"
                 android:layout_marginTop="10dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_centerHorizontal="true"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/fm_item_options_btn_open"
@@ -41,11 +39,9 @@
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
 
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_tv_name">
+                android:layout_below="@id/fm_item_options_tv_name">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -58,11 +54,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -74,11 +67,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_open">
+                android:layout_below="@id/fm_item_options_btn_open">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -91,11 +82,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -107,11 +95,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_delete">
+                android:layout_below="@id/fm_item_options_btn_delete">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -124,11 +110,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -140,11 +123,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_copy">
+                android:layout_below="@id/fm_item_options_btn_copy">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -157,11 +138,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -173,11 +151,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_cut">
+                android:layout_below="@id/fm_item_options_btn_cut">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -191,10 +167,8 @@
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -206,11 +180,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_share">
+                android:layout_below="@id/fm_item_options_btn_share">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -223,11 +195,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -239,11 +208,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_rename">
+                android:layout_below="@id/fm_item_options_btn_rename">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -256,11 +223,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -272,11 +236,9 @@
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="20dp"
                 android:backgroundTint="@color/white"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fm_item_options_btn_secure">
+                android:layout_below="@id/fm_item_options_btn_secure">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -289,14 +251,11 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_semibold"
                         android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
