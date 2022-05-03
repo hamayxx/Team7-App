@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.a_login_btn_login);
         mListUser = new ArrayList<>();
-        getListUsers();
+        getListUsers(); //call api
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<User>>() {
                     @Override
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                        Toast.makeText(LoginActivity.this, "Call API success", Toast.LENGTH_SHORT).show();
                         mListUser = response.body();
                         Log.e("List users: ", mListUser.size()+" ");
                     }
@@ -82,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<List<User>> call, Throwable t) {
                         Toast.makeText(LoginActivity.this, "Call API error", Toast.LENGTH_SHORT).show();
+                        Log.e("Error: ", t.toString()+" ");
+
                     }
                 });
     }

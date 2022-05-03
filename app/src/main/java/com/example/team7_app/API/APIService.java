@@ -10,14 +10,15 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.POST;
 
 public interface APIService {
+    //LINK get: https://api-nhom7.herokuapp.com/users
+    //LINK post: https://jsonplaceholder.typicode.com/posts
 
     Gson gson= new GsonBuilder()
             .setDateFormat("yyyy-mm-dd HH:mm:ss")
             .create();
-    //https://api-nhom7.herokuapp.com/users
     APIService apiService = new Retrofit.Builder()
             .baseUrl("https://api-nhom7.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -25,6 +26,10 @@ public interface APIService {
             .create(APIService.class);
     @GET("users")
     Call<List<User>> getListUsers();
+
+
+    @POST("users")
+    Call<User> sendUser();
 
 }
 

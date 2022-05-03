@@ -41,10 +41,17 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private static final int FRAGMENT_TRASH = 6;
 
     private int currentFragment = FRAGMENT_HOME;
+    private User usr;
 
+    public String getUsername() {
+        return mUsername;
+    }
+
+    private String mUsername="";
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
+
 
 
     @Override
@@ -59,10 +66,10 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         Bundle bundleRcvUser= getIntent().getExtras();
         if( bundleRcvUser != null)
         {
-            User urs = (User) bundleRcvUser.get("object_user");
-            if(urs != null)
+            usr = (User) bundleRcvUser.get("object_user");
+            if(usr != null)
             {
-                Log.e("User:",urs.getEmail().toString()+"");
+                mUsername= usr.getEmail().toString().trim();
             }
         }
 
@@ -113,6 +120,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     }
 
     private void openHomeFragment() {
+
         if(currentFragment != FRAGMENT_HOME) {
             replaceFragment(new HomeFragment());
             currentFragment = FRAGMENT_HOME;

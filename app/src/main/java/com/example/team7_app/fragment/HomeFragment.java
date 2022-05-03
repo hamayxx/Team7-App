@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.team7_app.CustomProgressBar.CustomProgressBar;
 import com.example.team7_app.CustomProgressBar.ProgressItem;
@@ -48,6 +49,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvCategories;
     private CategoryAdapter categoryAdapter;
     private IClickItemCategoryListener iClickItemCategoryListener;
+    private TextView tvHello;
+    private HomeActivity mHomeActivity;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -84,6 +87,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mHomeActivity =(HomeActivity) getActivity();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -95,6 +99,8 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rvCategories.setLayoutManager(linearLayoutManager);
 
+        tvHello= getView().findViewById(R.id.fm_home_tv_hello);
+        tvHello.setText("Hello, "+mHomeActivity.getUsername());
         categoryAdapter = new CategoryAdapter(getListCategory(), new IClickItemCategoryListener() {
             @Override
             public void onClickItemCategory(Category category) {
