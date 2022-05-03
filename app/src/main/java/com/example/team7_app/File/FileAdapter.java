@@ -17,6 +17,9 @@ import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> {
@@ -44,6 +47,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         File selectedFile = file.get(position);
 
         holder.tvName.setText(selectedFile.getName());
+        holder.tvName.setSelected(true);
 
         int items = 0;
         if(selectedFile.isDirectory())
@@ -60,7 +64,9 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         }
         else
         {
-            holder.tvSize.setText(Formatter.formatShortFileSize(context, selectedFile.length()));
+            SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy");
+            Date lastModified = new Date(selectedFile.lastModified());
+            holder.tvSize.setText(format.format(lastModified) + " | " + Formatter.formatShortFileSize(context, selectedFile.length()));
         }
 
         if(selectedFile.getName().endsWith(".jpeg"))
@@ -126,5 +132,13 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
             ivLogo = itemView.findViewById(R.id.item_item_iv_logo);
             btnOption = itemView.findViewById(R.id.item_item_btn_option);
         }
+    }
+
+    // Lay kich thuoc file
+    public static String readableFileSize(long size) {
+        if(size <= 0) return "0";
+        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 }

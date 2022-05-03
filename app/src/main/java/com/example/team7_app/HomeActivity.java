@@ -182,12 +182,12 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             }
             else
             {
-                super.onBackPressed();
+                finish();
                 // tat ung dung
                 //finishAffinity();
-                finish();
-            }
 
+            }
+            super.onBackPressed();
         }
     }
 

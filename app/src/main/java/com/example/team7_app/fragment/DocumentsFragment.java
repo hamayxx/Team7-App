@@ -1,6 +1,7 @@
 package com.example.team7_app.fragment;
 
 import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -97,20 +98,38 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void runtimePermission() {
-        Dexter.withContext(getContext()).withPermissions(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        displayFiles();
-                    }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Dexter.withContext(getContext()).withPermissions(
+                    Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                    , Manifest.permission.READ_EXTERNAL_STORAGE
+                    , Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                            displayFiles();
+                        }
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                    }
-                }).check();
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                            permissionToken.continuePermissionRequest();
+                        }
+                    }).check();
+        } else {
+            Dexter.withContext(getContext()).withPermissions(
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                    , Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                            displayFiles();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                            permissionToken.continuePermissionRequest();
+                        }
+                    }).check();
+        }
     }
 
     public ArrayList<File> findFiles(File file){
@@ -161,20 +180,6 @@ public class DocumentsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        rvItems = getView().findViewById(R.id.fm_documents_rv_items);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-//        rvItems.setLayoutManager(linearLayoutManager);
-//
-//        //mo option item
-//        itemAdapter = new ItemAdapter(getListItem(), new IClickItemOptionListener() {
-//            @Override
-//            public void onClickItemOption(Item item) {
-//                clickOpenOptionSheetDialog();
-//            }
-//        });
-//        itemAdapter.setData(getListItem());
-//        rvItems.setAdapter(itemAdapter);
-
         //feature
         //String internalStorage= System.getenv("EXTERNAL_STORAGE");
         String internalStorage= Environment.getExternalStorageDirectory().getPath();
@@ -183,6 +188,8 @@ public class DocumentsFragment extends Fragment {
         runtimePermission();
 
         ibBack = getView().findViewById(R.id.fm_documents_btn_return);
+        ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
+
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,7 +200,6 @@ public class DocumentsFragment extends Fragment {
             }
         });
 
-        ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
         ibAdjust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
