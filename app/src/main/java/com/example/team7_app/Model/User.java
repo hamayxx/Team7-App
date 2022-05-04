@@ -7,8 +7,30 @@ public class User implements Serializable {
     private String _id;
     private String first_name;
     private String last_name;
+    private String login;
+
     private String email;
     private String password;
+
+    public String getLogin() {
+        return login;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "_id='" + _id + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
     public String get_id() {
         return _id;
@@ -50,14 +72,4 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "_id='" + _id + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
