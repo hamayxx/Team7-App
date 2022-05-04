@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             usr = (User) bundleRcvUser.get("object_user");
             if(usr != null)
             {
-                mUsername= usr.getEmail().toString().trim();
+                mUsername= usr.getLogin().toString().trim();
             }
         }
 
