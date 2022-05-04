@@ -10,14 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.team7_app.File.FileAdapter;
@@ -39,10 +37,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DocumentsFragment#newInstance} factory method to
+ * Use the {@link InternalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocumentsFragment extends Fragment {
+public class InternalFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,26 +50,17 @@ public class DocumentsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     private RecyclerView rvItems;
     private ImageButton ibBack, ibAdjust;
-    public static final String documentTag = DocumentsFragment.class.getName();
-
-    private IClickItemOptionListener iClickItemOptionListener;
-    // feature
-    View mView;
+    private String data;
     private File storage;
     private List<File> fileList;
     private FileAdapter fileAdapter;
-    private String nameCategory;
     private TextView tvTitle;
-    private TextView tvSizeCount;
-    private ProgressBar pbTotalUsed;
-    private long size;
-    private int count;
 
-    public DocumentsFragment() {
+    public InternalFragment() {
         // Required empty public constructor
-
     }
 
     /**
@@ -80,11 +69,11 @@ public class DocumentsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DocumentsFragment.
+     * @return A new instance of fragment InternalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DocumentsFragment newInstance(String param1, String param2) {
-        DocumentsFragment fragment = new DocumentsFragment();
+    public static InternalFragment newInstance(String param1, String param2) {
+        InternalFragment fragment = new InternalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -105,73 +94,29 @@ public class DocumentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_documents, container, false);
+        return inflater.inflate(R.layout.fragment_internal, container, false);
 
-        return mView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvTitle = getView().findViewById(R.id.fm_documents_tv_title);
-        ibBack = getView().findViewById(R.id.fm_documents_btn_return);
-        ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
-        tvSizeCount = getView().findViewById(R.id.fm_documents_tv_gb_item);
-        pbTotalUsed = getView().findViewById(R.id.fm_documents_pb_total_used);
+        tvTitle = getView().findViewById(R.id.fm_internal_tv_title);
+        ibBack = getView().findViewById(R.id.fm_internal_btn_return);
+        ibAdjust = getView().findViewById(R.id.fm_internal_btn_adjust);
 
         try {
-            nameCategory = getArguments().getString("nameCategory");
+            data = getArguments().getString("path");
+            storage = new File(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //feature
-        //String internalStorage = Environment.getExternalStorageDirectory().getPath();
-
-        if (nameCategory.equals("Downloads")) {
-            String documentStorage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
-            storage = new File(documentStorage);
-            tvTitle.setText("DOWNLOADS");
-        }
-        else {
-            String internalStorage = Environment.getExternalStorageDirectory().getPath();
-            storage = new File(internalStorage);
-            switch (nameCategory) {
-                case "Documents":
-                    tvTitle.setText("DOCUMENTS");
-                    break;
-                case "Music":
-                    tvTitle.setText("MUSIC");
-                    break;
-                case "Videos":
-                    tvTitle.setText("VIDEOS");
-                    break;
-                case "Images":
-                    tvTitle.setText("IMAGES");
-                    break;
-            }
-
-        }
+        tvTitle.setText(storage.getName());
 
         runtimePermission();
 
-        ibBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(getFragmentManager() != null)
-                {
-                    getFragmentManager().popBackStack();
-                }
-            }
-        });
-
-        ibAdjust.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickOpenAdjustSheetDialog();
-            }
-        });
     }
 
     private void runtimePermission() {
@@ -209,61 +154,31 @@ public class DocumentsFragment extends Fragment {
         }
     }
 
-    public ArrayList<File> findFiles(File file){
+    public ArrayList<File> findFiles(File file) {
         ArrayList<File> arrayList = new ArrayList<>();
         File[] files = file.listFiles();
 
         if (files != null) {
-            for(File singleFile: files)
-            {
-                if(singleFile.isDirectory() && !singleFile.isHidden())
-                {
-                    if (nameCategory.equals("Downloads"))
+            for (File singleFile : files) {
+                if (singleFile.isDirectory() && !singleFile.isHidden()) {
+                        arrayList.add(singleFile);
+                } else {
+                    if(singleFile.getName().toLowerCase().endsWith(".jpg")
+                            || singleFile.getName().toLowerCase().endsWith(".jpeg")
+                            || singleFile.getName().toLowerCase().endsWith(".png")
+                            || singleFile.getName().toLowerCase().endsWith(".mp3")
+                            || singleFile.getName().toLowerCase().endsWith(".mp4")
+                            || singleFile.getName().toLowerCase().endsWith(".docx")
+                            || singleFile.getName().toLowerCase().endsWith(".doc")
+                            || singleFile.getName().toLowerCase().endsWith(".ppt")
+                            || singleFile.getName().toLowerCase().endsWith(".pptx")
+                            || singleFile.getName().toLowerCase().endsWith(".txt")
+                            || singleFile.getName().toLowerCase().endsWith(".pdf")
+                            || singleFile.getName().toLowerCase().endsWith(".wav")
+                            || singleFile.getName().toLowerCase().endsWith(".apk")
+                    )
                     {
                         arrayList.add(singleFile);
-                    }
-                    else {
-                        arrayList.addAll(findFiles(singleFile));
-                    }
-                }
-                else {
-                    switch (nameCategory) {
-                        case "Documents":
-                            if (singleFile.getName().toLowerCase().endsWith(".docx")
-                                    || singleFile.getName().toLowerCase().endsWith(".doc")
-                                    || singleFile.getName().toLowerCase().endsWith(".txt")
-                                    || singleFile.getName().toLowerCase().endsWith(".ppt")
-                                    || singleFile.getName().toLowerCase().endsWith(".pptx")
-                                    || singleFile.getName().toLowerCase().endsWith(".pdf")) {
-                                size += singleFile.length();
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                        case "Images":
-                            if (singleFile.getName().toLowerCase().endsWith(".jpg")
-                                    || singleFile.getName().toLowerCase().endsWith(".jpeg")
-                                    || singleFile.getName().toLowerCase().endsWith(".png")) {
-                                size += singleFile.length();
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                        case "Videos":
-                            if (singleFile.getName().toLowerCase().endsWith(".mp4")) {
-                                size += singleFile.length();
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                        case "Music":
-                            if (singleFile.getName().toLowerCase().endsWith(".mp3")
-                                    || singleFile.getName().toLowerCase().endsWith(".wav")) {
-                                size += singleFile.length();
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                        case "Downloads":
-                            arrayList.add(singleFile);
-                            size += singleFile.length();
-                            break;
                     }
                 }
             }
@@ -272,7 +187,7 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void displayFiles() {
-        rvItems = getView().findViewById(R.id.fm_documents_rv_items);
+        rvItems = getView().findViewById(R.id.fm_internal_rv_items);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rvItems.setLayoutManager(linearLayoutManager);
         fileList = new ArrayList<>();
@@ -291,8 +206,7 @@ public class DocumentsFragment extends Fragment {
                     InternalFragment internalFragment = new InternalFragment();
                     internalFragment.setArguments(bundle);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, internalFragment).addToBackStack(null).commit();
-                }
-                else {
+                } else {
                     try {
                         FileOpener.openFile(getContext(), file);
                     } catch (IOException e) {
@@ -303,19 +217,28 @@ public class DocumentsFragment extends Fragment {
 
         }, getContext());
         rvItems.setAdapter(fileAdapter);
-        count = fileList.size();
-        tvSizeCount.setText(Formatter.formatShortFileSize(getContext(), size) + "/ " + count + " Items");
 
-        StatFs stat = new StatFs(storage.getPath());
-        long totalBlocks = stat.getTotalBytes();
-        int proGr = (int) ((float)(size/totalBlocks) * 100);
-        pbTotalUsed.setProgress(proGr);
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
+
+        ibAdjust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickOpenAdjustSheetDialog();
+            }
+        });
     }
 
     private void clickOpenAdjustSheetDialog() {
         View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewAdjust);
         bottomSheetDialog.show();
 
@@ -326,7 +249,7 @@ public class DocumentsFragment extends Fragment {
     private void clickOpenOptionSheetDialog() {
         View viewOption = getLayoutInflater().inflate(R.layout.fragment_item_options, null);
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewOption);
         bottomSheetDialog.show();
 

@@ -11,22 +11,22 @@
         android:id="@+id/fm_documents_btn_return"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/icon_back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:background="@drawable/icon_back" />
 
     <TextView
         android:id="@+id/fm_documents_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="36sp"
-        android:textStyle="bold"
+        android:layout_below="@id/fm_documents_btn_return"
+        android:layout_centerHorizontal="true"
         android:text="DOCUMENTS"
         android:textColor="@color/white"
-        android:layout_below="@id/fm_documents_btn_return"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/fm_documents_cv_search"
@@ -61,10 +61,10 @@
             android:id="@+id/fm_documents_pb_total_used"
             android:layout_width="87dp"
             android:layout_height="87dp"
+            android:layout_alignParentStart="true"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle_progress_bar"
-            tools:progress="80"
-            android:layout_alignParentStart="true"/>
+            tools:progress="80" />
 
         <TextView
             android:id="@+id/fm_documents_tv_total_used"
@@ -84,16 +84,16 @@
             android:id="@+id/fm_documents_tv_gb_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/heebo"
-            android:text="26.7 GB/ 138 Items"
-            android:textColor="#FACE7F"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
             android:layout_below="@id/fm_documents_tv_total_used"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/fm_documents_pb_total_used"
-            android:layout_alignParentEnd="true"/>
+            android:fontFamily="@font/heebo"
+            android:gravity="center"
+            android:text="0 B/ 0 Items"
+            android:textColor="#FACE7F"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ImageButton
@@ -102,7 +102,7 @@
         android:layout_height="35dp"
         android:layout_below="@id/fm_documents_cl_progress"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="17dp"
         android:background="@drawable/icon_adjust" />
 
@@ -111,8 +111,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/fm_documents_btn_adjust"
-        android:layout_marginTop="15dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>

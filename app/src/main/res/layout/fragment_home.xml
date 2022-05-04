@@ -19,6 +19,7 @@
         android:textColor="#630A10" />
 
     <ImageButton
+        android:id="@+id/fm_home_ib_search"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/icon_search"
@@ -40,6 +41,7 @@
         android:layout_marginTop="45dp"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/fm_home_cv_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/fm_home_tv_hello"
@@ -117,6 +119,7 @@
                 android:elevation="2dp"/>
 
             <TextView
+                android:id="@+id/fm_home_tv_remaining_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="29.5 GB"
@@ -125,6 +128,7 @@
                 android:elevation="2dp"/>
 
             <TextView
+                android:id="@+id/fm_home_tv_total_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="64 GB"

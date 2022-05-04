@@ -61,50 +61,50 @@
             android:id="@+id/fm_recently_pb_total_used"
             android:layout_width="87dp"
             android:layout_height="87dp"
+            android:layout_alignParentStart="true"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle_progress_bar"
-            tools:progress="80"
-            android:layout_alignParentStart="true"/>
+            tools:progress="80" />
 
         <TextView
             android:id="@+id/fm_recently_tv_total_used"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/heebo"
-            android:text="Total Used"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:letterSpacing="0.1"
+            android:layout_alignParentEnd="true"
             android:layout_toEndOf="@id/fm_recently_pb_total_used"
-            android:layout_alignParentEnd="true"/>
+            android:fontFamily="@font/heebo"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:text="Total Used"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/fm_recently_tv_gb_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/heebo"
-            android:text="26.7 GB/ 138 Items"
-            android:textColor="#FACE7F"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
             android:layout_below="@id/fm_recently_tv_total_used"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@id/fm_recently_pb_total_used"
-            android:layout_alignParentEnd="true"/>
+            android:fontFamily="@font/heebo"
+            android:gravity="center"
+            android:text="0 B/ 0 Items"
+            android:textColor="#FACE7F"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ImageButton
         android:id="@+id/fm_recently_btn_adjust"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/fm_recently_cl_progress"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="17dp"
-        android:background="@drawable/icon_adjust"
-        android:layout_below="@id/fm_recently_cl_progress"
-        android:layout_alignParentEnd="true"/>
+        android:background="@drawable/icon_adjust" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fm_recently_rv_items"
@@ -112,6 +112,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/fm_recently_btn_adjust"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>
