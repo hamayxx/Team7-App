@@ -80,8 +80,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<List<User>> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Call API error", Toast.LENGTH_SHORT).show();
-                        Log.e("Error: ", t.toString()+" ");
+                        Toast.makeText(LoginActivity.this, "Call API <get> error", Toast.LENGTH_SHORT).show();
+                        Log.e("Error API: ", t.toString()+" ");
 
                     }
                 });
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     private void clickLogin() {
         String username = etUsername.getText().toString().trim();
         String password= etPass.getText().toString().trim();
-        
+
         if(mListUser==null || mListUser.isEmpty())
         {
             return;
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isHasUser= false;
         for(User usr: mListUser)
         {
-            if(username.equals(usr.getEmail())  && password.equals(usr.getPassword())){
+            if(username.equals(usr.getLogin())  && password.equals(usr.getPassword())){
                 isHasUser = true;
                 mUser = usr;
                 break;
@@ -116,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
-
         }
     }
 
