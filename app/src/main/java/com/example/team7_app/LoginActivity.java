@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.a_login_btn_login);
         mListUser = new ArrayList<>();
-        getListUsers(); //call api
+        getListUsers();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,15 +74,14 @@ public class LoginActivity extends AppCompatActivity {
                 .enqueue(new Callback<List<User>>() {
                     @Override
                     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                        Toast.makeText(LoginActivity.this, "Call API success", Toast.LENGTH_SHORT).show();
                         mListUser = response.body();
                         Log.e("List users: ", mListUser.size()+" ");
                     }
 
                     @Override
                     public void onFailure(Call<List<User>> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Call API <get> error", Toast.LENGTH_SHORT).show();
-                        Log.e("Error API: ", t.toString()+" ");
-
+                        Toast.makeText(LoginActivity.this, "Call API error", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -90,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     private void clickLogin() {
         String username = etUsername.getText().toString().trim();
         String password= etPass.getText().toString().trim();
-
+        
         if(mListUser==null || mListUser.isEmpty())
         {
             return;
@@ -99,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isHasUser= false;
         for(User usr: mListUser)
         {
-            if(username.equals(usr.getLogin())  && password.equals(usr.getPassword())){
+            if(username.equals(usr.getEmail())  && password.equals(usr.getPassword())){
                 isHasUser = true;
                 mUser = usr;
                 break;
@@ -116,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
+
         }
     }
 
