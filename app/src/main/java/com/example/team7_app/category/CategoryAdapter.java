@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.R;
@@ -20,11 +21,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private List<Category> mCategories;
     private IClickItemCategoryListener iClickItemCategoryListener;
+    private Context context;
 
-    public CategoryAdapter(List<Category> list, IClickItemCategoryListener iClickItemCategoryListener)
+    public CategoryAdapter(List<Category> list, IClickItemCategoryListener iClickItemCategoryListener, Context context)
     {
         this.mCategories=list;
         this.iClickItemCategoryListener= iClickItemCategoryListener;
+        this.context = context;
     }
 
     public void setData(List<Category> list) {
@@ -49,6 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.tvTitle.setText(category.getTitle());
         holder.ivIcon.setBackgroundResource(category.getIconId());
         holder.tvStatus.setText(category.getStatus());
+        holder.cvLayout.setCardBackgroundColor(ContextCompat.getColor(context, category.getColorId()));
         holder.cvLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,14 +77,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         private TextView tvStatus;
         private CardView cvLayout;
 
-
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.item_category_tv_title);
             ivIcon = itemView.findViewById(R.id.item_category_iv_icon);
             tvStatus = itemView.findViewById(R.id.item_category_tv_status);
-            cvLayout= itemView.findViewById(R.id.item_category_cv_layout);
+            cvLayout = itemView.findViewById(R.id.item_category_cv_layout);
         }
     }
 }
