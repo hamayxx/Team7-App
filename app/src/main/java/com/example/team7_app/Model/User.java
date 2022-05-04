@@ -10,11 +10,7 @@ public class User implements Serializable {
     private String login;
 
     private String email;
-    private String password;
-
-    public String getLogin() {
-        return login;
-    }
+    private String password_hash;
 
     @Override
     public String toString() {
@@ -24,12 +20,8 @@ public class User implements Serializable {
                 ", last_name='" + last_name + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password_hash='" + password_hash + '\'' +
                 '}';
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String get_id() {
@@ -56,6 +48,14 @@ public class User implements Serializable {
         this.last_name = last_name;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -64,12 +64,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword_hash() {
+        return password_hash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword_hash(String password_hash) {
+        this.password_hash = password_hash;
     }
-
 }

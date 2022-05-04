@@ -7,14 +7,15 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface APIService {
     @GET("/api/admin/users")
     Call<List<User>> getListUsers();
 
-
-    @POST("register")
+    @Headers("Content-Type: application/json")
+    @POST("/api/register")
     Call<User> createUser(@Body User user);
 }
 

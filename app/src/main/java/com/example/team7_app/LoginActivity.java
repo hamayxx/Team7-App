@@ -96,22 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                  Log.e(TAG, call.toString());
              }
         });
-//
-//        APIService.apiService.getListUsers()
-//                .enqueue(new Callback<List<User>>() {
-//                    @Override
-//                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-//                        Log.i("TEAM8", response.toString());
-//                        Log.e("TEAM8", mListUser.size()+ mListUser.toString());
-//                        Toast.makeText(LoginActivity.this, "Call API success", Toast.LENGTH_SHORT).show();
-//                        mListUser = response.body();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<User>> call, Throwable t) {
-//                        Toast.makeText(LoginActivity.this, "Call API error", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+
     }
 
     private void clickLogin() {

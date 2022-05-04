@@ -14,6 +14,10 @@ import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.User;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private EditText etEmail;
-    private User mUser = new User();
+    private User mUser ;
     private final static String TAG = "TEAM8_DEBUGGER";
 
 
@@ -68,8 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // error response, no access to resource?
-                    Log.e(TAG, "SignUp: LOI CMNR!!!");
+                    Log.e(TAG, "SignUp: LOI CMNR!!!"+ response.toString() );
                 }
+
             }
 
             @Override
@@ -96,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mUser.setLogin(username);
         mUser.setEmail(email);
-        mUser.setPassword(password);
+        mUser.setPassword_hash(password);
         Log.e(TAG, "User check: "+mUser.toString().trim());
 
         createUser();
