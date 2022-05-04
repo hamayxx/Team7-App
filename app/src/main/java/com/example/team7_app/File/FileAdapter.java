@@ -85,6 +85,18 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         else if(selectedFile.getName().endsWith(".doc")){
             holder.ivLogo.setImageResource(R.drawable.ic_docs);
         }
+        else if(selectedFile.getName().endsWith(".docx")){
+            holder.ivLogo.setImageResource(R.drawable.ic_docs);
+        }
+        else if(selectedFile.getName().endsWith(".txt")){
+            holder.ivLogo.setImageResource(R.drawable.icon_txt);
+        }
+        else if(selectedFile.getName().endsWith(".ppt")){
+            holder.ivLogo.setImageResource(R.drawable.icon_ppt);
+        }
+        else if(selectedFile.getName().endsWith(".pptx")){
+            holder.ivLogo.setImageResource(R.drawable.icon_ppt);
+        }
         else if(selectedFile.getName().endsWith(".mp3")){
             holder.ivLogo.setImageResource(R.drawable.ic_music);
         }
@@ -107,6 +119,13 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
                 iClickItemOptionListener.onClickItemOption(selectedFile);
             }
         });
+
+        holder.cvItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickItemOptionListener.onClickFileItem(selectedFile);
+            }
+        });
     }
 
     @Override
@@ -119,7 +138,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
 
     public class FileViewHolder extends RecyclerView.ViewHolder {
         public TextView tvName, tvSize;
-        public CardView item;
+        public CardView cvItem;
         public ImageView ivLogo;
         public ImageButton btnOption;
 
@@ -128,7 +147,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
 
             tvName = itemView.findViewById(R.id.item_item_tv_name);
             tvSize = itemView.findViewById(R.id.item_item_tv_info);
-            item = itemView.findViewById(R.id.item_item_cv_item);
+            cvItem = itemView.findViewById(R.id.item_item_cv_item);
             ivLogo = itemView.findViewById(R.id.item_item_iv_logo);
             btnOption = itemView.findViewById(R.id.item_item_btn_option);
         }
