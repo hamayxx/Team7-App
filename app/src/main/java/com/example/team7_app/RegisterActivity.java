@@ -14,12 +14,6 @@ import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.User;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void onSignUp() {
         //kiem tra dau vao
+        mUser = new User();
         String username = etUsername.getText().toString().trim();
         String password= etPassword.getText().toString().trim();
         String email= etEmail.getText().toString().trim();
