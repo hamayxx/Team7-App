@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
+import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.User;
 
 import retrofit2.Call;
@@ -49,15 +50,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void createUser() {
+    private void createUser(RegisterUserDTO registerUserDTO) {
         Log.i("TEAM8", "Getting list users from server!!!");
         APIService signupService = ServiceGenerator.createService(APIService.class, "admin", "admin");
-        Call<User> call = signupService.createUser(mUser);
-        Log.e(TAG, "User API: "+mUser.toString().trim());
+        Call<RegisterUserDTO> call = signupService.createUser(registerUserDTO);
+        Log.e(TAG, "User API: "+ registerUserDTO.toString().trim());
 
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<RegisterUserDTO>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<RegisterUserDTO> call, Response<RegisterUserDTO> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "Respone" + response.toString());
                     Toast.makeText(RegisterActivity.this, "Call API <post> success", Toast.LENGTH_SHORT).show();
@@ -72,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<RegisterUserDTO> call, Throwable t) {
                 // something went completely south (like no internet connection)
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
@@ -83,10 +84,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void onSignUp() {
         //kiem tra dau vao
-        mUser = new User();
         String username = etUsername.getText().toString().trim();
         String password= etPassword.getText().toString().trim();
         String email= etEmail.getText().toString().trim();
+
 
         if(username.isEmpty() || password.isEmpty() || email.isEmpty())
         {
@@ -94,12 +95,10 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        mUser.setLogin(username);
-        mUser.setEmail(email);
-        mUser.setPassword_hash(password);
-        Log.e(TAG, "User check: "+mUser.toString().trim());
+        RegisterUserDTO registerUserDTO = new RegisterUserDTO(username, email, password);
+        Log.e(TAG, "User check: "+ registerUserDTO.toString().trim());
 
-        createUser();
+        createUser(registerUserDTO);
 
         //kiem tra da co user do chua
     }

@@ -29,6 +29,11 @@ android {
 
 dependencies {
 
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     // https://mvnrepository.com/artifact/com.squareup.moshi/moshi
     implementation 'com.squareup.moshi:moshi:1.13.0'
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"

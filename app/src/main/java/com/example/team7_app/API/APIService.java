@@ -1,5 +1,6 @@
 package com.example.team7_app.API;
 
+import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.User;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface APIService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/register")
-    Call<User> createUser(@Body User user);
+    Call<RegisterUserDTO> createUser(@Body RegisterUserDTO user);
 }
 
 
