@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                  // something went completely south (like no internet connection)
                  Log.e(TAG, t.getMessage());
                  Log.e(TAG, call.toString());
+                 Toast.makeText(LoginActivity.this, "CALLED API FAILED!!!", Toast.LENGTH_SHORT).show();
              }
         });
 
