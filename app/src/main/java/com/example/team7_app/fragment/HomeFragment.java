@@ -1,19 +1,27 @@
 package com.example.team7_app.fragment;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
+import android.os.StatFs;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.team7_app.CustomProgressBar.CustomProgressBar;
@@ -25,6 +33,7 @@ import com.example.team7_app.category.CategoryAdapter;
 import com.example.team7_app.my_interface.IClickHomeListener;
 import com.example.team7_app.my_interface.IClickItemCategoryListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +48,7 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ERROR = "ERROR";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -49,8 +59,15 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvCategories;
     private CategoryAdapter categoryAdapter;
     private IClickItemCategoryListener iClickItemCategoryListener;
+    private ImageButton btnSearch;
+    private SearchView svSearch;
     private TextView tvHello;
+    private TextView tvRemainStorage;
+    private TextView tvTotalStorage;
+    private CardView cvSearch;
     private HomeActivity mHomeActivity;
+    private long[] sizeCategories;
+    /*private GetStatusTask getStatusTask;*/
 
     public HomeFragment() {
         // Required empty public constructor
@@ -96,84 +113,282 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvCategories = getView().findViewById(R.id.fm_home_rv_categories);
+        customProgressBar = getView().findViewById(R.id.fm_home_pb_mainstorage);
+        tvHello = getView().findViewById(R.id.fm_home_tv_hello);
+        tvRemainStorage = getView().findViewById(R.id.fm_home_tv_remaining_size);
+        tvTotalStorage = getView().findViewById(R.id.fm_home_tv_total_size);
+        btnSearch = getView().findViewById(R.id.fm_home_ib_search);
+        cvSearch = getView().findViewById(R.id.fm_home_cv_search);
+
+        svSearch = getView().findViewById(R.id.fm_home_sv_search);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rvCategories.setLayoutManager(linearLayoutManager);
 
-        tvHello= getView().findViewById(R.id.fm_home_tv_hello);
-        tvHello.setText("Hello, "+mHomeActivity.getUsername());
+        tvHello.setText("Hello, " + mHomeActivity.getUsername());
+
+        sizeCategories = new long[8];
+        for (int i = 0; i < 8; i++) {
+            sizeCategories[i] = 0;
+        }
+
+        findSizeFiles(Environment.getExternalStorageDirectory());
+
         categoryAdapter = new CategoryAdapter(getListCategory(), new IClickItemCategoryListener() {
             @Override
             public void onClickItemCategory(Category category) {
                 IClickHomeListener iClickHomeListener = (IClickHomeListener) getActivity();
+                Bundle bundle = new Bundle();
+                DocumentsFragment documentsFragment = new DocumentsFragment();
                 switch (category.getTitle()) {
                     case "Documents":
+                        bundle.putString("nameCategory","Documents");
+                        documentsFragment.setArguments(bundle);
                         iClickHomeListener.setCurrentFragment(4);
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DocumentsFragment()).addToBackStack(DocumentsFragment.documentTag).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, documentsFragment).addToBackStack(DocumentsFragment.documentTag).commit();
                         break;
                     case "Downloads":
+                        bundle.putString("nameCategory","Downloads");
+                        documentsFragment.setArguments(bundle);
                         iClickHomeListener.setCurrentFragment(4);
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DownloadsFragment()).addToBackStack(DownloadsFragment.downloadTag).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, documentsFragment).addToBackStack(DocumentsFragment.documentTag).commit();
                         break;
-                    case "Media":
+                    case "Images":
+                        bundle.putString("nameCategory","Images");
+                        documentsFragment.setArguments(bundle);
                         iClickHomeListener.setCurrentFragment(4);
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MediaFragment()).addToBackStack(MediaFragment.mediaTag).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, documentsFragment).addToBackStack(DocumentsFragment.documentTag).commit();
                         break;
-                    case "Apps":
+                    case "Music":
+                        bundle.putString("nameCategory","Music");
+                        documentsFragment.setArguments(bundle);
                         iClickHomeListener.setCurrentFragment(4);
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AppsFragment()).addToBackStack(AppsFragment.appTag).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, documentsFragment).addToBackStack(DocumentsFragment.documentTag).commit();
+                        break;
+                    case "Videos":
+                        bundle.putString("nameCategory","Videos");
+                        documentsFragment.setArguments(bundle);
+                        iClickHomeListener.setCurrentFragment(4);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, documentsFragment).addToBackStack(DocumentsFragment.documentTag).commit();
                         break;
                     default:
                         break;
                 }
 
             }
-        });
-        categoryAdapter.setData(getListCategory());
+        }, getContext());
+
         rvCategories.setAdapter(categoryAdapter);
 
-        customProgressBar = getView().findViewById(R.id.fm_home_pb_mainstorage);
         customProgressBar.getThumb().mutate().setAlpha(0);
         initDataToSeekbar();
+
+        tvTotalStorage.setText(getTotalExternalMemorySize(getContext()));
+        tvRemainStorage.setText(getUsedExternalMemorySize(getContext()));
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cvSearch.getVisibility() == View.VISIBLE) {
+                    tvHello.setVisibility(View.VISIBLE);
+                    cvSearch.setVisibility(View.INVISIBLE);
+                }
+                else
+                {
+                    tvHello.setVisibility(View.INVISIBLE);
+                    cvSearch.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private List<Category> getListCategory() {
         List<Category> listCategory = new ArrayList<>();
 
-        listCategory.add(new Category("Documents", R.drawable.icon_document, "26.7 GB (138)"));
-        listCategory.add(new Category("Downloads", R.drawable.icon_download, "435 MB (43)"));
-        listCategory.add(new Category("Media", R.drawable.icon_media, "1.2 GB (1384)"));
-        listCategory.add(new Category("Apps", R.drawable.icon_app, "1.6 GB (92)"));
+        listCategory.add(new Category("Documents", R.drawable.icon_document, getStatus("documents", getContext()), R.color.red1));
+        listCategory.add(new Category("Images", R.drawable.icon_download, getStatus("images", getContext()), R.color.red2));
+        listCategory.add(new Category("Videos", R.drawable.icon_download, getStatus("videos", getContext()), R.color.red3));
+        listCategory.add(new Category("Music", R.drawable.icon_media, getStatus("music", getContext()), R.color.red4));
+        listCategory.add(new Category("Downloads", R.drawable.icon_download, getStatus("downloads", getContext()), R.color.red5));
 
         return listCategory;
     }
 
     private void initDataToSeekbar() {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long totalBlocks = stat.getTotalBytes();
         progressItemList = new ArrayList<ProgressItem>();
-        // red span
+        //Documents span
         mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = 20;
-        Log.i("Mainactivity", mProgressItem.progressItemPercentage + "");
-        mProgressItem.color = R.color.red;
+        mProgressItem.progressItemPercentage = ((float) sizeCategories[0]/totalBlocks)*100;
+        mProgressItem.color = R.color.red1;
         progressItemList.add(mProgressItem);
-        // blue span
+        //Images span
         mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = 25;
-        mProgressItem.color = R.color.blue;
+        mProgressItem.progressItemPercentage = ((float) sizeCategories[6]/totalBlocks)*100;
+        mProgressItem.color = R.color.red2;
         progressItemList.add(mProgressItem);
-        // green span
+        //Videos span
         mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = 35;
-        mProgressItem.color = R.color.green;
+        mProgressItem.progressItemPercentage = ((float) sizeCategories[2]/totalBlocks)*100;
+        mProgressItem.color = R.color.red3;
         progressItemList.add(mProgressItem);
-
-        //white span
+        //Music span
         mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = 20;
+        mProgressItem.progressItemPercentage = ((float) sizeCategories[4]/totalBlocks)*100;
+        mProgressItem.color =  R.color.red4;
+        progressItemList.add(mProgressItem);
+        //Downloads span
+        File pathDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        mProgressItem = new ProgressItem();
+        mProgressItem.progressItemPercentage =  ((float) folderSize(pathDownloads)/totalBlocks)*100;
+        mProgressItem.color =  R.color.red5;
+        progressItemList.add(mProgressItem);
+        //Remaining span
+        mProgressItem = new ProgressItem();
+        mProgressItem.progressItemPercentage = (float) (totalBlocks - sizeCategories[0] - sizeCategories[2]
+                                                        - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads)) * 100;
         mProgressItem.color =  R.color.white;
         progressItemList.add(mProgressItem);
-
 
         customProgressBar.initData(progressItemList);
         customProgressBar.invalidate();
     }
+
+    public String getStatus(String categoryName, Context context) {
+        switch (categoryName) {
+            case "downloads":
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                return Formatter.formatShortFileSize(context, folderSize(path)) + " (" + path.listFiles().length + ")";
+            case "documents":
+                return Formatter.formatShortFileSize(context, sizeCategories[0]) + " (" + sizeCategories[1] + ")";
+            case "videos":
+                return Formatter.formatShortFileSize(context, sizeCategories[2]) + " (" + sizeCategories[3] + ")";
+            case "music":
+                return Formatter.formatShortFileSize(context, sizeCategories[4]) + " (" + sizeCategories[5] + ")";
+            case "images":
+                return Formatter.formatShortFileSize(context, sizeCategories[6]) + " (" + sizeCategories[7] + ")";
+        }
+        return "";
+    }
+
+    private void findSizeFiles(File file) { // 0,1: document 2,3: video 4,5: music 6,7: image
+        File[] files = file.listFiles();
+
+        if (files != null) {
+            for(File singleFile: files)
+            {
+                if(singleFile.isDirectory() && !singleFile.isHidden())
+                {
+                    findSizeFiles(singleFile);
+                }
+                else {
+                    if (singleFile.getName().toLowerCase().endsWith(".docs")
+                            || singleFile.getName().toLowerCase().endsWith(".doc")
+                            || singleFile.getName().toLowerCase().endsWith(".txt")
+                            || singleFile.getName().toLowerCase().endsWith(".ppt")
+                            || singleFile.getName().toLowerCase().endsWith(".pptx")
+                            || singleFile.getName().toLowerCase().endsWith(".pdf")) {
+                        sizeCategories[0] += singleFile.length();
+                        sizeCategories[1]++;
+                    }
+                    else if (singleFile.getName().toLowerCase().endsWith(".mp4")) {
+                        sizeCategories[2] += singleFile.length();
+                        sizeCategories[3]++;
+                    }
+                    else if (singleFile.getName().toLowerCase().endsWith(".mp3")
+                            || singleFile.getName().toLowerCase().endsWith(".wav")){
+                        sizeCategories[4] += singleFile.length();
+                        sizeCategories[5]++;
+                    }
+                    else if (singleFile.getName().toLowerCase().endsWith(".jpg")
+                            || singleFile.getName().toLowerCase().endsWith(".jpeg")
+                            || singleFile.getName().toLowerCase().endsWith(".png")) {
+                        sizeCategories[6] += singleFile.length();
+                        sizeCategories[7]++;
+                    }
+                }
+            }
+        }
+    }
+
+    public static long folderSize(File directory) {
+        long length = 0;
+        for (File file : directory.listFiles()) {
+            if (file.isFile())
+                length += file.length();
+            else
+                length += folderSize(file);
+        }
+        return length;
+    }
+
+    public static String getAvailableInternalMemorySize(Context context) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSizeLong();
+        long availableBlocks = stat.getAvailableBlocksLong();
+        return Formatter.formatShortFileSize(context, availableBlocks * blockSize);
+    }
+
+    public static String getTotalInternalMemorySize(Context context) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSizeLong();
+        long totalBlocks = stat.getBlockCountLong();
+        return Formatter.formatShortFileSize(context, totalBlocks * blockSize);
+    }
+
+    public static String getUsedInternalMemorySize(Context context) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSizeLong();
+        long totalBlocks = stat.getBlockCountLong();
+        long availableBlocks = stat.getAvailableBlocksLong();
+        return Formatter.formatShortFileSize(context, (totalBlocks - availableBlocks) * blockSize);
+    }
+
+    public static boolean externalMemoryAvailable() {
+        return android.os.Environment.getExternalStorageState().equals(
+                android.os.Environment.MEDIA_MOUNTED);
+    }
+
+    public static String getAvailableExternalMemorySize(Context context) {
+        if (externalMemoryAvailable()) {
+            File path = Environment.getExternalStorageDirectory();
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSizeLong();
+            long availableBlocks = stat.getAvailableBlocksLong();
+            return Formatter.formatShortFileSize(context, availableBlocks * blockSize);
+        } else {
+            return ERROR;
+        }
+    }
+
+    public static String getTotalExternalMemorySize(Context context) {
+        if (externalMemoryAvailable()) {
+            File path = Environment.getExternalStorageDirectory();
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSizeLong();
+            long totalBlocks = stat.getBlockCountLong();
+            return Formatter.formatShortFileSize(context, totalBlocks * blockSize);
+        } else {
+            return ERROR;
+        }
+    }
+
+    public static String getUsedExternalMemorySize(Context context) {
+        if (externalMemoryAvailable()) {
+            File path = Environment.getExternalStorageDirectory();
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSizeLong();
+            long availableBlocks = stat.getAvailableBlocksLong();
+            long totalBlocks = stat.getBlockCountLong();
+            return Formatter.formatShortFileSize(context, (totalBlocks - availableBlocks) * blockSize);
+        } else {
+            return ERROR;
+        }
+    }
+
 }

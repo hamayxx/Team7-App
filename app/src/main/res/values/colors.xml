@@ -18,5 +18,11 @@
     <color name="title_activity_color">#9E272F</color>
     <color name="button_background">#FACE7F</color>
     <color name="text_button">#630A10</color>
+    <color name="red1">#6B141A</color>
 
+
+    <color name="red2">#771C24</color>
+    <color name="red3">#8A2F35</color>
+    <color name="red4">#9E4349</color>
+    <color name="red5">#B4555C</color>
 </resources>

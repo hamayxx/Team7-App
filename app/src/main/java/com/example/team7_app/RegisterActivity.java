@@ -1,6 +1,8 @@
 package com.example.team7_app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -8,7 +10,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.team7_app.API.APIService;
+import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     CardView cvToLogin;
@@ -16,7 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private EditText etEmail;
-    private User mUser;
+    private User mUser ;
+    private final static String TAG = "TEAM8_DEBUGGER";
 
 
     @Override
@@ -41,29 +56,35 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser() {
-//
-//        APIService.apiService.createUser(mUser)
-//                .enqueue(new Callback<User>() {
-//                    @Override
-//                    public void onResponse(Call<User> call, Response<User> response) {
-//                        User usrResult = (User) response.body();
-//                        if(usrResult!= null)
-//                        {
-//                            Log.e("Success: ", usrResult.toString()+" ");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<User> call, Throwable t) {
-//                        Toast.makeText(RegisterActivity.this, "Call API<post> error", Toast.LENGTH_SHORT).show();
-//                        Log.e("Error API: ", t.toString()+" ");
-//                    }
-//                });
-//
-//
-//
-//        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//        startActivity(intent);
+        Log.i("TEAM8", "Getting list users from server!!!");
+        APIService signupService = ServiceGenerator.createService(APIService.class, "admin", "admin");
+        Call<User> call = signupService.createUser(mUser);
+        Log.e(TAG, "User API: "+mUser.toString().trim());
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "Respone" + response.toString());
+                    Toast.makeText(RegisterActivity.this, "Call API <post> success", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    // error response, no access to resource?
+                    Log.e(TAG, "SignUp: LOI CMNR!!!"+ response.toString() );
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                // something went completely south (like no internet connection)
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+            }
+        });
+
     }
 
     private void onSignUp() {
@@ -80,7 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mUser.setLogin(username);
         mUser.setEmail(email);
-        mUser.setPassword(password);
+        mUser.setPassword_hash(password);
+        Log.e(TAG, "User check: "+mUser.toString().trim());
 
         createUser();
 
