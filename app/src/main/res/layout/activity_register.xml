@@ -44,6 +44,7 @@
 
             <EditText
                 android:id="@+id/a_register_et_user"
+                android:text="chien"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -87,6 +88,7 @@
 
             <EditText
                 android:id="@+id/a_register_et_mail"
+                android:text="19520025@gm.uit.edu.vn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -130,20 +132,22 @@
 
             <EditText
                 android:id="@+id/a_register_et_password"
+                android:text="12032001"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:singleLine="true"
-                android:background="@null"
-                android:fontFamily="@font/dosis_semibold"
-                android:textFontWeight="600"
-                android:textColor="#25252D"
-                android:inputType="textPassword"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/a_register_icon_password"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_toEndOf="@id/a_register_icon_password"
+                android:background="@null"
+                android:fontFamily="@font/dosis_semibold"
+                android:inputType="textPassword"
+                android:hint="Enter your password"
+                android:singleLine="true"
+                android:textColor="#25252D"
+                android:textFontWeight="600"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -174,21 +178,22 @@
 
             <EditText
                 android:id="@+id/a_register_et_repass"
+                android:text="12032001"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:singleLine="true"
-                android:background="@null"
-                android:fontFamily="@font/dosis_semibold"
-                android:textFontWeight="600"
-                android:textColor="#25252D"
-                android:inputType="textPassword"
-                android:hint="Confirm your password"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/a_register_icon_repass"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_toEndOf="@id/a_register_icon_repass"
+                android:background="@null"
+                android:fontFamily="@font/dosis_semibold"
+                android:hint="Confirm your password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#25252D"
+                android:textFontWeight="600"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
