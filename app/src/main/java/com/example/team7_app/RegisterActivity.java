@@ -2,6 +2,8 @@ package com.example.team7_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +17,8 @@ import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.User;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private EditText etEmail;
+    private EditText etRePassword;
     private User mUser ;
     private final static String TAG = "TEAM8_DEBUGGER";
 
@@ -37,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         etUsername=findViewById(R.id.a_register_et_user);
         etPassword=findViewById(R.id.a_register_et_password);
         etEmail=findViewById(R.id.a_register_et_mail);
+        etRePassword=findViewById(R.id.a_register_et_repass);
 
 
 
@@ -52,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createUser(RegisterUserDTO registerUserDTO) {
         Log.i("TEAM8", "Getting list users from server!!!");
-        APIService signupService = ServiceGenerator.createService(APIService.class, "admin", "admin");
+        APIService signupService = ServiceGenerator.createService(APIService.class);
         Call<RegisterUserDTO> call = signupService.createUser(registerUserDTO);
         Log.e(TAG, "User API: "+ registerUserDTO.toString().trim());
 
@@ -77,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                 // something went completely south (like no internet connection)
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
+                Toast.makeText(RegisterActivity.this, "CALLED API FAILED!!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,15 +94,16 @@ public class RegisterActivity extends AppCompatActivity {
         String username = etUsername.getText().toString().trim();
         String password= etPassword.getText().toString().trim();
         String email= etEmail.getText().toString().trim();
+        String repass= etRePassword.getText().toString().trim();
 
 
-        if(username.isEmpty() || password.isEmpty() || email.isEmpty())
+        if(username.isEmpty() || password.isEmpty() || email.isEmpty() || (!password.equals(repass)))
         {
             Toast.makeText(this, "Field are required", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        RegisterUserDTO registerUserDTO = new RegisterUserDTO(username, email, password);
+        RegisterUserDTO registerUserDTO = new RegisterUserDTO(username, email, password, "en");
         Log.e(TAG, "User check: "+ registerUserDTO.toString().trim());
 
         createUser(registerUserDTO);
@@ -108,11 +116,5 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-
     }
-
-
-
-
-
 }
