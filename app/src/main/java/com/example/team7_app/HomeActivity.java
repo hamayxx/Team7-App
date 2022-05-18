@@ -95,14 +95,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                         clickOpenProfileSheetDialog();
                         break;
 
-                    case R.id.bottom_bar_security:
-                        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                            drawerLayout.closeDrawer(Gravity.LEFT);
-                        }
-                        openSecurityFragment();
-                        break;
                 }
                 return true;
+
             }
         });
 
