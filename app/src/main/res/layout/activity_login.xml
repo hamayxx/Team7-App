@@ -41,10 +41,10 @@
                 android:id="@+id/a_login_icon_user"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/icon_user"
-                android:backgroundTint="@color/icon_color"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="15dp"
+                android:background="@drawable/icon_user"
+                android:backgroundTint="@color/icon_color" />
 
             <EditText
                 android:id="@+id/a_login_et_user"
