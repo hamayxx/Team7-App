@@ -15,246 +15,63 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="650dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rectangle"
+                android:layout_width="65dp"
+                android:layout_height="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:width="65dp"
+                android:height="5dp"
+                android:background="@color/bar"
+                app:cardCornerRadius="50dp" />
+
+        <ImageView
+            android:id="@+id/iv_logofile"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_file"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"/>
 
             <TextView
-                android:id="@+id/fm_item_options_tv_name"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DRAFT.TXT"
-                android:textSize="35sp"
-                android:textFontWeight="400"
-                android:singleLine="true"
-                android:fontFamily="@font/iciel_smoothy_sans"
-                android:textColor="@color/category_title"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"/>
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="50dp"
+                android:layout_toRightOf="@+id/iv_logofile"
+                android:fontFamily="@font/dosis_extrabold"
+                android:text="File review"
+                android:textColor="@color/white"
+                android:textSize="35dp" />
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="110dp"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:id="@+id/divider1"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="300dp"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosis_extrabold"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:text="File decription:"
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_open"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-
-                android:layout_below="@id/fm_item_options_tv_name">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_open"
-                        android:text="Open"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_delete"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_open">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_delete"
-                        android:text="Delete"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_copy"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_delete">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_copy"
-                        android:text="Copy to"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_cut"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_copy">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_cut"
-                        android:text="Cut to"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_share"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_cut">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_share"
-                        android:text="Share to"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_rename"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_share">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_rename"
-                        android:text="Rename"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_secure"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_rename">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_secure"
-                        android:text="Secure"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/fm_item_options_btn_information"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_below="@id/fm_item_options_btn_secure">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/fm_item_options_tv_information"
-                        android:text="Information"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:layout_centerInParent="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
+            android:layout_below="@+id/divider1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"/>
         </RelativeLayout>
     </LinearLayout>
 
