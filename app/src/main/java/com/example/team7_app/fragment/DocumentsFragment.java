@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,6 +67,7 @@ public class DocumentsFragment extends Fragment {
     private TextView tvTitle;
     private TextView tvSizeCount;
     private ProgressBar pbTotalUsed;
+    private SearchView svSearch;
     private long size;
     private int count;
 
@@ -119,6 +121,7 @@ public class DocumentsFragment extends Fragment {
         ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
         tvSizeCount = getView().findViewById(R.id.fm_documents_tv_gb_item);
         pbTotalUsed = getView().findViewById(R.id.fm_documents_pb_total_used);
+        svSearch = getView().findViewById(R.id.fm_documents_sv_search);
 
         try {
             nameCategory = getArguments().getString("nameCategory");
@@ -170,6 +173,20 @@ public class DocumentsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 clickOpenAdjustSheetDialog();
+            }
+        });
+
+        // search
+        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                fileAdapter.searchItem(search(newText));
+                return false;
             }
         });
     }
@@ -308,8 +325,21 @@ public class DocumentsFragment extends Fragment {
 
         StatFs stat = new StatFs(storage.getPath());
         long totalBlocks = stat.getTotalBytes();
-        int proGr = (int) ((float)(size/totalBlocks) * 100);
+        int proGr = (int) ((float) size/totalBlocks * 100);
         pbTotalUsed.setProgress(proGr);
+    }
+
+    // search
+    private ArrayList<File> search(String text) {
+        ArrayList<File> arrayList = new ArrayList<>();
+        if (fileList != null) {
+            for (File singleFile: fileList) {
+                if (singleFile.getName().toLowerCase().contains(text.toLowerCase())) {
+                    arrayList.add(singleFile);
+                }
+            }
+        }
+        return arrayList;
     }
 
     private void clickOpenAdjustSheetDialog() {

@@ -26,14 +26,14 @@
                 android:height="5dp"
                 android:background="@color/bar"
                 app:cardCornerRadius="50dp" />
-
-        <ImageView
-            android:id="@+id/iv_logofile"
-            android:layout_width="45dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_file"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="20dp"/>
+            //tittle
+            <ImageView
+                android:id="@+id/iv_logofile"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_file"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,33 +45,87 @@
                 android:text="File review"
                 android:textColor="@color/white"
                 android:textSize="35dp" />
-        <ImageView
-            android:id="@+id/divider"
-            android:layout_width="340dp"
-            android:layout_height="2dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="110dp"
-            android:background="@color/white"
-            android:layout_centerHorizontal="true"/>
-        <ImageView
-            android:id="@+id/divider1"
-            android:layout_width="340dp"
-            android:layout_height="2dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="300dp"
-            android:background="@color/white"
-            android:layout_centerHorizontal="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/dosis_extrabold"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:text="File decription:"
+            //icon
+            <ImageView
+                android:id="@+id/divider"
+                android:layout_width="340dp"
+                android:layout_height="2dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="110dp"
+                android:background="@color/white"
+                android:layout_centerHorizontal="true"/>
+            //descript
+            <ImageView
+                android:id="@+id/divider1"
+                android:layout_width="340dp"
+                android:layout_height="2dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="300dp"
+                android:background="@color/white"
+                android:layout_centerHorizontal="true"/>
 
-            android:layout_below="@+id/divider1"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"/>
+            <TextView
+                android:id="@+id/tv_file_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/dosis_bold"
+                android:text="File Description:"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_file_description"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/grey"
+                android:textSize="25dp"
+                android:text="Datetime: 21/05/2022"/>
+            <TextView
+                android:id="@+id/tv_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_date"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="@font/dosis_bold"
+                android:textColor="@color/grey"
+                android:textSize="25dp"
+                android:text="Size: 132MB"/>
+            //button
+            <ImageView
+                android:id="@+id/divider2"
+                android:layout_width="340dp"
+                android:layout_height="2dp"
+                android:layout_below="@+id/tv_size"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:layout_centerHorizontal="true"/>
+            //rename
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_open"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_below="@+id/divider2"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/main_menu_background"
+                app:cardCornerRadius="15dp"
+                app:strokeWidth="2dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/divider2"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="42dp"
+                android:background="@drawable/ic_rename2"
+                android:elevation="2dp" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -8,22 +8,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 import com.example.team7_app.Model.User;
-import com.example.team7_app.fragment.DocumentsFragment;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
-import com.example.team7_app.fragment.SecurityFragment;
 import com.example.team7_app.fragment.TrashFragment;
-import com.example.team7_app.fragment.UserFragment;
 import com.example.team7_app.my_interface.IClickHomeListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -68,7 +62,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             usr = (User) bundleRcvUser.get("object_user");
             if(usr != null)
             {
-                mUsername= usr.getLogin().toString().trim();
+                mUsername= usr.getLogin().trim();
             }
         }
 
@@ -121,13 +115,6 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         }
     }
 
-    private void openSecurityFragment() {
-        if(currentFragment != FRAGMENT_SECURITY) {
-            replaceFragment(new SecurityFragment());
-            currentFragment = FRAGMENT_SECURITY;
-        }
-    }
-
     private void openRecentlyFragment() {
         if(currentFragment != FRAGMENT_RECENTLY) {
             replaceFragment(new RecentlyFragment());
@@ -141,6 +128,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             currentFragment = FRAGMENT_TRASH;
         }
     }
+
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
 
@@ -172,7 +160,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             if(fragmentManager.getBackStackEntryCount() > 0)
             {
                 fragmentManager.popBackStack();
-                currentFragment = FRAGMENT_HOME;
+                //currentFragment = FRAGMENT_HOME;
             }
             else
             {
@@ -181,7 +169,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                 //finishAffinity();
 
             }
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 

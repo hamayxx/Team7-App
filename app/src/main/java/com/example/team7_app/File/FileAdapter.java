@@ -19,6 +19,7 @@ import com.example.team7_app.my_interface.IClickItemOptionListener;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,12 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         this.file = file;
         this.iClickItemOptionListener = iClickItemOptionListener;
         this.context = context;
+    }
+
+    // search
+    public void searchItem(ArrayList<File> file) {
+        this.file = file;
+        notifyDataSetChanged();
     }
 
     @NonNull

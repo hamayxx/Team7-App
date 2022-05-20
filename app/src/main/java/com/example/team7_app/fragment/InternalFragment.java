@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +59,7 @@ public class InternalFragment extends Fragment {
     private List<File> fileList;
     private FileAdapter fileAdapter;
     private TextView tvTitle;
+    private SearchView svSearch;
 
     public InternalFragment() {
         // Required empty public constructor
@@ -105,6 +107,7 @@ public class InternalFragment extends Fragment {
         tvTitle = getView().findViewById(R.id.fm_internal_tv_title);
         ibBack = getView().findViewById(R.id.fm_internal_btn_return);
         ibAdjust = getView().findViewById(R.id.fm_internal_btn_adjust);
+        svSearch = getView().findViewById(R.id.fm_internal_sv_search);
 
         try {
             data = getArguments().getString("path");
@@ -117,6 +120,35 @@ public class InternalFragment extends Fragment {
 
         runtimePermission();
 
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
+
+        ibAdjust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickOpenAdjustSheetDialog();
+            }
+        });
+
+        // search
+        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                fileAdapter.searchItem(search(newText));
+                return false;
+            }
+        });
     }
 
     private void runtimePermission() {
@@ -217,22 +249,19 @@ public class InternalFragment extends Fragment {
 
         }, getContext());
         rvItems.setAdapter(fileAdapter);
+    }
 
-        ibBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getFragmentManager() != null) {
-                    getFragmentManager().popBackStack();
+    // search
+    private ArrayList<File> search(String text) {
+        ArrayList<File> arrayList = new ArrayList<>();
+        if (fileList != null) {
+            for (File singleFile: fileList) {
+                if (singleFile.getName().toLowerCase().contains(text.toLowerCase())) {
+                    arrayList.add(singleFile);
                 }
             }
-        });
-
-        ibAdjust.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickOpenAdjustSheetDialog();
-            }
-        });
+        }
+        return arrayList;
     }
 
     private void clickOpenAdjustSheetDialog() {
