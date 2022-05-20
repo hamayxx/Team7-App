@@ -36,6 +36,7 @@
                 android:layout_marginLeft="20dp"/>
 
             <TextView
+                android:id="@+id/fm_item_tv_nameFile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -75,40 +76,43 @@
                 android:text="File Description:"
                 android:textColor="@color/white"
                 android:textSize="30dp" />
+
             <TextView
-                android:id="@+id/tv_date"
+                android:id="@+id/fm_item_tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_file_description"
-                android:layout_marginTop="15dp"
                 android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/dosis_bold"
+                android:text="Datetime: 21/05/2022"
                 android:textColor="@color/grey"
-                android:textSize="25dp"
-                android:text="Datetime: 21/05/2022"/>
+                android:textSize="25dp" />
+
             <TextView
-                android:id="@+id/tv_size"
+                android:id="@+id/fm_item_tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_date"
-                android:layout_marginTop="5dp"
+                android:layout_below="@+id/fm_item_tv_date"
                 android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/dosis_bold"
+                android:text="Size: 132MB"
                 android:textColor="@color/grey"
-                android:textSize="25dp"
-                android:text="Size: 132MB"/>
+                android:textSize="25dp" />
             //button
             <ImageView
                 android:id="@+id/divider2"
                 android:layout_width="340dp"
                 android:layout_height="2dp"
-                android:layout_below="@+id/tv_size"
+                android:layout_below="@+id/fm_item_tv_size"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
                 android:layout_centerHorizontal="true"/>
             //rename
+
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_open"
+                android:id="@+id/fm_item_cv_open"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_below="@+id/divider2"
