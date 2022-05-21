@@ -43,6 +43,9 @@
         <entry key="..\:/Mobile-FiMa-main/app/src/main/res/layout/activity_welcome.xml" value="0.18" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bottom_sheet_corners_background.xml" value="0.112" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_delete.xml" value="0.1" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_delete2.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_move.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_rename2.xml" value="0.1785" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/dosis_extrabold.xml" value="0.234375" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/dosis_semibold.xml" value="0.11944444444444445" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/heebo.xml" value="0.11944444444444445" />
@@ -59,7 +62,7 @@
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_downloads.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_internal.xml" value="0.18" />
-        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_item_options.xml" value="0.20416666666666666" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_item_options.xml" value="0.22" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_media.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_profile_pass.xml" value="0.20416666666666666" />

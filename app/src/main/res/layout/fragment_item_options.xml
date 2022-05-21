@@ -54,6 +54,25 @@
                 android:layout_marginTop="110dp"
                 android:background="@color/white"
                 android:layout_centerHorizontal="true"/>
+            <ImageView
+                android:id="@+id/iv_iconfile"
+                android:layout_width="96dp"
+                android:layout_height="90dp"
+                android:layout_below="@+id/divider"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_filepdf"
+                android:layout_marginTop="30dp"/>
+            <TextView
+                android:id="@+id/tv_filename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_iconfile"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="Draf.txt"
+                android:fontFamily="@font/dosis_extrabold"
+                android:textSize="28dp"
+                android:textColor="@color/white"/>
             //descript
             <ImageView
                 android:id="@+id/divider1"
@@ -74,7 +93,7 @@
                 android:fontFamily="@font/dosis_bold"
                 android:text="File Description:"
                 android:textColor="@color/white"
-                android:textSize="30dp" />
+                android:textSize="28dp" />
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
@@ -84,7 +103,7 @@
                 android:layout_marginLeft="25dp"
                 android:fontFamily="@font/dosis_bold"
                 android:textColor="@color/grey"
-                android:textSize="25dp"
+                android:textSize="24dp"
                 android:text="Datetime: 21/05/2022"/>
             <TextView
                 android:id="@+id/tv_size"
@@ -95,7 +114,7 @@
                 android:layout_marginLeft="25dp"
                 android:fontFamily="@font/dosis_bold"
                 android:textColor="@color/grey"
-                android:textSize="25dp"
+                android:textSize="24dp"
                 android:text="Size: 132MB"/>
             //button
             <ImageView
@@ -106,26 +125,99 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
                 android:layout_centerHorizontal="true"/>
-            //rename
+            //move file
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_open"
+                android:id="@+id/card_move"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_below="@+id/divider2"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="@color/main_menu_background"
                 app:cardCornerRadius="15dp"
                 app:strokeWidth="2dp" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                <ImageView
+                    android:id="@+id/iv_movefile"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/divider2"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginTop="42dp"
+                    android:background="@drawable/ic_moveto"
+                    android:elevation="2dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_bold"
+                    android:text="Move to"
+                    android:layout_marginLeft="39dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/card_move"/>
+            //rename
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_rename"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_below="@+id/divider2"
-                android:layout_marginLeft="55dp"
-                android:layout_marginTop="42dp"
-                android:background="@drawable/ic_rename2"
-                android:elevation="2dp" />
+                android:layout_toRightOf="@+id/card_move"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/main_menu_background"
+                app:cardCornerRadius="15dp"
+                app:strokeWidth="2dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/divider2"
+                    android:layout_toRightOf="@+id/card_move"
+                    android:layout_marginLeft="78dp"
+                    android:layout_marginTop="42dp"
+                    android:background="@drawable/ic_rename"
+                    android:elevation="2dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_bold"
+                    android:text="Rename"
+                    android:layout_marginLeft="162dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/card_rename"/>
+
+            //delete
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_delete"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_below="@+id/divider2"
+                android:layout_toRightOf="@+id/card_rename"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/main_menu_background"
+                app:cardCornerRadius="15dp"
+                app:strokeWidth="2dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/divider2"
+                    android:layout_toRightOf="@+id/card_rename"
+                    android:layout_marginLeft="78dp"
+                    android:layout_marginTop="42dp"
+                    android:background="@drawable/ic_delete"
+                    android:elevation="2dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_bold"
+                    android:text="Delete"
+                    android:layout_marginLeft="294dp"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/card_rename"/>
         </RelativeLayout>
     </LinearLayout>
 
