@@ -14,7 +14,6 @@
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_apps.xml" value="0.24818840579710144" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_documents.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_internal.xml" value="0.23854166666666668" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_item_options.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_profile.xml" value="0.24818840579710144" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_profile_pass.xml" value="0.25416666666666665" />
@@ -43,6 +42,8 @@
         <entry key="..\:/Mobile-FiMa-main/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Mobile-FiMa-main/app/src/main/res/layout/activity_welcome.xml" value="0.18" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bottom_sheet_corners_background.xml" value="0.112" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_delete.xml" value="0.1" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/dosis_extrabold.xml" value="0.234375" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/dosis_semibold.xml" value="0.11944444444444445" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/heebo.xml" value="0.11944444444444445" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/activity_enter_mail.xml" value="0.20416666666666666" />
@@ -64,7 +65,7 @@
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_profile_pass.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_recently.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_security.xml" value="0.20416666666666666" />
-        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_sort.xml" value="0.25" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_sort.xml" value="0.22" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_trash.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_user.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/item_category.xml" value="0.20416666666666666" />
