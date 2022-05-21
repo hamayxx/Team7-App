@@ -1,6 +1,7 @@
 package com.example.team7_app;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -20,6 +21,7 @@ import android.provider.Settings;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
@@ -266,5 +268,20 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             finish();
         }
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2296) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    replaceFragment(new HomeFragment());
+                } else {
+                    Toast.makeText(this, "Please allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                    requestPermission();
+                }
+            }
+        }
     }
 }
