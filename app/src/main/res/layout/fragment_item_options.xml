@@ -62,17 +62,18 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/ic_filepdf"
                 android:layout_marginTop="30dp"/>
+
             <TextView
                 android:id="@+id/tv_filename"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_iconfile"
-                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
-                android:text="Draf.txt"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/dosis_extrabold"
-                android:textSize="28dp"
-                android:textColor="@color/white"/>
+                android:text="Draf.txt"
+                android:textColor="@color/white"
+                android:textSize="28dp" />
             //descript
             <ImageView
                 android:id="@+id/divider1"
