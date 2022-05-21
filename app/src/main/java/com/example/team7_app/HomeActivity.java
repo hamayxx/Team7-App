@@ -116,7 +116,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         drawerLayout.addDrawerListener(toggle);
 
         if (checkPermission()) {
-            replaceFragment(new HomeFragment());
+            replaceFragment(new HomeFragment(), "Home");
             bottomNavigationView.setSelectedItemId(R.id.bottom_bar_home);
         }
         else {
@@ -130,23 +130,27 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     }
 
     private void openHomeFragment() {
-
         if(currentFragment != FRAGMENT_HOME) {
-            replaceFragment(new HomeFragment());
+            if(getSupportFragmentManager().getBackStackEntryCount() > 1) {
+                getSupportFragmentManager().popBackStack("Home", 0);
+            }
+            else {
+                replaceFragment(new HomeFragment(), "Home");
+            }
             currentFragment = FRAGMENT_HOME;
         }
     }
 
     private void openRecentlyFragment() {
         if(currentFragment != FRAGMENT_RECENTLY) {
-            replaceFragment(new RecentlyFragment());
+            replaceFragment(new RecentlyFragment(), "Recently");
             currentFragment = FRAGMENT_RECENTLY;
         }
     }
 
     private void openTrashFragment() {
         if(currentFragment != FRAGMENT_TRASH) {
-            replaceFragment(new TrashFragment());
+            replaceFragment(new TrashFragment(), "Trash");
             currentFragment = FRAGMENT_TRASH;
         }
     }
@@ -162,11 +166,11 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, String nameFrag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         transaction.replace(R.id.content_frame, fragment);
-        transaction.addToBackStack(null);
+        transaction.addToBackStack(nameFrag);
         transaction.commit();
     }
 
@@ -200,7 +204,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                     .withListener(new MultiplePermissionsListener() {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                            replaceFragment(new HomeFragment());
+                            replaceFragment(new HomeFragment(), "Home");
                             bottomNavigationView.setSelectedItemId(R.id.bottom_bar_home);
                         }
 
@@ -221,19 +225,15 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         else {
             // back tren ban phim
             FragmentManager fragmentManager = getSupportFragmentManager();
-            if(fragmentManager.getBackStackEntryCount() > 0)
-            {
-                fragmentManager.popBackStack();
-                //currentFragment = FRAGMENT_HOME;
-            }
-            else
-            {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 1){
                 finish();
                 // tat ung dung
                 //finishAffinity();
-
             }
-            //super.onBackPressed();
+            else
+            {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -276,7 +276,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         if (requestCode == 2296) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
-                    replaceFragment(new HomeFragment());
+                    replaceFragment(new HomeFragment(), "Home");
                 } else {
                     Toast.makeText(this, "Please allow permission for storage access!", Toast.LENGTH_SHORT).show();
                     requestPermission();

@@ -18,16 +18,6 @@
         android:layout_marginTop="5dp"
         android:textColor="#630A10" />
 
-    <ImageButton
-        android:id="@+id/fm_home_ib_search"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/icon_search"
-        android:backgroundTint="@color/black"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"/>
-
     <TextView
         android:id="@+id/fm_home_tv_hello"
         android:layout_width="wrap_content"

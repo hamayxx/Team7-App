@@ -157,7 +157,7 @@ public class DocumentsFragment extends Fragment {
 
         }
 
-        runtimePermission();
+        displayFiles();
 
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
