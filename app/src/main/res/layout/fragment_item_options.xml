@@ -60,9 +60,6 @@
             android:layout_marginTop="30dp"/>
 
         <TextView
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
             android:id="@+id/fm_item_options_tv_filename"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
