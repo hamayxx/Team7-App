@@ -124,6 +124,7 @@
             android:background="@color/white"
             android:layout_centerHorizontal="true"/>
         //move file
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_move"
             android:layout_width="65dp"
@@ -151,7 +152,7 @@
             android:text="Move to"
             android:layout_marginLeft="39dp"
             android:textSize="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/yellow"
             android:layout_below="@id/card_move"/>
         //rename
         <com.google.android.material.card.MaterialCardView
@@ -182,7 +183,7 @@
             android:text="Rename"
             android:layout_marginLeft="162dp"
             android:textSize="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/yellow"
             android:layout_below="@id/card_rename"/>
 
         //delete
@@ -214,7 +215,7 @@
             android:text="Delete"
             android:layout_marginLeft="294dp"
             android:textSize="20dp"
-            android:textColor="@color/white"
+            android:textColor="@color/yellow"
             android:layout_below="@id/card_rename"/>
     </RelativeLayout>
 

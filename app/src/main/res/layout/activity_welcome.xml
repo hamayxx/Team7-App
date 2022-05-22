@@ -27,7 +27,7 @@
         android:id="@+id/a_welcome_tv_madeby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="made by team 7"
+        android:text="made by team 8"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
