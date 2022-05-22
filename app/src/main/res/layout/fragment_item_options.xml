@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,228 +7,215 @@
     android:background="@drawable/bottom_sheet_corners_background"
     tools:context=".fragment.ItemOptionsFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="650dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rectangle"
+            android:layout_width="65dp"
+            android:layout_height="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:width="65dp"
+            android:height="5dp"
+            android:background="@color/bar"
+            app:cardCornerRadius="50dp" />
+        //tittle
+        <ImageView
+            android:id="@+id/iv_logofile"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_file"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="650dp">
-            <androidx.cardview.widget.CardView
-                android:id="@+id/rectangle"
-                android:layout_width="65dp"
-                android:layout_height="5dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:width="65dp"
-                android:height="5dp"
-                android:background="@color/bar"
-                app:cardCornerRadius="50dp" />
-            //tittle
-            <ImageView
-                android:id="@+id/iv_logofile"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_file"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/iv_logofile"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="File review"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+        //icon
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="110dp"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:id="@+id/fm_item_options_iv_iconfile"
+            android:layout_width="96dp"
+            android:layout_height="90dp"
+            android:layout_below="@+id/divider"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_filepdf"
+            android:layout_marginTop="30dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="50dp"
-                android:layout_toRightOf="@+id/iv_logofile"
-                android:fontFamily="@font/dosis_extrabold"
-                android:text="File review"
-                android:textColor="@color/white"
-                android:textSize="35dp" />
-            //icon
-            <ImageView
-                android:id="@+id/divider"
-                android:layout_width="340dp"
-                android:layout_height="2dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="110dp"
-                android:background="@color/white"
-                android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/fm_item_options_tv_filename"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fm_item_options_iv_iconfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="Draf.txt"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
 
-            <ImageView
-                android:id="@+id/fm_item_options_iv_iconfile"
-                android:layout_width="96dp"
-                android:layout_height="90dp"
-                android:layout_below="@+id/divider"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/ic_filepdf" />
+        //descript
+        <ImageView
+            android:id="@+id/divider1"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="300dp"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"/>
 
-            <TextView
-                android:id="@+id/fm_item_options_tv_filename"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fm_item_options_iv_iconfile"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/dosis_extrabold"
-                android:text="Draf.txt"
-                android:textColor="@color/white"
-                android:textSize="28dp"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"/>
-            //descript
-            <ImageView
-                android:id="@+id/divider1"
-                android:layout_width="340dp"
-                android:layout_height="2dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="300dp"
-                android:background="@color/white"
-                android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/tv_file_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider1"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/dosis_bold"
+            android:text="File Description:"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+        <TextView
+            android:id="@+id/fm_item_options_tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_file_description"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="25dp"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/grey"
+            android:textSize="24dp"
+            android:text="Datetime: 21/05/2022"/>
+        <TextView
+            android:id="@+id/fm_item_options_tv_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fm_item_options_tv_date"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="25dp"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/grey"
+            android:textSize="24dp"
+            android:text="Size: 132MB"/>
+        //button
+        <ImageView
+            android:id="@+id/divider2"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_below="@+id/fm_item_options_tv_size"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:layout_centerHorizontal="true"/>
+        //move file
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fm_item_options_cv_move"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/divider2"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/main_menu_background"
+            app:cardCornerRadius="15dp"
+            app:strokeWidth="2dp" />
 
-            <TextView
-                android:id="@+id/tv_file_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/divider1"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/dosis_bold"
-                android:text="File Description:"
-                android:textColor="@color/white"
-                android:textSize="28dp" />
+        <ImageView
+            android:id="@+id/iv_movefile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/divider2"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="42dp"
+            android:background="@drawable/ic_moveto"
+            android:elevation="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosis_bold"
+            android:text="Move to"
+            android:layout_marginLeft="39dp"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_below="@id/fm_item_options_cv_move"/>
+        //rename
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fm_item_options_cv_rename"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/divider2"
+            android:layout_toRightOf="@+id/fm_item_options_cv_move"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/main_menu_background"
+            app:cardCornerRadius="15dp"
+            app:strokeWidth="2dp" />
 
-            <TextView
-                android:id="@+id/fm_item_options_tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_file_description"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/dosis_bold"
-                android:text="Datetime: 21/05/2022"
-                android:textColor="@color/grey"
-                android:textSize="24dp" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/divider2"
+            android:layout_toRightOf="@+id/fm_item_options_cv_move"
+            android:layout_marginLeft="78dp"
+            android:layout_marginTop="42dp"
+            android:background="@drawable/ic_rename"
+            android:elevation="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosis_bold"
+            android:text="Rename"
+            android:layout_marginLeft="162dp"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_below="@id/fm_item_options_cv_rename"/>
 
-            <TextView
-                android:id="@+id/fm_item_options_tv_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/fm_item_options_tv_date"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/dosis_bold"
-                android:text="Size: 132MB"
-                android:textColor="@color/grey"
-                android:textSize="24dp" />
-            //button
-            <ImageView
-                android:id="@+id/divider2"
-                android:layout_width="340dp"
-                android:layout_height="2dp"
-                android:layout_below="@+id/fm_item_options_tv_size"
-                android:layout_marginTop="20dp"
-                android:background="@color/white"
-                android:layout_centerHorizontal="true"/>
-            //move file
+        //delete
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fm_item_options_cv_delete"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/divider2"
+            android:layout_toRightOf="@+id/fm_item_options_cv_rename"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/main_menu_background"
+            app:cardCornerRadius="15dp"
+            app:strokeWidth="2dp" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fm_item_options_cv_move"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_below="@+id/divider2"
-                android:layout_marginLeft="38dp"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="@color/main_menu_background"
-                app:cardCornerRadius="15dp"
-                app:strokeWidth="2dp" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/divider2"
+            android:layout_toRightOf="@+id/fm_item_options_cv_rename"
+            android:layout_marginLeft="78dp"
+            android:layout_marginTop="42dp"
+            android:background="@drawable/ic_delete"
+            android:elevation="2dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosis_bold"
+            android:text="Delete"
+            android:layout_marginLeft="294dp"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_below="@id/fm_item_options_cv_rename"/>
+    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/iv_movefile"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/divider2"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="42dp"
-                android:background="@drawable/ic_moveto"
-                android:elevation="2dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/dosis_bold"
-                    android:text="Move to"
-                    android:layout_marginLeft="39dp"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@id/fm_item_options_cv_move"/>
-            //rename
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fm_item_options_cv_rename"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_below="@+id/divider2"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="25dp"
-                android:layout_toRightOf="@+id/fm_item_options_cv_move"
-                android:backgroundTint="@color/main_menu_background"
-                app:cardCornerRadius="15dp"
-                app:strokeWidth="2dp" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/divider2"
-                    android:layout_toRightOf="@+id/fm_item_options_cv_move"
-                    android:layout_marginLeft="78dp"
-                    android:layout_marginTop="42dp"
-                    android:background="@drawable/ic_rename"
-                    android:elevation="2dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/dosis_bold"
-                    android:text="Rename"
-                    android:layout_marginLeft="162dp"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@id/fm_item_options_cv_rename"/>
-
-            //delete
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fm_item_options_cv_delete"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_below="@+id/divider2"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="25dp"
-                android:layout_toRightOf="@+id/fm_item_options_cv_rename"
-                android:backgroundTint="@color/main_menu_background"
-                app:cardCornerRadius="15dp"
-                app:strokeWidth="2dp" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/divider2"
-                android:layout_marginLeft="78dp"
-                android:layout_marginTop="42dp"
-                android:layout_toRightOf="@+id/fm_item_options_cv_rename"
-                android:background="@drawable/ic_delete"
-                android:elevation="2dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/dosis_bold"
-                    android:text="Delete"
-                    android:layout_marginLeft="294dp"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"
-                    android:layout_below="@id/fm_item_options_cv_rename"/>
-        </RelativeLayout>
-    </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>

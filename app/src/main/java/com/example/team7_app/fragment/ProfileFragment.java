@@ -1,12 +1,12 @@
 package com.example.team7_app.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.team7_app.R;
 
@@ -25,8 +25,13 @@ public class ProfileFragment extends Fragment {
 
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String username;
+    private String email;
+    private boolean isMale;
+
+    private TextView tvUsername;
+    private TextView tvEmail;
+    private TextView gender;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -54,8 +59,8 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            username = getArguments().getString(ARG_PARAM1);
+            email = getArguments().getString(ARG_PARAM2);
         }
     }
 

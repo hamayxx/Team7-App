@@ -38,7 +38,6 @@ import java.util.List;
 
 public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private static final String KEY_FILE_OBJ = "file_object";
-    private static final String KEY_FILE_LIST = "file_list";
     private File mFile;
     private TextView tvName ;
     private TextView tvDate ;
@@ -46,15 +45,11 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private CardView btnMove, btnRename, btnDelete ;
     private ImageView ivIcon;
 
-    private FileAdapter mfileAdapter;
-    private List<File> mfileList;
 
-
-    public static MyBottomSheetFragment newInstance(File file, List<File> fileList){
+    public static MyBottomSheetFragment newInstance(File file){
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_FILE_OBJ, file);
-        bundle.putSerializable(KEY_FILE_LIST, (Serializable) fileList);
 
         myBottomSheetFragment.setArguments(bundle);
 
@@ -69,7 +64,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         if(bundleRecvive != null)
         {
             mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
-            mfileList = (List<File>) bundleRecvive.get(KEY_FILE_LIST);
         }
     }
 
@@ -125,7 +119,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteFile() {
 
-      //  Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
 
         String dest = "/storage/emulated/0/Trash/";
         File deleteFile = new File(dest + mFile.getName());
@@ -135,7 +129,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         try {
             Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
-    catch (IOException exception)
+        catch (IOException exception)
         {
             Log.i("TEAM8", "deleteFile:"+ exception.toString());
 

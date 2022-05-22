@@ -59,12 +59,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvCategories;
     private CategoryAdapter categoryAdapter;
     private IClickItemCategoryListener iClickItemCategoryListener;
-    private ImageButton btnSearch;
-    private SearchView svSearch;
     private TextView tvHello;
     private TextView tvRemainStorage;
     private TextView tvTotalStorage;
-    private CardView cvSearch;
     private HomeActivity mHomeActivity;
     private long[] sizeCategories;
     /*private GetStatusTask getStatusTask;*/
@@ -117,10 +114,6 @@ public class HomeFragment extends Fragment {
         tvHello = getView().findViewById(R.id.fm_home_tv_hello);
         tvRemainStorage = getView().findViewById(R.id.fm_home_tv_remaining_size);
         tvTotalStorage = getView().findViewById(R.id.fm_home_tv_total_size);
-        btnSearch = getView().findViewById(R.id.fm_home_ib_search);
-        cvSearch = getView().findViewById(R.id.fm_home_cv_search);
-
-        svSearch = getView().findViewById(R.id.fm_home_sv_search);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rvCategories.setLayoutManager(linearLayoutManager);
@@ -185,21 +178,6 @@ public class HomeFragment extends Fragment {
 
         tvTotalStorage.setText(getTotalExternalMemorySize(getContext()));
         tvRemainStorage.setText(getUsedExternalMemorySize(getContext()));
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (cvSearch.getVisibility() == View.VISIBLE) {
-                    tvHello.setVisibility(View.VISIBLE);
-                    cvSearch.setVisibility(View.INVISIBLE);
-                }
-                else
-                {
-                    tvHello.setVisibility(View.INVISIBLE);
-                    cvSearch.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 
     private List<Category> getListCategory() {
