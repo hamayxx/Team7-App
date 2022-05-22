@@ -49,6 +49,7 @@
             android:layout_marginTop="110dp"
             android:background="@color/white"
             android:layout_centerHorizontal="true"/>
+
         <ImageView
             android:id="@+id/fm_item_options_iv_iconfile"
             android:layout_width="96dp"
@@ -62,10 +63,13 @@
             android:id="@+id/fm_item_options_tv_filename"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fm_item_options_iv_iconfile"
+            android:layout_below="@id/fm_item_options_iv_iconfile"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/dosis_extrabold"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             android:text="Draf.txt"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -103,17 +107,19 @@
             android:textColor="@color/grey"
             android:textSize="24dp"
             android:text="Datetime: 21/05/2022"/>
+
         <TextView
             android:id="@+id/fm_item_options_tv_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fm_item_options_tv_date"
+            android:layout_below="@id/fm_item_options_tv_date"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="25dp"
             android:fontFamily="@font/dosis_bold"
             android:textColor="@color/grey"
             android:textSize="24dp"
             android:text="Size: 132MB"/>
+
         //button
         <ImageView
             android:id="@+id/divider2"
@@ -123,6 +129,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:layout_centerHorizontal="true"/>
+
         //move file
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fm_item_options_cv_move"
@@ -153,6 +160,7 @@
             android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_below="@id/fm_item_options_cv_move"/>
+
         //rename
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fm_item_options_cv_rename"
