@@ -1,12 +1,14 @@
 package com.example.team7_app.fragment;
 
+import static java.lang.Long.divideUnsigned;
+import static java.lang.Math.round;
+
 import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +70,6 @@ public class DocumentsFragment extends Fragment {
     private TextView tvTitle;
     private TextView tvSizeCount;
     private ProgressBar pbTotalUsed;
-    private SearchView svSearch;
     private long size;
     private int count;
 
@@ -121,7 +123,6 @@ public class DocumentsFragment extends Fragment {
         ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
         tvSizeCount = getView().findViewById(R.id.fm_documents_tv_gb_item);
         pbTotalUsed = getView().findViewById(R.id.fm_documents_pb_total_used);
-        svSearch = getView().findViewById(R.id.fm_documents_sv_search);
 
         try {
             nameCategory = getArguments().getString("nameCategory");
@@ -134,6 +135,8 @@ public class DocumentsFragment extends Fragment {
 
         if (nameCategory.equals("Downloads")) {
             String documentStorage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+            Log.i("TEAM8", "Downloads:"+ documentStorage);
+
             storage = new File(documentStorage);
             tvTitle.setText("DOWNLOADS");
         }
@@ -143,15 +146,23 @@ public class DocumentsFragment extends Fragment {
             switch (nameCategory) {
                 case "Documents":
                     tvTitle.setText("DOCUMENTS");
+                    Log.i("TEAM8", "Documents"+ internalStorage);
+
                     break;
                 case "Music":
                     tvTitle.setText("MUSIC");
+                    Log.i("TEAM8", "Downloads"+ internalStorage);
+
                     break;
                 case "Videos":
                     tvTitle.setText("VIDEOS");
+                    Log.i("TEAM8", "Music"+ internalStorage);
+
                     break;
                 case "Images":
                     tvTitle.setText("IMAGES");
+                    Log.i("TEAM8", "Images"+ internalStorage);
+
                     break;
             }
 
@@ -173,20 +184,6 @@ public class DocumentsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 clickOpenAdjustSheetDialog();
-            }
-        });
-
-        // search
-        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                fileAdapter.searchItem(search(newText));
-                return false;
             }
         });
     }
@@ -297,7 +294,7 @@ public class DocumentsFragment extends Fragment {
         fileAdapter = new FileAdapter(fileList, new IClickItemOptionListener() {
             @Override
             public void onClickItemOption(File file) {
-                clickOpenOptionSheetDialog();
+                clickOpenOptionSheetDialog(file, fileList);
             }
 
             @Override
@@ -325,21 +322,10 @@ public class DocumentsFragment extends Fragment {
 
         StatFs stat = new StatFs(storage.getPath());
         long totalBlocks = stat.getTotalBytes();
-        int proGr = (int) ((float) size/totalBlocks * 100);
-        pbTotalUsed.setProgress(proGr);
-    }
 
-    // search
-    private ArrayList<File> search(String text) {
-        ArrayList<File> arrayList = new ArrayList<>();
-        if (fileList != null) {
-            for (File singleFile: fileList) {
-                if (singleFile.getName().toLowerCase().contains(text.toLowerCase())) {
-                    arrayList.add(singleFile);
-                }
-            }
-        }
-        return arrayList;
+        int proGr = (int) ((float )size/totalBlocks * 100);
+
+        pbTotalUsed.setProgress(proGr);
     }
 
     private void clickOpenAdjustSheetDialog() {
@@ -353,14 +339,17 @@ public class DocumentsFragment extends Fragment {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
-    private void clickOpenOptionSheetDialog() {
-        View viewOption = getLayoutInflater().inflate(R.layout.fragment_item_options, null);
+    private void clickOpenOptionSheetDialog(File file,List<File> fileList)  {
+//        View viewOption = getLayoutInflater().inflate(R.layout.fragment_item_options, null);
+//
+//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+//        bottomSheetDialog.setContentView(viewOption);
+//        bottomSheetDialog.show();
+//
+//        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
+//        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
-        bottomSheetDialog.setContentView(viewOption);
-        bottomSheetDialog.show();
-
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file, fileList);
+        myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
     }
 }
