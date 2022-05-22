@@ -73,8 +73,11 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/activity_info.xml" value="0.1421875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1421875" />
+        <entry key="app/src/main/res/layout/activity_otpactivity.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.733525594075521" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1421875" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
       </map>
     </option>
   </component>

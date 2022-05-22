@@ -59,22 +59,21 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/fm_profile_et_user"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:textColor="@color/main_menu_background"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:textSize="20sp"
-                        android:singleLine="true"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:layout_toEndOf="@id/fm_profile_icon_user"
-                        />
+                        android:background="@null"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:singleLine="true"
+                        android:textColor="@color/main_menu_background"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -103,22 +102,22 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/fm_profile_et_birthday"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:singleLine="true"
-                        android:background="@null"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:textColor="#25252D"
-                        android:inputType="date"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/fm_profile_icon_birthdate"/>
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/fm_profile_icon_birthdate"
+                        android:background="@null"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:inputType="date"
+                        android:singleLine="true"
+                        android:textColor="#25252D"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -148,21 +147,21 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/fm_profile_et_gender"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:singleLine="true"
-                        android:background="@null"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:textColor="#25252D"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/fm_profile_icon_gender"/>
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/fm_profile_icon_gender"
+                        android:background="@null"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:singleLine="true"
+                        android:textColor="#25252D"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -205,22 +204,22 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/fm_profile_et_mail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:singleLine="true"
-                        android:background="@null"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:textColor="@color/main_menu_background"
-                        android:inputType="textEmailAddress"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/fm_profile_icon_mail"/>
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/fm_profile_icon_mail"
+                        android:background="@null"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textColor="@color/main_menu_background"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -250,22 +249,22 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="15dp"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/fm_profile_et_pass"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:singleLine="true"
-                        android:background="@null"
-                        android:fontFamily="@font/dosis_semibold"
-                        android:textFontWeight="600"
-                        android:textColor="#25252D"
-                        android:inputType="textPassword"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/fm_profile_icon_pass"/>
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/fm_profile_icon_pass"
+                        android:background="@null"
+                        android:fontFamily="@font/dosis_semibold"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="#25252D"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
