@@ -181,46 +181,46 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
 
         if(mFile.getName().endsWith(".jpeg"))
         {
-            ivIcon.setImageResource(R.drawable.ic_image);
+            ivIcon.setBackgroundResource(R.drawable.ic_image);
         }
         else if(mFile.getName().endsWith(".jpg")){
-            ivIcon.setImageResource(R.drawable.ic_image);
+            ivIcon.setBackgroundResource(R.drawable.ic_image);
         }
         else if(mFile.getName().endsWith(".png")){
-            ivIcon.setImageResource(R.drawable.ic_image);
+            ivIcon.setBackgroundResource(R.drawable.ic_image);
         }
         else if(mFile.getName().endsWith(".pdf")){
-            ivIcon.setImageResource(R.drawable.ic_pdf);
+            ivIcon.setBackgroundResource(R.drawable.ic_pdf);
         }
         else if(mFile.getName().endsWith(".doc")){
-            ivIcon.setImageResource(R.drawable.ic_docs);
+            ivIcon.setBackgroundResource(R.drawable.ic_docs);
         }
         else if(mFile.getName().endsWith(".docx")){
-            ivIcon.setImageResource(R.drawable.ic_docs);
+            ivIcon.setBackgroundResource(R.drawable.ic_docs);
         }
         else if(mFile.getName().endsWith(".txt")){
-            ivIcon.setImageResource(R.drawable.icon_txt);
+            ivIcon.setBackgroundResource(R.drawable.icon_txt);
         }
         else if(mFile.getName().endsWith(".ppt")){
-            ivIcon.setImageResource(R.drawable.icon_ppt);
+            ivIcon.setBackgroundResource(R.drawable.icon_ppt);
         }
         else if(mFile.getName().endsWith(".pptx")){
-            ivIcon.setImageResource(R.drawable.icon_ppt);
+            ivIcon.setBackgroundResource(R.drawable.icon_ppt);
         }
         else if(mFile.getName().endsWith(".mp3")){
-            ivIcon.setImageResource(R.drawable.ic_music);
+            ivIcon.setBackgroundResource(R.drawable.ic_music);
         }
         else if(mFile.getName().endsWith(".wav")){
-            ivIcon.setImageResource(R.drawable.ic_music);
+            ivIcon.setBackgroundResource(R.drawable.ic_music);
         }
         else if(mFile.getName().endsWith(".mp4")){
-            ivIcon.setImageResource(R.drawable.ic_play);
+            ivIcon.setBackgroundResource(R.drawable.ic_play);
         }
         else if(mFile.getName().endsWith(".apk")){
-            ivIcon.setImageResource(R.drawable.ic_android);
+            ivIcon.setBackgroundResource(R.drawable.ic_android);
         }
         else{
-            ivIcon.setImageResource(R.drawable.folder);
+            ivIcon.setBackgroundResource(R.drawable.folder);
         }
 
         tvName.setText(mFile.getName());
@@ -230,5 +230,10 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         tvDate.setText("Last modified: "+ formattedDate);
         tvSize.setText("Size : "+ Formatter.formatShortFileSize(getContext(), mFile.length()));
 
+    }
+
+    @Override
+    public int getTheme() {
+        return R.style.BottomSheetDialog;
     }
 }
