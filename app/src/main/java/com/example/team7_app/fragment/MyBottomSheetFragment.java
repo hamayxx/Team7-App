@@ -1,30 +1,39 @@
 package com.example.team7_app.fragment;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.pm.LabeledIntent;
 import android.os.Bundle;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
+import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private static final String KEY_FILE_OBJ = "file_object";
+    private static final String KEY_FILE_LIST = "file_list";
     private File mFile;
     private TextView tvName ;
     private TextView tvDate ;
@@ -32,10 +41,15 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private CardView btnMove, btnRename, btnDelete ;
     private ImageView ivIcon;
 
-    public static MyBottomSheetFragment newInstance(File file){
+    private FileAdapter mfileAdapter;
+    private List<File> mfileList;
+
+
+    public static MyBottomSheetFragment newInstance(File file, List<File> fileList){
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_FILE_OBJ, file);
+        bundle.putSerializable(KEY_FILE_LIST, (Serializable) fileList);
 
         myBottomSheetFragment.setArguments(bundle);
 
@@ -50,6 +64,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         if(bundleRecvive != null)
         {
             mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
+            mfileList = (List<File>) bundleRecvive.get(KEY_FILE_LIST);
         }
     }
 
@@ -82,24 +97,81 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         btnMove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                moveFile();
             }
         });
 
         btnRename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                renameFile();
             }
         });
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                deleteFile();
             }
         });
     }
+
+    private void deleteFile() {
+        Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+    }
+
+    private void renameFile() {
+        AlertDialog.Builder renameDailog = new AlertDialog.Builder(getContext());
+        renameDailog.setTitle("Rename File");
+        final EditText name = new EditText(getContext());
+        renameDailog.setView(name);
+
+        renameDailog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String new_name = name.getEditableText().toString();
+                String extention = mFile.getAbsolutePath().substring(mFile.getAbsolutePath().lastIndexOf("."));
+
+                File current = new File(mFile.getAbsolutePath());
+                File destination = new File(mFile.getAbsolutePath().replace(mFile.getName(), new_name) + extention);
+
+
+                if(destination.exists())
+                {
+                    Toast.makeText(getContext(), destination.getName() +" already exist!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    int position = mfileList.indexOf(mFile);
+                    if(current.renameTo(destination))
+                    {
+//                        mfileList.set(position, destination); // gan file vao position
+                        Toast.makeText(getContext(), "Rename!" + current.getName() , Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(), "Couldn't rename!" + current.getName() , Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alertDialog_rename = renameDailog.create();
+        alertDialog_rename.show();
+    }
+
+    private void moveFile() {
+        Toast.makeText(getContext(), "Move", Toast.LENGTH_SHORT).show();
+
+    }
+
     private void setDataFile()
     {
         if(mFile == null)
@@ -153,7 +225,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
 
         tvName.setText(mFile.getName());
         Date lastModified = new Date(mFile.lastModified());
-        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = simpleDateFormatter.format(lastModified);
         tvDate.setText("Last modified: "+ formattedDate);
         tvSize.setText("Size : "+ Formatter.formatShortFileSize(getContext(), mFile.length()));
