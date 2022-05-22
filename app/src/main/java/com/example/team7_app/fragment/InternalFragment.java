@@ -227,7 +227,7 @@ public class InternalFragment extends Fragment {
         fileAdapter = new FileAdapter(fileList, new IClickItemOptionListener() {
             @Override
             public void onClickItemOption(File file) {
-                clickOpenOptionSheetDialog();
+                clickOpenOptionSheetDialog(file);
             }
 
             @Override
@@ -275,14 +275,17 @@ public class InternalFragment extends Fragment {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
-    private void clickOpenOptionSheetDialog() {
-        View viewOption = getLayoutInflater().inflate(R.layout.fragment_item_options, null);
+    private void clickOpenOptionSheetDialog(File file) {
+//        View viewOption = getLayoutInflater().inflate(R.layout.fragment_item_options, null);
+//
+//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialog);
+//        bottomSheetDialog.setContentView(viewOption);
+//        bottomSheetDialog.show();
+//
+//        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
+//        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialog);
-        bottomSheetDialog.setContentView(viewOption);
-        bottomSheetDialog.show();
-
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
+        myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
     }
 }
