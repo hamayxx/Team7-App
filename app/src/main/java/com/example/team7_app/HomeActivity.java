@@ -28,7 +28,6 @@ import com.google.android.material.navigation.NavigationView;
 public class HomeActivity extends AppCompatActivity  implements IClickHomeListener, NavigationView.OnNavigationItemSelectedListener {
 
     private static final int FRAGMENT_HOME = 1;
-    private static final int FRAGMENT_SECURITY = 3;
 
     private static final int FRAGMENT_RECENTLY = 5;
     private static final int FRAGMENT_TRASH = 6;

@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.pm.LabeledIntent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 
 import com.example.team7_app.File.FileAdapter;
@@ -26,6 +29,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -109,6 +114,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         });
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 deleteFile();
@@ -116,8 +122,24 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteFile() {
-        Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+
+      //  Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+
+        String dest = "/storage/emulated/0/Trash/";
+        File deleteFile = new File(dest + mFile.getName());
+        File originalFile = new File(mFile.getAbsolutePath());
+        Log.i("TEAM8", "deleteFile:"+ deleteFile);
+
+        try {
+            Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
+    catch (IOException exception)
+        {
+            Log.i("TEAM8", "deleteFile:"+ exception.toString());
+
+        }
     }
 
     private void renameFile() {
@@ -127,14 +149,15 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         renameDailog.setView(name);
 
         renameDailog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String new_name = name.getEditableText().toString();
                 String extention = mFile.getAbsolutePath().substring(mFile.getAbsolutePath().lastIndexOf("."));
 
-                File current = new File(mFile.getAbsolutePath());
                 File destination = new File(mFile.getAbsolutePath().replace(mFile.getName(), new_name) + extention);
-
+                Log.i("TEAM8", "mFile:"+ mFile);
+                Log.i("TEAM8", "destination:"+ destination);
 
                 if(destination.exists())
                 {
@@ -142,16 +165,13 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
                 }
                 else
                 {
-                    int position = mfileList.indexOf(mFile);
-                    if(current.renameTo(destination))
-                    {
-//                        mfileList.set(position, destination); // gan file vao position
-                        Toast.makeText(getContext(), "Rename!" + current.getName() , Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(), "Couldn't rename!" + current.getName() , Toast.LENGTH_SHORT).show();
 
+                    try {
+                        Files.move(mFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
                     }
                 }
 

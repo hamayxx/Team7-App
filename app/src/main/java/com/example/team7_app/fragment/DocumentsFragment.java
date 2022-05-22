@@ -146,22 +146,22 @@ public class DocumentsFragment extends Fragment {
             switch (nameCategory) {
                 case "Documents":
                     tvTitle.setText("DOCUMENTS");
-                    Log.i("TEAM8", "Documents"+ internalStorage);
+                    Log.i("TEAM8", "Documents:"+ internalStorage);
 
                     break;
                 case "Music":
                     tvTitle.setText("MUSIC");
-                    Log.i("TEAM8", "Downloads"+ internalStorage);
+                    Log.i("TEAM8", "Downloads:"+ internalStorage);
 
                     break;
                 case "Videos":
                     tvTitle.setText("VIDEOS");
-                    Log.i("TEAM8", "Music"+ internalStorage);
+                    Log.i("TEAM8", "Music:"+ internalStorage);
 
                     break;
                 case "Images":
                     tvTitle.setText("IMAGES");
-                    Log.i("TEAM8", "Images"+ internalStorage);
+                    Log.i("TEAM8", "Images:"+ internalStorage);
 
                     break;
             }

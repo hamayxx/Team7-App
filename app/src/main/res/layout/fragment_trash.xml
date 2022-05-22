@@ -11,20 +11,20 @@
         android:id="@+id/fm_trash_btn_trash"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/icon_trash"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="15dp"/>
+        android:background="@drawable/icon_trash" />
 
     <ImageButton
         android:id="@+id/fm_trash_btn_return"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/icon_back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:background="@drawable/icon_back" />
 
     <TextView
         android:id="@+id/fm_trash_tv_title"
@@ -109,11 +109,11 @@
         android:id="@+id/fm_trash_btn_adjust"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_below="@id/fm_trash_cl_progress"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="17dp"
-        android:background="@drawable/icon_adjust"
-        android:layout_below="@id/fm_trash_cl_progress"
-        android:layout_alignParentEnd="true"/>
+        android:background="@drawable/icon_adjust" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fm_trash_rv_items"
