@@ -11,6 +11,7 @@ public class User implements Serializable {
 
     private String email;
     private String password_hash;
+    private boolean isMale;
 
     @Override
     public String toString() {

@@ -1,15 +1,5 @@
 package com.example.team7_app;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,7 +11,18 @@ import android.provider.Settings;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
@@ -51,16 +52,19 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private int currentFragment = FRAGMENT_HOME;
     private User usr;
 
-    public String getUsername() {
-        return mUsername;
-    }
-
-    private String mUsername="";
+    private String mUsername;
+    private String mEmail;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
 
+    public String getUsername() {
+        return mUsername;
+    }
 
+    public String getEmail() {
+        return mEmail;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,8 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             usr = (User) bundleRcvUser.get("object_user");
             if(usr != null)
             {
-                mUsername= usr.getLogin().trim();
+                mUsername = usr.getLogin().trim();
+                mEmail = usr.getEmail().trim();
             }
         }
 
@@ -157,6 +162,18 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
+
+
+        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_et_user);
+        tvUsername.setText(mUsername);
+        TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
+        tvDate.setText("19/05/1999");
+        TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
+        tvGender.setText("Male");
+        TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_et_mail);
+        tvEmail.setText(mEmail);
+        TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
+        tvPassword.setText("NotPasswordHere");
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewProfile);
