@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/bg_popup">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <TextView
+            android:id="@+id/dl_popup_rename_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rename"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/dl_popup_rename_iv_blank"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_blank"
+            android:layout_below="@id/dl_popup_rename_tv_title"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/dl_popup_rename_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dl_popup_rename_iv_blank"
+            android:text="YES"
+            android:fontFamily="@font/dosis_bold"
+            android:textSize="28dp"
+            android:textColor="@color/red2"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="125dp"/>
+        <TextView
+            android:id="@+id/dl_popup_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dl_popup_rename_iv_blank"
+            android:layout_toRightOf="@id/dl_popup_rename_yes"
+            android:text="CANCEL"
+            android:fontFamily="@font/dosis_bold"
+            android:textSize="28dp"
+            android:textColor="@color/grey2"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="35dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

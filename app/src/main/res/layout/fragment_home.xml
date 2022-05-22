@@ -31,27 +31,6 @@
         android:layout_marginTop="45dp"/>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/fm_home_cv_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/fm_home_tv_hello"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        app:cardCornerRadius="25dp"
-        android:visibility="invisible">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/fm_home_sv_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:searchIcon="@null"
-            app:defaultQueryHint="Search here..."
-            app:iconifiedByDefault="false"/>
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
         android:id="@+id/fm_home_cv_mainstorage"
         android:layout_width="320dp"
         android:layout_height="112dp"
