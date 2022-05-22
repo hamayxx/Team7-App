@@ -41,9 +41,16 @@
         <entry key="..\:/Mobile-FiMa-main/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Mobile-FiMa-main/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Mobile-FiMa-main/app/src/main/res/layout/activity_welcome.xml" value="0.18" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bg_blank.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bg_bordered.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bg_button.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bg_popup.xml" value="0.1785" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/bottom_sheet_corners_background.xml" value="0.112" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_back.xml" value="0.1355" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_delete.xml" value="0.1" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_delete2.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_details.xml" value="0.1785" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_docs.xml" value="0.1785" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_move.xml" value="0.1785" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/drawable/ic_rename2.xml" value="0.1785" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/font/dosis_extrabold.xml" value="0.234375" />
@@ -57,6 +64,7 @@
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/activity_otpactivity.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/activity_welcome.xml" value="0.22" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragmant_movetofile.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_apps.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_documents.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_downloads.xml" value="0.20416666666666666" />
@@ -64,6 +72,7 @@
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_internal.xml" value="0.18" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_item_options.xml" value="0.22" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_media.xml" value="0.20416666666666666" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_movetofile.xml" value="0.22" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_profile_pass.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/fragment_recently.xml" value="0.20416666666666666" />
@@ -74,6 +83,8 @@
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/item_category.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/item_item.xml" value="0.25" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/menu_header.xml" value="0.20416666666666666" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/popup_logout.xml" value="0.20416666666666666" />
+        <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/layout/popup_rename.xml" value="0.20416666666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/menu/bottom_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/menu/main_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/ThucHanh/MOBILE-NT118/Team7-App/app/src/main/res/xml/provider_path.xml" value="0.20416666666666666" />

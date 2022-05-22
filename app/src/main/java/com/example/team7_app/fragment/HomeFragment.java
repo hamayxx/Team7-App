@@ -59,11 +59,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvCategories;
     private CategoryAdapter categoryAdapter;
     private IClickItemCategoryListener iClickItemCategoryListener;
-    private SearchView svSearch;
     private TextView tvHello;
     private TextView tvRemainStorage;
     private TextView tvTotalStorage;
-    private CardView cvSearch;
     private HomeActivity mHomeActivity;
     private long[] sizeCategories;
     /*private GetStatusTask getStatusTask;*/
@@ -116,9 +114,6 @@ public class HomeFragment extends Fragment {
         tvHello = getView().findViewById(R.id.fm_home_tv_hello);
         tvRemainStorage = getView().findViewById(R.id.fm_home_tv_remaining_size);
         tvTotalStorage = getView().findViewById(R.id.fm_home_tv_total_size);
-        cvSearch = getView().findViewById(R.id.fm_home_cv_search);
-
-        svSearch = getView().findViewById(R.id.fm_home_sv_search);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rvCategories.setLayoutManager(linearLayoutManager);

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/bg_popup">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/dl_popup_logout_tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you really want to log out?"
+            android:fontFamily="@font/dosis_bold"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:id="@+id/dl_popup_logout_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dl_popup_logout_tv_question"
+            android:text="YES"
+            android:fontFamily="@font/dosis_bold"
+            android:textSize="28dp"
+            android:textColor="@color/red2"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="125dp"/>
+        <TextView
+            android:id="@+id/dl_popup_logout_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dl_popup_logout_tv_question"
+            android:layout_toRightOf="@id/dl_popup_logout_yes"
+            android:text="CANCEL"
+            android:fontFamily="@font/dosis_bold"
+            android:textSize="28dp"
+            android:textColor="@color/grey2"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="35dp"/>
+    </RelativeLayout>
+
+</LinearLayout>
