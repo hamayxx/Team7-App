@@ -2,7 +2,6 @@ package com.example.team7_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +17,6 @@ import com.example.team7_app.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -125,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Log.i("TEAM8", "GET TOKEN FROM SERVER!!!");
         LoginAuthenticateDTO loginUser = new LoginAuthenticateDTO(username, password, false);
-
         APIService loginService = ServiceGenerator.createService(APIService.class);
         Call<ResponseBody> call = loginService.getToken(loginUser);
         call.enqueue(new Callback<ResponseBody>() {
@@ -139,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     Bundle bundle= new Bundle();
-                    bundle.putSerializable("object_user", mUser);
+                    bundle.putSerializable("object_user", loginUser);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
