@@ -2,6 +2,7 @@ package com.example.team7_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -12,11 +13,14 @@ import androidx.cardview.widget.CardView;
 
 import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
+import com.example.team7_app.Model.LoginAuthenticateDTO;
 import com.example.team7_app.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.a_login_btn_login);
         mListUser = new ArrayList<>();
-        getListUsers();
+//        getListUsers();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,34 +107,69 @@ public class LoginActivity extends AppCompatActivity {
     private void clickLogin() {
         String username = etUsername.getText().toString().trim();
         String password= etPass.getText().toString().trim();
-        
-        if(mListUser==null || mListUser.isEmpty())
-        {
-            return;
-        }
 
-        boolean isHasUser= false;
-        for(User usr: mListUser)
-        {
-            if(username.equals(usr.getLogin())){
-                isHasUser = true;
-                mUser = usr;
-                break;
+//        if(mListUser==null || mListUser.isEmpty())
+//        {
+//            return;
+//        }
+//
+//        boolean isHasUser= false;
+//        for(User usr: mListUser)
+//        {
+//            if(username.equals(usr.getLogin())){
+//                isHasUser = true;
+//                mUser = usr;
+//                break;
+//            }
+//        }
+
+        Log.i("TEAM8", "GET TOKEN FROM SERVER!!!");
+        LoginAuthenticateDTO loginUser = new LoginAuthenticateDTO(username, password, false);
+
+        APIService loginService = ServiceGenerator.createService(APIService.class);
+        Call<ResponseBody> call = loginService.getToken(loginUser);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, response.toString());
+                    Toast.makeText(LoginActivity.this, "Call API success", Toast.LENGTH_SHORT).show();
+                    String msg = response.body().toString();
+                    Log.e(TAG, "Get response there are: " + msg);
+
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Bundle bundle= new Bundle();
+                    bundle.putSerializable("object_user", mUser);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    // error response, no access to resource?
+                    Log.e(TAG, "LOI CMNR!!!");
+                    Toast.makeText(LoginActivity.this, "Response not success", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
 
-        if(isHasUser){
-             //MainAct
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            Bundle bundle= new Bundle();
-            bundle.putSerializable("object_user", mUser);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
-        else{
-            Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
-
-        }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                // something went completely south (like no internet connection)
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+                Toast.makeText(LoginActivity.this, "CALLED API FAILED!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+//
+//        if(isHasUser){
+//             //MainAct
+//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//            Bundle bundle= new Bundle();
+//            bundle.putSerializable("object_user", mUser);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//        }
+//        else{
+//            Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
+//
+//        }
     }
 
 
