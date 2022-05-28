@@ -162,14 +162,15 @@
             android:layout_below="@id/fm_item_options_cv_move"/>
 
         //rename
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/fm_item_options_cv_rename"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_below="@+id/divider2"
-            android:layout_toRightOf="@+id/fm_item_options_cv_move"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="25dp"
+            android:layout_toRightOf="@+id/fm_item_options_cv_move"
             android:backgroundTint="@color/main_menu_background"
             app:cardCornerRadius="15dp"
             app:strokeWidth="2dp" />
