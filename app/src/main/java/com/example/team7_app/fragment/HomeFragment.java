@@ -184,9 +184,9 @@ public class HomeFragment extends Fragment {
         List<Category> listCategory = new ArrayList<>();
 
         listCategory.add(new Category("Documents", R.drawable.icon_document, getStatus("documents", getContext()), R.color.red1));
-        listCategory.add(new Category("Images", R.drawable.icon_download, getStatus("images", getContext()), R.color.red2));
-        listCategory.add(new Category("Videos", R.drawable.icon_download, getStatus("videos", getContext()), R.color.red3));
-        listCategory.add(new Category("Music", R.drawable.icon_media, getStatus("music", getContext()), R.color.red4));
+        listCategory.add(new Category("Images", R.drawable.icon_pic, getStatus("images", getContext()), R.color.red2));
+        listCategory.add(new Category("Videos", R.drawable.icon_mp4, getStatus("videos", getContext()), R.color.red3));
+        listCategory.add(new Category("Musics", R.drawable.icon_mp3, getStatus("music", getContext()), R.color.red4));
         listCategory.add(new Category("Downloads", R.drawable.icon_download, getStatus("downloads", getContext()), R.color.red5));
 
         return listCategory;
