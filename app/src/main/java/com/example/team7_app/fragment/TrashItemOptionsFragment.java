@@ -1,28 +1,21 @@
 package com.example.team7_app.fragment;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.example.team7_app.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ItemOptionsFragment#newInstance} factory method to
+ * Use the {@link TrashItemOptionsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ItemOptionsFragment extends Fragment {
+public class TrashItemOptionsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,7 +26,7 @@ public class ItemOptionsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ItemOptionsFragment() {
+    public TrashItemOptionsFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +36,11 @@ public class ItemOptionsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ItemOptionsFragment.
+     * @return A new instance of fragment TrashItemOptionsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ItemOptionsFragment newInstance(String param1, String param2) {
-        ItemOptionsFragment fragment = new ItemOptionsFragment();
+    public static TrashItemOptionsFragment newInstance(String param1, String param2) {
+        TrashItemOptionsFragment fragment = new TrashItemOptionsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,7 +61,6 @@ public class ItemOptionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_options, container, false);
+        return inflater.inflate(R.layout.fragment_trash_item_options, container, false);
     }
-
 }

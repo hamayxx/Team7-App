@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="650dp"
+    android:background="@drawable/bottom_sheet_corners_background"
+    tools:context=".fragment.TrashItemOptionsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rectangle"
+            android:layout_width="65dp"
+            android:layout_height="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:width="65dp"
+            android:height="5dp"
+            android:background="@color/bar"
+            app:cardCornerRadius="50dp" />
+        //tittle
+
+        <ImageView
+            android:id="@+id/iv_logofile"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/ic_file" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@+id/iv_logofile"
+            android:fontFamily="@font/dosis_extrabold"
+            android:text="File review"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+        //icon
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:background="@color/white" />
+
+        <ImageView
+            android:id="@+id/fm_item_options_trash_iv_iconfile"
+            android:layout_width="96dp"
+            android:layout_height="90dp"
+            android:layout_below="@+id/divider"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_filepdf" />
+
+        <TextView
+            android:id="@+id/fm_item_options_tv_filename"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fm_item_options_trash_iv_iconfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/dosis_extrabold"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="Draf.txt"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        //descript
+
+        <ImageView
+            android:id="@+id/divider1"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="300dp"
+            android:background="@color/white" />
+        <RelativeLayout
+            android:id="@+id/fm_item_options_trash_rl_part2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@id/divider1">
+            <TextView
+                android:id="@+id/fm_item_options_trash_tv_file_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dosis_bold"
+                android:text="File Description:"
+                android:textColor="@color/white"
+                android:textSize="28dp" />
+
+            <TextView
+                android:id="@+id/fm_item_options_trash_tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fm_item_options_trash_tv_file_description"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/dosis_bold"
+                android:text="Datetime: 21/05/2022"
+                android:textColor="@color/grey"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/fm_item_options_trash_tv_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fm_item_options_trash_tv_date"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/dosis_bold"
+                android:text="Size: 132MB"
+                android:textColor="@color/grey"
+                android:textSize="24dp" />
+            <TextView
+                android:id="@+id/fm_item_options_trash_tv_origin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fm_item_options_trash_tv_size"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/dosis_bold"
+                android:text="Original path:"
+                android:textColor="@color/grey"
+                android:textSize="24dp" />
+        </RelativeLayout>
+
+
+        //button
+
+        <ImageView
+            android:id="@+id/divider2"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_below="@+id/fm_item_options_trash_rl_part2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/white" />
+
+        //restore file
+
+        <RelativeLayout
+            android:id="@+id/fm_item_options_trash_rl_restore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider2"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fm_item_options_trash_cv_restore"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:backgroundTint="@color/main_menu_background"
+                app:cardCornerRadius="15dp"
+                app:strokeWidth="2dp"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/fm_item_options_trash_iv_restore"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_trashrestore"
+                        android:elevation="2dp" />
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fm_item_options_trash_cv_restore"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="Restore"
+                android:textColor="@color/yellow"
+                android:textSize="24dp" />
+        </RelativeLayout>
+
+        //delete file
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider2"
+            android:layout_toRightOf="@id/fm_item_options_trash_rl_restore"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fm_item_options_trash_cv_delete"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:backgroundTint="@color/main_menu_background"
+                app:cardCornerRadius="15dp"
+                app:strokeWidth="2dp"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/fm_item_options_trash_iv_delete"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_delete"
+                        android:elevation="2dp" />
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fm_item_options_trash_cv_delete"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dosis_semibold"
+                android:text="Restore"
+                android:textColor="@color/yellow"
+                android:textSize="24dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

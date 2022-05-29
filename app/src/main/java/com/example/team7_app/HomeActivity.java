@@ -1,8 +1,11 @@
 package com.example.team7_app;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +14,8 @@ import android.provider.Settings;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -159,6 +164,47 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         }
     }
 
+    //pop-up logout
+    private void openLogoutDialog(int gravity) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.popup_logout);
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        if (Gravity.CENTER  == gravity) {
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+        }
+        dialog.show();
+
+        TextView tvYes = dialog.findViewById(R.id.dl_popup_logout_yes);
+        TextView tvCancel = dialog.findViewById(R.id.dl_popup_logout_cancel);
+
+        tvYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
 
@@ -280,8 +326,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         }
         else if(id==R.id.nav_logout)
         {
-            drawerLayout.closeDrawer(Gravity.LEFT);
-            finish();
+            openLogoutDialog(Gravity.CENTER);
+            //drawerLayout.closeDrawer(Gravity.LEFT);
+            //finish();
         }
         return false;
     }
