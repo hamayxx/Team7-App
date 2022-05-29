@@ -129,8 +129,6 @@ public class TrashFragment extends Fragment {
         pbTotalUsed = getView().findViewById(R.id.fm_trash_pb_total_used);
         svSearch = getView().findViewById(R.id.fm_trash_sv_search);
 
-
-
         runtimePermission();
 
         ibBack.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +162,7 @@ public class TrashFragment extends Fragment {
             }
         });
     }
-
+    // create Folder
     private void createFolder() {
         String folderName = "Trash";
         folderTrash = new File(Environment.getExternalStorageDirectory(),folderName);
@@ -208,7 +206,6 @@ public class TrashFragment extends Fragment {
                     .withListener(new MultiplePermissionsListener() {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                            //displayFiles();
                             createFolder();
                         }
 
@@ -267,25 +264,26 @@ public class TrashFragment extends Fragment {
         fileAdapter = new FileAdapter(fileList, new IClickItemOptionListener() {
             @Override
             public void onClickItemOption(File file) {
-                //clickOpenOptionSheetDialog();
+                clickOpenOptionSheetDialog(file);
             }
 
+            //mở file
             @Override
             public void onClickFileItem(File file) {
-                if (file.isDirectory()) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("path", file.getAbsolutePath());
-                    InternalFragment internalFragment = new InternalFragment();
-                    internalFragment.setArguments(bundle);
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, internalFragment).addToBackStack(null).commit();
-                }
-                else {
-                    try {
-                        FileOpener.openFile(getContext(), file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+//                if (file.isDirectory()) {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("path", file.getAbsolutePath());
+//                    InternalFragment internalFragment = new InternalFragment();
+//                    internalFragment.setArguments(bundle);
+//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, internalFragment).addToBackStack(null).commit();
+//                }
+//                else {
+//                    try {
+//                        FileOpener.openFile(getContext(), file);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
             }
         }, getContext());
         rvItems.setAdapter(fileAdapter);
@@ -298,6 +296,8 @@ public class TrashFragment extends Fragment {
         pbTotalUsed.setProgress(proGr);
     }
 
+
+
     // search
     private ArrayList<File> search(String text) {
         ArrayList<File> arrayList = new ArrayList<>();
@@ -309,6 +309,11 @@ public class TrashFragment extends Fragment {
             }
         }
         return arrayList;
+    }
+
+    private void clickOpenOptionSheetDialog(File file) {
+        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
+        myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
     }
 
     private void clickOpenAdjustSheetDialog() {

@@ -133,7 +133,6 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
                 iClickItemOptionListener.onClickFileItem(selectedFile);
             }
         });
-
     }
 
     @Override
