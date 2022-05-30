@@ -106,24 +106,10 @@ public class LoginActivity extends AppCompatActivity {
         String username = etUsername.getText().toString().trim();
         String password= etPass.getText().toString().trim();
 
-//        if(mListUser==null || mListUser.isEmpty())
-//        {
-//            return;
-//        }
-//
-//        boolean isHasUser= false;
-//        for(User usr: mListUser)
-//        {
-//            if(username.equals(usr.getLogin())){
-//                isHasUser = true;
-//                mUser = usr;
-//                break;
-//            }
-//        }
-
         Log.i("TEAM8", "GET TOKEN FROM SERVER!!!");
-        LoginAuthenticateDTO loginUser = new LoginAuthenticateDTO(username, password, false);
+        LoginAuthenticateDTO loginUser = new LoginAuthenticateDTO(username, password);
         APIService loginService = ServiceGenerator.createService(APIService.class);
+
         Call<ResponseBody> call = loginService.getToken(loginUser);
         call.enqueue(new Callback<ResponseBody>() {
             @Override

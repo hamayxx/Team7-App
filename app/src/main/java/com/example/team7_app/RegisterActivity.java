@@ -2,8 +2,6 @@ package com.example.team7_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,8 +14,6 @@ import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.User;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,13 +63,13 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<RegisterUserDTO> call, Response<RegisterUserDTO> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "Respone" + response.toString());
-                    Toast.makeText(RegisterActivity.this, "Call API <post> success", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
+//                    Toast.makeText(RegisterActivity.this, "Call API <post> success", Toast.LENGTH_SHORT).show();
+//
+//                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                    startActivity(intent);
                 } else {
                     // error response, no access to resource?
-                    Log.e(TAG, "SignUp: LOI CMNR!!!"+ response.toString() );
+                    Log.e(TAG, "Register FAILED!!!"+ response.toString());
                 }
 
             }
@@ -83,7 +79,11 @@ public class RegisterActivity extends AppCompatActivity {
                 // something went completely south (like no internet connection)
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
-                Toast.makeText(RegisterActivity.this, "CALLED API FAILED!!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(RegisterActivity.this, "Register successfully!!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
