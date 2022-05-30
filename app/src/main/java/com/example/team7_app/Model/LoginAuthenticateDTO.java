@@ -6,11 +6,21 @@ public class LoginAuthenticateDTO implements Serializable {
     private String username;
     private String password;
     private boolean rememberMe;
+    private String token;
 
     public LoginAuthenticateDTO(String username, String password) {
         this.username = username;
         this.password = password;
         this.rememberMe = false;
+        this.token = "";
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {
