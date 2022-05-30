@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="650dp"
     android:background="@drawable/bottom_sheet_corners_background"
-    tools:context=".fragment.ItemOptionsFragment">
+    tools:context=".fragment.MyBottomSheetFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -66,8 +66,8 @@
             android:layout_below="@id/fm_item_options_iv_iconfile"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/dosis_extrabold"
             android:ellipsize="marquee"
+            android:fontFamily="@font/dosis_extrabold"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
             android:text="Draf.txt"

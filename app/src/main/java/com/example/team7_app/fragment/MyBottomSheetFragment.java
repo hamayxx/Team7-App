@@ -23,6 +23,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.R;
+import com.example.team7_app.my_interface.IClickFileOptionListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -45,12 +46,22 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private TextView tvSize ;
     private CardView btnMove, btnRename, btnDelete ;
     private ImageView ivIcon;
+    private IClickFileOptionListener iClickFileOptionListener;
+
+    public static MyBottomSheetFragment newInstance(File file, IClickFileOptionListener iClickFileOptionListener){
+        MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY_FILE_OBJ, file);
+        bundle.putSerializable("interfaceFileOption", (Serializable) iClickFileOptionListener);
+        myBottomSheetFragment.setArguments(bundle);
+
+        return myBottomSheetFragment;
+    }
 
     public static MyBottomSheetFragment newInstance(File file){
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_FILE_OBJ, file);
-
         myBottomSheetFragment.setArguments(bundle);
 
         return myBottomSheetFragment;
@@ -64,6 +75,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         if(bundleRecvive != null)
         {
             mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
+            iClickFileOptionListener = (IClickFileOptionListener) bundleRecvive.get("interfaceFileOption");
         }
     }
 
@@ -165,6 +177,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
 
                     try {
                         Files.move(mFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        tvName.setText(new_name + extention);
                     }
                     catch (IOException e)
                     {
@@ -252,5 +265,11 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     @Override
     public int getTheme() {
         return R.style.BottomSheetDialog;
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        iClickFileOptionListener.refreshRecycleView();
     }
 }

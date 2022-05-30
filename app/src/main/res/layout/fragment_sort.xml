@@ -37,7 +37,7 @@
             android:textSize="30sp" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/az"
+            android:id="@+id/fm_sort_az"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_below="@+id/sort_by"
@@ -60,13 +60,13 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/za"
+            android:id="@+id/fm_sort_za"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_below="@+id/sort_by"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
-            android:layout_toRightOf="@+id/az"
+            android:layout_toRightOf="@+id/fm_sort_az"
             android:backgroundTint="@color/main_menu_background"
             app:cardCornerRadius="100dp"
             app:strokeWidth="2dp" />
@@ -82,13 +82,13 @@
             android:elevation="2dp" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/incr_size"
+            android:id="@+id/fm_sort_incr_size"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_below="@+id/sort_by"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
-            android:layout_toRightOf="@+id/za"
+            android:layout_toRightOf="@+id/fm_sort_za"
             android:backgroundTint="@color/main_menu_background"
             app:cardCornerRadius="100dp"
             app:strokeWidth="2dp" />
@@ -117,13 +117,13 @@
             android:elevation="2dp" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/decr_size"
+            android:id="@+id/fm_sort_decr_size"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_below="@+id/sort_by"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
-            android:layout_toRightOf="@+id/incr_size"
+            android:layout_toRightOf="@+id/fm_sort_incr_size"
             android:backgroundTint="@color/main_menu_background"
             app:cardCornerRadius="100dp"
             app:strokeWidth="2dp" />
@@ -156,7 +156,7 @@
             android:id="@+id/filter_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/az"
+            android:layout_below="@+id/fm_sort_az"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="140dp"
             android:layout_marginTop="40dp"
@@ -205,6 +205,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
+            android:id="@+id/fm_sort_tv_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/filter_by"
