@@ -240,7 +240,7 @@
                 android:layout_below="@id/fm_item_options_trash_cv_delete"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/dosis_semibold"
-                android:text="Restore"
+                android:text="Delete"
                 android:textColor="@color/yellow"
                 android:textSize="24dp" />
         </RelativeLayout>

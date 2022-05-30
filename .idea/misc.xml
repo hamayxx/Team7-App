@@ -14,8 +14,9 @@
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_apps.xml" value="0.24818840579710144" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_documents.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_internal.xml" value="0.18020833333333333" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_item_options.xml" value="0.25416666666666665" />
-        <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_item_options_trash.xml" value="0.144" />
+        <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_item_options_trash.xml" value="0.4" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_movetofile.xml" value="0.165625" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_profile.xml" value="0.24818840579710144" />
         <entry key="..\:/AndroidStudioProjects/Team7-App/app/src/main/res/layout/fragment_profile_pass.xml" value="0.25416666666666665" />

@@ -1,9 +1,7 @@
 package com.example.team7_app.File;
 
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -32,7 +30,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -178,18 +175,16 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
                 {
                     Toast.makeText(getContext(), destination.getName() +" already exist!", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else {
 
                     try {
                         Files.move(mFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         Toast.makeText(getContext(), "Rename success", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
 
             }

@@ -35,7 +35,7 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
     private TextView tvDate ;
     private TextView tvSize ;
     private TextView tvOriginalPath ;
-    private CardView btnRestore,  btnDelete ;
+    private ImageView btnRestore,  btnDelete ;
     private ImageView ivIcon;
 
 
@@ -64,7 +64,7 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         BottomSheetDialog bottomSheetDialog = (BottomSheetDialog)  super.onCreateDialog(savedInstanceState);
-        View viewOption = LayoutInflater.from(getContext()).inflate(R.layout.fragment_item_options, null);
+        View viewOption = LayoutInflater.from(getContext()).inflate(R.layout.fragment_item_options_trash, null);
 
         bottomSheetDialog.setContentView(viewOption);
 
@@ -83,7 +83,7 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         tvSize = view.findViewById(R.id.fm_item_options_trash_tv_size);
         tvOriginalPath = view.findViewById(R.id.fm_item_options_trash_tv_origin);
         btnRestore = view.findViewById(R.id.fm_item_options_trash_iv_restore);
-        btnDelete = view.findViewById(R.id.fm_item_options_trash_iv_restore);
+        btnDelete = view.findViewById(R.id.fm_item_options_trash_iv_delete);
 
 
         btnRestore.setOnClickListener(new View.OnClickListener() {
