@@ -326,4 +326,7 @@ public class TrashFragment extends Fragment {
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewAdjust.getParent());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
+
+
+
 }

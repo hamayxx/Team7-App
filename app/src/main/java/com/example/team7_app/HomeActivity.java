@@ -236,6 +236,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         transaction.commit();
     }
 
+
     private boolean checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return Environment.isExternalStorageManager();
@@ -332,6 +333,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         }
         return false;
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -152,7 +152,7 @@ public class HomeFragment extends Fragment {
                         iClickHomeListener.setCurrentFragment(4);
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, documentsFragment).addToBackStack(DocumentsFragment.documentTag).commit();
                         break;
-                    case "Music":
+                    case "Musics":
                         bundle.putString("nameCategory","Music");
                         documentsFragment.setArguments(bundle);
                         iClickHomeListener.setCurrentFragment(4);

@@ -7,6 +7,8 @@ public class Category {
     private String status;
     private int colorId;
 
+
+
     public Category(String title, int iconId, String status, int colorId) {
         this.title = title;
         this.iconId = iconId;
@@ -45,4 +47,6 @@ public class Category {
     public void setColorId(int colorId) {
         this.colorId = colorId;
     }
+
+
 }

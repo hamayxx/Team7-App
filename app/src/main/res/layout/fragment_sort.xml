@@ -56,20 +56,21 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="122dp"
             android:background="@drawable/ic_atoz"
-            android:elevation="2dp"/>
+            android:elevation="2dp" />
 
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/za"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="100dp"
             android:layout_below="@+id/sort_by"
-            android:layout_toRightOf="@+id/az"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
+            android:layout_toRightOf="@+id/az"
             android:backgroundTint="@color/main_menu_background"
-            app:strokeWidth="2dp"/>
+            app:cardCornerRadius="100dp"
+            app:strokeWidth="2dp" />
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -78,31 +79,33 @@
             android:layout_marginLeft="120dp"
             android:layout_marginTop="122dp"
             android:background="@drawable/ic_ztoa"
-            android:elevation="2dp"/>
+            android:elevation="2dp" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/incr_size"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="100dp"
             android:layout_below="@+id/sort_by"
-            android:layout_toRightOf="@+id/za"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
+            android:layout_toRightOf="@+id/za"
             android:backgroundTint="@color/main_menu_background"
-            app:strokeWidth="2dp"/>
+            app:cardCornerRadius="100dp"
+            app:strokeWidth="2dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Size"
-            android:fontFamily="@font/dosis_semibold"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="220dp"
             android:layout_marginTop="130dp"
-            android:textSize="25dp"
+            android:elevation="2dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="Size"
             android:textColor="@color/white"
-            android:elevation="2dp"/>
+            android:textSize="25dp" />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -111,30 +114,33 @@
             android:layout_marginLeft="252dp"
             android:layout_marginTop="130dp"
             android:background="@drawable/ic_up"
-            android:elevation="2dp"/>
+            android:elevation="2dp" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/decr_size"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="100dp"
             android:layout_below="@+id/sort_by"
-            android:layout_toRightOf="@+id/incr_size"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
+            android:layout_toRightOf="@+id/incr_size"
             android:backgroundTint="@color/main_menu_background"
-            app:strokeWidth="2dp"/>
+            app:cardCornerRadius="100dp"
+            app:strokeWidth="2dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Size"
-            android:fontFamily="@font/dosis_semibold"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="320dp"
             android:layout_marginTop="130dp"
-            android:textSize="25dp"
+            android:elevation="2dp"
+            android:fontFamily="@font/dosis_semibold"
+            android:text="Size"
             android:textColor="@color/white"
-            android:elevation="2dp"/>
+            android:textSize="25dp" />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -143,7 +149,7 @@
             android:layout_marginLeft="352dp"
             android:layout_marginTop="132dp"
             android:background="@drawable/ic_down"
-            android:elevation="2dp"/>
+            android:elevation="2dp" />
         //filter
 
         <TextView
@@ -158,81 +164,56 @@
             android:text="FILTER BY"
             android:textColor="@color/white"
             android:textSize="30sp" />
+
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/filetype"
-            android:layout_width="350dp"
+            android:id="@+id/fm_sort_cv_filetype"
+            android:layout_width="300dp"
             android:layout_height="70dp"
-            android:layout_below="@+id/filter_by"
+            android:layout_below="@id/filter_by"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="@color/main_menu_background"
+            app:cardCornerRadius="5dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp">
+
+            <Spinner
+                android:id="@+id/fm_sort_spn_filetype"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/fm_sort_cv_time"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/fm_sort_cv_filetype"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:layout_centerHorizontal="true"
             android:backgroundTint="@color/main_menu_background"
-            app:cardCornerRadius="50dp"
-            app:strokeWidth="2dp"/>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="305dp"
-            android:background="@drawable/ic_expand"
-            android:elevation="2dp"/>
+            app:cardCornerRadius="5dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="145dp"
-            android:layout_marginTop="295dp"
-            android:elevation="2dp"
-            android:fontFamily="@font/dosis_semibold"
-            android:text="File type"
-            android:textColor="@color/white"
-            android:textSize="30dp" />
+            <Spinner
+                android:id="@+id/fm_sort_spn_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/time"
-            android:layout_width="350dp"
-            android:layout_height="70dp"
-            android:layout_below="@+id/filetype"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/main_menu_background"
-            app:cardCornerRadius="50dp"
-            app:strokeWidth="2dp" />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="395dp"
-            android:background="@drawable/ic_expand"
-            android:elevation="2dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="165dp"
-            android:layout_marginTop="385dp"
-            android:elevation="2dp"
-            android:fontFamily="@font/dosis_semibold"
-            android:text="Time"
-            android:textColor="@color/white"
-            android:textSize="30dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset"
+            android:layout_below="@id/filter_by"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="220dp"
             android:fontFamily="@font/dosis_semibold"
-            android:textSize="25sp"
+            android:text="Reset"
             android:textColor="@color/white"
-            android:layout_below="@id/time"
-            android:layout_marginTop="40dp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="25sp" />
 
     </RelativeLayout>
 </RelativeLayout>

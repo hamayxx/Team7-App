@@ -145,7 +145,7 @@ public class DocumentsFragment extends Fragment {
                     tvTitle.setText("DOCUMENTS");
                     break;
                 case "Music":
-                    tvTitle.setText("MUSIC");
+                    tvTitle.setText("MUSICS");
                     break;
                 case "Videos":
                     tvTitle.setText("VIDEOS");
@@ -343,14 +343,17 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void clickOpenAdjustSheetDialog() {
-        View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
+        /*View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewAdjust);
         bottomSheetDialog.show();
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewAdjust.getParent());
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);*/
+
+        SortFragment sortFragment = SortFragment.newInstance();
+        sortFragment.show(getActivity().getSupportFragmentManager(), sortFragment.getTag());
     }
 
     private void clickOpenOptionSheetDialog(File file) {
