@@ -7,10 +7,10 @@ public class LoginAuthenticateDTO implements Serializable {
     private String password;
     private boolean rememberMe;
 
-    public LoginAuthenticateDTO(String username, String password, boolean rememberMe) {
+    public LoginAuthenticateDTO(String username, String password) {
         this.username = username;
         this.password = password;
-        this.rememberMe = rememberMe;
+        this.rememberMe = false;
     }
 
     public String getUsername() {

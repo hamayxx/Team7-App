@@ -2,8 +2,6 @@ package com.example.team7_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,8 +14,6 @@ import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.User;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // error response, no access to resource?
-                    Log.e(TAG, "SignUp: LOI CMNR!!!"+ response.toString() );
+                    Log.e(TAG, "SignUp: LOI CMNR!!!"+ response.toString());
                 }
 
             }
