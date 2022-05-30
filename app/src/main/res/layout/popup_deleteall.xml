@@ -9,39 +9,40 @@
         android:layout_height="150dp">
 
         <TextView
-            android:id="@+id/dl_popup_deleteall_tv_question"
+            android:id="@+id/dl_popup_deleteAll_tv_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delele all items in trash?"
-            android:fontFamily="@font/dosis_bold"
-            android:textColor="@color/black"
-            android:textSize="28dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/dosis_bold"
+            android:text="Delele items in trash?"
+            android:textColor="@color/black"
+            android:textSize="28dp" />
 
         <TextView
-            android:id="@+id/dl_popup_deleteall_tv_yes"
+            android:id="@+id/dl_popup_deleteAll_tv_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dl_popup_deleteall_tv_question"
+            android:layout_below="@id/dl_popup_deleteAll_tv_question"
             android:layout_marginLeft="125dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/dosis_bold"
             android:text="YES"
             android:textColor="@color/red2"
             android:textSize="28dp" />
+
         <TextView
-            android:id="@+id/dl_popup_deleteall_logout_cancel"
+            android:id="@+id/dl_popup_deleteAll_logout_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dl_popup_deleteall_tv_question"
-            android:layout_toRightOf="@id/dl_popup_deleteall_tv_yes"
-            android:text="CANCEL"
-            android:fontFamily="@font/dosis_bold"
-            android:textSize="28dp"
-            android:textColor="@color/grey2"
+            android:layout_below="@id/dl_popup_deleteAll_tv_question"
+            android:layout_marginLeft="35dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="35dp"/>
+            android:layout_toRightOf="@id/dl_popup_deleteAll_tv_yes"
+            android:fontFamily="@font/dosis_bold"
+            android:text="CANCEL"
+            android:textColor="@color/grey2"
+            android:textSize="28dp" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,17 +1,16 @@
-package com.example.team7_app.fragment;
+package com.example.team7_app.File;
 
-
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.pm.LabeledIntent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Formatter;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,42 +20,36 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 
-import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-
-public class MyBottomSheetFragment extends BottomSheetDialogFragment {
+public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
     private static final String KEY_FILE_OBJ = "file_object";
     private File mFile;
     private TextView tvName ;
     private TextView tvDate ;
     private TextView tvSize ;
-    private CardView btnMove, btnRename, btnDelete ;
+    private TextView tvOriginalPath ;
+    private CardView btnRestore,  btnDelete ;
     private ImageView ivIcon;
 
 
-    public static MyBottomSheetFragment newInstance(File file){
-        MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
+
+    public static MyBottomSheetForTrash newInstance(File file){
+        MyBottomSheetForTrash myBottomSheetForTrash = new MyBottomSheetForTrash();
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_FILE_OBJ, file);
+        myBottomSheetForTrash.setArguments(bundle);
 
-        myBottomSheetFragment.setArguments(bundle);
-
-        return myBottomSheetFragment;
+        return myBottomSheetForTrash;
     }
 
-    @Override
+        @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -83,29 +76,23 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     }
     private void  initView(View view)
     {
-        ivIcon = view.findViewById(R.id.fm_item_options_iv_iconfile);
-        tvName = view.findViewById(R.id.fm_item_options_tv_filename);
+        ivIcon = view.findViewById(R.id.fm_item_options_trash_iv_iconfile);
+        tvName = view.findViewById(R.id.fm_item_options_trash_tv_filename);
         tvName.setSelected(true);
-        tvDate = view.findViewById(R.id.fm_item_options_tv_date);
-        tvSize = view.findViewById(R.id.fm_item_options_tv_size);
-        btnMove = view.findViewById(R.id.fm_item_options_cv_move);
-        btnRename = view.findViewById(R.id.fm_item_options_cv_rename);
-        btnDelete = view.findViewById(R.id.fm_item_options_cv_delete);
+        tvDate = view.findViewById(R.id.fm_item_options_trash_tv_date);
+        tvSize = view.findViewById(R.id.fm_item_options_trash_tv_size);
+        tvOriginalPath = view.findViewById(R.id.fm_item_options_trash_tv_origin);
+        btnRestore = view.findViewById(R.id.fm_item_options_trash_iv_restore);
+        btnDelete = view.findViewById(R.id.fm_item_options_trash_iv_restore);
 
 
-        btnMove.setOnClickListener(new View.OnClickListener() {
+        btnRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                moveFile();
+                restoreFile();
             }
         });
 
-        btnRename.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                renameFile();
-            }
-        });
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -116,75 +103,60 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         });
     }
 
+    private void restoreFile() {
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteFile() {
 
-        //  Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+        openDeleteDialog(Gravity.CENTER);
 
-        String dest = "/storage/emulated/0/Trash/";
-        File deleteFile = new File(dest + mFile.getName());
-        File originalFile = new File(mFile.getAbsolutePath());
-        Log.i("TEAM8", "deleteFile:"+ deleteFile);
-
-        try {
-            Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        }
-        catch (IOException exception)
-        {
-            Log.i("TEAM8", "deleteFile:"+ exception.toString());
-
-        }
     }
 
-    private void renameFile() {
-        AlertDialog.Builder renameDailog = new AlertDialog.Builder(getContext());
-        renameDailog.setTitle("Rename File");
-        final EditText name = new EditText(getContext());
-        renameDailog.setView(name);
+    private void openDeleteDialog(int gravity) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.popup_deleteall);
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
 
-        renameDailog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        if (Gravity.CENTER  == gravity) {
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+        }
+        dialog.show();
+
+        TextView tvYes = dialog.findViewById(R.id.dl_popup_deleteAll_tv_question);
+        TextView tvCancel = dialog.findViewById(R.id.dl_popup_deleteAll_logout_cancel);
+
+        tvYes.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String new_name = name.getEditableText().toString();
-                String extention = mFile.getAbsolutePath().substring(mFile.getAbsolutePath().lastIndexOf("."));
-
-                File destination = new File(mFile.getAbsolutePath().replace(mFile.getName(), new_name) + extention);
-                Log.i("TEAM8", "mFile:"+ mFile);
-                Log.i("TEAM8", "destination:"+ destination);
-
-                if(destination.exists())
-                {
-                    Toast.makeText(getContext(), destination.getName() +" already exist!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-
-                    try {
-                        Files.move(mFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
+            public void onClick(View view) {
+                mFile.delete();
+                Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
 
             }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-            }
         });
 
-        AlertDialog alertDialog_rename = renameDailog.create();
-        alertDialog_rename.show();
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
-    private void moveFile() {
-        Toast.makeText(getContext(), "Move", Toast.LENGTH_SHORT).show();
-
-    }
 
     private void setDataFile()
     {

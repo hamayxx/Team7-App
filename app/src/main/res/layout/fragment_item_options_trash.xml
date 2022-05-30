@@ -63,7 +63,7 @@
             android:background="@drawable/ic_filepdf" />
 
         <TextView
-            android:id="@+id/fm_item_options_tv_filename"
+            android:id="@+id/fm_item_options_trash_tv_filename"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/fm_item_options_trash_iv_iconfile"
@@ -88,11 +88,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="300dp"
             android:background="@color/white" />
+
         <RelativeLayout
             android:id="@+id/fm_item_options_trash_rl_part2"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_below="@id/divider1">
+
             <TextView
                 android:id="@+id/fm_item_options_trash_tv_file_description"
                 android:layout_width="wrap_content"
@@ -127,6 +129,7 @@
                 android:text="Size: 132MB"
                 android:textColor="@color/grey"
                 android:textSize="24dp" />
+
             <TextView
                 android:id="@+id/fm_item_options_trash_tv_origin"
                 android:layout_width="wrap_content"
@@ -166,10 +169,10 @@
                 android:id="@+id/fm_item_options_trash_cv_restore"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/main_menu_background"
                 app:cardCornerRadius="15dp"
-                app:strokeWidth="2dp"
-                android:layout_centerHorizontal="true">
+                app:strokeWidth="2dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -203,18 +206,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/divider2"
-            android:layout_toRightOf="@id/fm_item_options_trash_rl_restore"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/fm_item_options_trash_rl_restore">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fm_item_options_trash_cv_delete"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/main_menu_background"
                 app:cardCornerRadius="15dp"
-                app:strokeWidth="2dp"
-                android:layout_centerHorizontal="true">
+                app:strokeWidth="2dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

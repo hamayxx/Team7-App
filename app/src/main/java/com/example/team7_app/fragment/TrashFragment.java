@@ -1,16 +1,12 @@
 package com.example.team7_app.fragment;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.PackageManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,10 +21,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.team7_app.File.FileAdapter;
-import com.example.team7_app.FileOpener;
+import com.example.team7_app.File.MyBottomSheetForTrash;
 import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -40,7 +35,6 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -270,20 +264,6 @@ public class TrashFragment extends Fragment {
             //mở file
             @Override
             public void onClickFileItem(File file) {
-//                if (file.isDirectory()) {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("path", file.getAbsolutePath());
-//                    InternalFragment internalFragment = new InternalFragment();
-//                    internalFragment.setArguments(bundle);
-//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, internalFragment).addToBackStack(null).commit();
-//                }
-//                else {
-//                    try {
-//                        FileOpener.openFile(getContext(), file);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
             }
         }, getContext());
         rvItems.setAdapter(fileAdapter);
@@ -295,8 +275,6 @@ public class TrashFragment extends Fragment {
         int proGr = (int) ((float) size/totalBlocks * 100);
         pbTotalUsed.setProgress(proGr);
     }
-
-
 
     // search
     private ArrayList<File> search(String text) {
@@ -312,8 +290,8 @@ public class TrashFragment extends Fragment {
     }
 
     private void clickOpenOptionSheetDialog(File file) {
-        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
-        myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
+        MyBottomSheetForTrash myBottomSheetForTrash = MyBottomSheetForTrash.newInstance(file);
+        myBottomSheetForTrash.show(getActivity().getSupportFragmentManager(), myBottomSheetForTrash.getTag());
     }
 
     private void clickOpenAdjustSheetDialog() {

@@ -44,7 +44,6 @@
 
             <EditText
                 android:id="@+id/a_register_et_user"
-                android:text="chien"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -55,6 +54,7 @@
                 android:background="@null"
                 android:fontFamily="@font/dosis_semibold"
                 android:singleLine="true"
+                android:hint="Enter your username"
                 android:textColor="#25252D"
                 android:textFontWeight="600"
                 android:textSize="20sp" />
@@ -88,7 +88,6 @@
 
             <EditText
                 android:id="@+id/a_register_et_mail"
-                android:text="19520025@gm.uit.edu.vn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -98,6 +97,7 @@
                 android:layout_toEndOf="@id/a_register_icon_mail"
                 android:background="@null"
                 android:fontFamily="@font/dosis_semibold"
+                android:hint="Enter your email"
                 android:singleLine="true"
                 android:textColor="#25252D"
                 android:textFontWeight="600"
@@ -132,7 +132,6 @@
 
             <EditText
                 android:id="@+id/a_register_et_password"
-                android:text="12032001"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -142,8 +141,8 @@
                 android:layout_toEndOf="@id/a_register_icon_password"
                 android:background="@null"
                 android:fontFamily="@font/dosis_semibold"
-                android:inputType="textPassword"
                 android:hint="Enter your password"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#25252D"
                 android:textFontWeight="600"
@@ -178,7 +177,6 @@
 
             <EditText
                 android:id="@+id/a_register_et_repass"
-                android:text="12032001"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

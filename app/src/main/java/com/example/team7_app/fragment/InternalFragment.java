@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.StatFs;
-import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.team7_app.File.FileAdapter;
+import com.example.team7_app.File.MyBottomSheetFragment;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
