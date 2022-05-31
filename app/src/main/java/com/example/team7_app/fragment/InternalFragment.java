@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  * Use the {@link InternalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InternalFragment extends Fragment {
+public class InternalFragment extends Fragment implements SortFragment.IClickSortListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -375,12 +375,31 @@ public class InternalFragment extends Fragment {
 
         SortFragment sortFragment = SortFragment.newInstance(arrayExtension, sortStatus, filterFileStatus, filterTimeStatus);
         sortFragment.show(getActivity().getSupportFragmentManager(), sortFragment.getTag());
+        sortFragment.setTargetFragment(InternalFragment.this, 1);
     }
 
     // option file
     private void clickOpenOptionSheetDialog(File file) {
 
-        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file, iClickFileOptionListener);
+        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
         myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
+    }
+
+    @Override
+    public void updateSort(String sort, String filterFile, String filterTime) {
+        sortStatus = sort;
+        filterFileStatus = filterFile;
+        filterTimeStatus = filterTime;
+        fileAdapter.searchItem(updateListSort());
+    }
+
+    @Override
+    public void resetSort() {
+        sortStatus = "null";
+        filterFileStatus = "File Type";
+        filterTimeStatus = "Timeline";
+        ArrayList<File> arrayList = new ArrayList<>();
+        arrayList.addAll(fileList);
+        fileAdapter.searchItem(arrayList);
     }
 }

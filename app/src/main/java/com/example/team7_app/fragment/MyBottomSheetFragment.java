@@ -47,16 +47,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private CardView btnMove, btnRename, btnDelete ;
     private ImageView ivIcon;
 
-    public static MyBottomSheetFragment newInstance(File file, IClickFileOptionListener iClickFileOptionListener){
-        MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(KEY_FILE_OBJ, file);
-        bundle.putSerializable("interfaceFileOption", (Serializable) iClickFileOptionListener);
-        myBottomSheetFragment.setArguments(bundle);
-
-        return myBottomSheetFragment;
-    }
-
     public static MyBottomSheetFragment newInstance(File file){
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
         Bundle bundle = new Bundle();

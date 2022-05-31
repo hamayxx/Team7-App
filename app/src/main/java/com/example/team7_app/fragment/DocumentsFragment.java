@@ -420,7 +420,7 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
     }
 
     private void clickOpenOptionSheetDialog(File file) {
-        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file, iClickFileOptionListener);
+        MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
         myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
     }
 
