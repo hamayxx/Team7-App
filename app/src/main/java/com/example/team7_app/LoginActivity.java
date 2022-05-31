@@ -14,7 +14,6 @@ import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.LoginAuthenticateDTO;
 import com.example.team7_app.Model.User;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,16 +137,11 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    mUser = getAccountInfo(loginUser);
+                    getAccountInfo(loginUser);
 
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    Bundle bundle= new Bundle();
-                    bundle.putSerializable("object_user", mUser);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                 } else {
                     // error response, no access to resource?
-                    Log.e(TAG, "LOI CMNR!!!");
+                    Log.e(TAG, "FAILED, Status code not 200!!!");
                     Toast.makeText(LoginActivity.this, "Response not success", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -162,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private User getAccountInfo(LoginAuthenticateDTO loginUser) {
+    private void getAccountInfo(LoginAuthenticateDTO loginUser) {
         User user = new User();
         APIService loginService = ServiceGenerator.createService(APIService.class);
         Call<ResponseBody> getAccountInfoCaller = loginService.getAccountInfo("Bearer " + loginUser.getToken());
@@ -173,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     try {
-                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        JSONObject jsonObject = new JSONObject(response.body().string());
                         Log.e(TAG, response.body().string());
 
                         user.setEmail(jsonObject.getString("email"));
@@ -185,6 +179,13 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Log.e(TAG, "FAILED PARSE OBJECT");
                     }
+
+
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Bundle bundle= new Bundle();
+                    bundle.putSerializable("object_user", user);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
                 else {
                     Log.e(TAG, "NOT SUCCESSFULLY");
@@ -199,7 +200,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Cannot get account info!!!", Toast.LENGTH_SHORT).show();
             }
         });
-        return user;
     }
     // bam nut back thi ket thuc this, quay lai activity call this
     @Override
