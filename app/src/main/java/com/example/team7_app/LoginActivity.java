@@ -15,6 +15,9 @@ import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.LoginAuthenticateDTO;
 import com.example.team7_app.Model.User;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,19 +118,30 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Log.i(TAG, response.toString());
+//                    Log.e(TAG, "response neeeeee: " + new Gson().toJson(response.body()));
                     Toast.makeText(LoginActivity.this, "Call API success", Toast.LENGTH_SHORT).show();
-                    String msg = response.body().toString();
-                    Log.e(TAG, "Get response there are: " + msg);
+                    String token = "";
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = new JSONObject(response.body().string());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Log.i(TAG, response.toString());
 
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    Bundle bundle= new Bundle();
-                    bundle.putSerializable("object_user", loginUser);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    try {
+                        token = jsonObject.getString("id_token");
+                        Log.e(TAG, "Get response token there : " + token);
+                        loginUser.setToken(token);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    getAccountInfo(loginUser);
+
                 } else {
                     // error response, no access to resource?
-                    Log.e(TAG, "LOI CMNR!!!");
+                    Log.e(TAG, "FAILED, Status code not 200!!!");
                     Toast.makeText(LoginActivity.this, "Response not success", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -140,22 +154,53 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "CALLED API FAILED!!!", Toast.LENGTH_SHORT).show();
             }
         });
-//
-//        if(isHasUser){
-//             //MainAct
-//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//            Bundle bundle= new Bundle();
-//            bundle.putSerializable("object_user", mUser);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-//        }
-//        else{
-//            Toast.makeText(LoginActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
-//
-//        }
     }
 
+    private void getAccountInfo(LoginAuthenticateDTO loginUser) {
+        User user = new User();
+        APIService loginService = ServiceGenerator.createService(APIService.class);
+        Call<ResponseBody> getAccountInfoCaller = loginService.getAccountInfo("Bearer " + loginUser.getToken());
+        Log.e(TAG, "AUTH HEADER: " + "Bearer " + loginUser.getToken());
+        getAccountInfoCaller.enqueue(new Callback<ResponseBody>() {
 
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        Log.e(TAG, response.body().string());
+
+                        user.setEmail(jsonObject.getString("email"));
+                        user.setLogin(jsonObject.getString("login"));
+//                        user.setEmail(jsonObject.getString("email"));
+//                        user.setEmail(jsonObject.getString("email"));
+                        Log.e(TAG, "EMAIL NE: " + jsonObject.getString("email"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "FAILED PARSE OBJECT");
+                    }
+
+
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Bundle bundle= new Bundle();
+                    bundle.putSerializable("object_user", user);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                else {
+                    Log.e(TAG, "NOT SUCCESSFULLY");
+                    Log.e(TAG, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+                Toast.makeText(LoginActivity.this, "Cannot get account info!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     // bam nut back thi ket thuc this, quay lai activity call this
     @Override
     public void onBackPressed() {

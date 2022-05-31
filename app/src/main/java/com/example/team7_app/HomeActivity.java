@@ -29,7 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.team7_app.Model.LoginAuthenticateDTO;
+import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
 import com.example.team7_app.fragment.TrashFragment;
@@ -55,10 +55,10 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private static final int FRAGMENT_TRASH = 6;
 
     private int currentFragment = FRAGMENT_HOME;
-    private LoginAuthenticateDTO usr;
+    private User usr;
 
     private String mUsername;
-    private String mEmail = "CONST EMAIL NOT CHANGED";
+    private String mEmail;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
@@ -83,10 +83,12 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         Bundle bundleRcvUser= getIntent().getExtras();
         if( bundleRcvUser != null)
         {
-            usr = (LoginAuthenticateDTO) bundleRcvUser.get("object_user");
+            usr = (User) bundleRcvUser.get("object_user");
             if(usr != null)
             {
-                mUsername = usr.getUsername().trim();
+                mUsername = usr.getLogin().trim();
+                mEmail = usr.getEmail().trim();
+//                mToken = usr.getToken().trim();
             }
         }
 
