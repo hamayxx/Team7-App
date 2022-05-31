@@ -30,8 +30,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.team7_app.Model.LoginAuthenticateDTO;
+import com.example.team7_app.fragment.DocumentsFragment;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
+import com.example.team7_app.fragment.SortFragment;
 import com.example.team7_app.fragment.TrashFragment;
 import com.example.team7_app.my_interface.IClickHomeListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

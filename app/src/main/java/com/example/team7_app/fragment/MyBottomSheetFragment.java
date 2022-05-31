@@ -46,7 +46,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private TextView tvSize ;
     private CardView btnMove, btnRename, btnDelete ;
     private ImageView ivIcon;
-    private IClickFileOptionListener iClickFileOptionListener;
 
     public static MyBottomSheetFragment newInstance(File file, IClickFileOptionListener iClickFileOptionListener){
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
@@ -75,7 +74,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         if(bundleRecvive != null)
         {
             mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
-            iClickFileOptionListener = (IClickFileOptionListener) bundleRecvive.get("interfaceFileOption");
         }
     }
 
@@ -270,6 +268,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
-        iClickFileOptionListener.refreshRecycleView();
+
     }
 }

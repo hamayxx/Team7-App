@@ -1,6 +1,8 @@
 package com.example.team7_app.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,14 +19,11 @@ import android.widget.TextView;
 import com.example.team7_app.R;
 import com.example.team7_app.category.SortCategory;
 import com.example.team7_app.category.SortCategoryAdapter;
-import com.example.team7_app.my_interface.IClickSortListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +38,13 @@ public class SortFragment extends BottomSheetDialogFragment {
         // Required empty public constructor
     }
 
-    public static SortFragment newInstance(ArrayList<String> listFileExtensions, String sortStatus, String filterFileStatus, String filterTimeStatus, IClickSortListener iClickSortListener) {
+    public static SortFragment newInstance(ArrayList<String> listFileExtensions, String sortStatus, String filterFileStatus, String filterTimeStatus) {
         SortFragment fragment = new SortFragment();
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("listExtensions", listFileExtensions);
         bundle.putString("sort", sortStatus);
         bundle.putString("file", filterFileStatus);
         bundle.putString("time", filterTimeStatus);
-        bundle.putSerializable("interfaceSort", (Serializable) iClickSortListener);
         
         fragment.setArguments(bundle);
         return fragment;
@@ -62,7 +60,7 @@ public class SortFragment extends BottomSheetDialogFragment {
     private String filterFileStatus = "File Type";
     private String filterTimeStatus = "Timeline";
     private ArrayList<String> listExtensions;
-    private IClickSortListener iClickSortListener;
+    private IClickSortListener mIClickSortListenerCallback;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +70,6 @@ public class SortFragment extends BottomSheetDialogFragment {
             sortStatus = getArguments().getString("sort");
             filterFileStatus = getArguments().getString("file");
             filterTimeStatus = getArguments().getString("time");
-            iClickSortListener = (IClickSortListener) getArguments().get("interfaceSort");
         }
     }
 
@@ -93,14 +90,14 @@ public class SortFragment extends BottomSheetDialogFragment {
         cvDescSize = viewOption.findViewById(R.id.fm_sort_decr_size);
         tvReset = viewOption.findViewById(R.id.fm_sort_tv_reset);
         spnSortFileCategory = viewOption.findViewById(R.id.fm_sort_spn_filetype);
-        
+
         sortCategoryFileTypeAdapter = new SortCategoryAdapter(getContext(), R.layout.fragment_sort_item_selected, listExtensions);
         spnSortFileCategory.setAdapter(sortCategoryFileTypeAdapter);
         spnSortFileCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     filterFileStatus = sortCategoryFileTypeAdapter.getItem(i);
-                    iClickSortListener.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
+                    mIClickSortListenerCallback.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
             }
 
             @Override
@@ -116,7 +113,7 @@ public class SortFragment extends BottomSheetDialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 filterTimeStatus = sortCategoryTimeAdapter.getItem(i);
-                iClickSortListener.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
+                mIClickSortListenerCallback.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
             }
 
             @Override
@@ -136,7 +133,7 @@ public class SortFragment extends BottomSheetDialogFragment {
                     cvIncrSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     cvDescSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     sortStatus = "az";
-                    iClickSortListener.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
+                    mIClickSortListenerCallback.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
                 }
             }
         });
@@ -150,7 +147,7 @@ public class SortFragment extends BottomSheetDialogFragment {
                     cvIncrSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     cvDescSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     sortStatus = "za";
-                    iClickSortListener.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
+                    mIClickSortListenerCallback.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
                 }
             }
         });
@@ -164,7 +161,7 @@ public class SortFragment extends BottomSheetDialogFragment {
                     cvZA.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     cvDescSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     sortStatus = "incrSize";
-                    iClickSortListener.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
+                    mIClickSortListenerCallback.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
                 }
             }
         });
@@ -178,7 +175,7 @@ public class SortFragment extends BottomSheetDialogFragment {
                     cvZA.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     cvIncrSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                     sortStatus = "descSize";
-                    iClickSortListener.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
+                    mIClickSortListenerCallback.updateSort(sortStatus, filterFileStatus, filterTimeStatus);
                 }
             }
         });
@@ -192,7 +189,7 @@ public class SortFragment extends BottomSheetDialogFragment {
                 cvIncrSize.setBackgroundTintList(getContext().getResources().getColorStateList(R.color.main_menu_background));
                 spnSortFileCategory.setSelection(sortCategoryFileTypeAdapter.getPosition("File Type"));
                 spnSortTimeCategory.setSelection(sortCategoryTimeAdapter.getPosition("Timeline"));
-                iClickSortListener.resetSort();
+                mIClickSortListenerCallback.resetSort();
             }
         });
 
@@ -219,7 +216,7 @@ public class SortFragment extends BottomSheetDialogFragment {
         return list;
 
     }
-    
+
     private void settingUpStatus() {
         if (!sortStatus.equals("null")) {
             switch (sortStatus) {
@@ -237,7 +234,7 @@ public class SortFragment extends BottomSheetDialogFragment {
                     break;
             }
         }
-        
+
         if (!filterFileStatus.equals("File Type")) {
             spnSortFileCategory.setSelection(sortCategoryFileTypeAdapter.getPosition(filterFileStatus));
         }
@@ -245,6 +242,39 @@ public class SortFragment extends BottomSheetDialogFragment {
         if (!filterTimeStatus.equals("Timeline")) {
             spnSortTimeCategory.setSelection(sortCategoryTimeAdapter.getPosition(filterTimeStatus));
         }
+    }
+
+    /*@Override
+    public void onAttach(@NonNull Activity activity) {
+        super.onAttach(activity);
+        try {
+            mIClickSortListenerCallback = (IClickSortListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement IClickSortListener");
+        }
+    }*/
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            mIClickSortListenerCallback = (IClickSortListener) getTargetFragment();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement IClickSortListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mIClickSortListenerCallback = null;
+        super.onDetach();
+    }
+
+    public interface IClickSortListener {
+
+        void updateSort(String sort, String filterFile, String filterTime);
+        void resetSort();
     }
 
     @Override

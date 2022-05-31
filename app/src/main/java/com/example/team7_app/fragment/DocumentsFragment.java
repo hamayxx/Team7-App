@@ -24,13 +24,14 @@ import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickFileOptionListener;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
-import com.example.team7_app.my_interface.IClickSortListener;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.comparator.SizeFileComparator;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +41,7 @@ import java.util.concurrent.TimeUnit;
  * Use the {@link DocumentsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocumentsFragment extends Fragment {
+public class DocumentsFragment extends Fragment implements SortFragment.IClickSortListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,7 +71,6 @@ public class DocumentsFragment extends Fragment {
     private String sortStatus = "null";
     private String filterFileStatus = "File Type";
     private String filterTimeStatus = "Timeline";
-    private IClickSortListener iClickSortListener;
     private IClickFileOptionListener iClickFileOptionListener;
 
     public DocumentsFragment() {
@@ -192,32 +192,30 @@ public class DocumentsFragment extends Fragment {
             }
         });
 
-        iClickSortListener = new IClickSortListener() {
-            @Override
-            public void updateSort(String sort, String filterFile, String filterTime) {
-                sortStatus = sort;
-                filterFileStatus = filterFile;
-                filterTimeStatus = filterTime;
-                fileAdapter.searchItem(updateListSort());
-            }
-
-            @Override
-            public void resetSort() {
-                sortStatus = "null";
-                filterFileStatus = "File Type";
-                filterTimeStatus = "Timeline";
-                ArrayList<File> arrayList = new ArrayList<>();
-                arrayList.addAll(fileList);
-                fileAdapter.searchItem(arrayList);
-            }
-        };
-
         iClickFileOptionListener = new IClickFileOptionListener() {
             @Override
             public void refreshRecycleView() {
                 refreshRecycleViewList();
             }
         };
+    }
+
+    @Override
+    public void updateSort(String sort, String filterFile, String filterTime) {
+        sortStatus = sort;
+        filterFileStatus = filterFile;
+        filterTimeStatus = filterTime;
+        fileAdapter.searchItem(updateListSort());
+    }
+
+    @Override
+    public void resetSort() {
+        sortStatus = "null";
+        filterFileStatus = "File Type";
+        filterTimeStatus = "Timeline";
+        ArrayList<File> arrayList = new ArrayList<>();
+        arrayList.addAll(fileList);
+        fileAdapter.searchItem(arrayList);
     }
 
     public ArrayList<File> findFiles(File file){
@@ -367,26 +365,8 @@ public class DocumentsFragment extends Fragment {
                         arrayList.add(singleFile);
                     }
                 }
-                else {
-                    long now = System.currentTimeMillis();
-                    long diff = now - singleFile.lastModified();
-                    switch (filterTimeStatus) {
-                        case "A day":
-                            if (TimeUnit.MILLISECONDS.toHours(diff) < 24) {
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                        case "A week":
-                            if (TimeUnit.MILLISECONDS.toDays(diff) < 7) {
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                        case "A month":
-                            if (TimeUnit.MILLISECONDS.toDays(diff) < 31) {
-                                arrayList.add(singleFile);
-                            }
-                            break;
-                    }
+                else if (filterFileStatus.equals("File Type")){
+                    arrayList.add(singleFile);
                 }
             }
         }
@@ -399,16 +379,14 @@ public class DocumentsFragment extends Fragment {
                 arrayList.sort(Comparator.comparing(File::getName).reversed());
                 break;
             case "descSize":
-                arrayList.sort(Comparator.comparing(File::length).reversed());
+                arrayList.sort(Comparator.comparingLong(File::length).reversed());
                 break;
             case "incrSize":
-                arrayList.sort(Comparator.comparing(File::length));
+                arrayList.sort(Comparator.comparingLong(File::length));
                 break;
         }
         return arrayList;
     }
-
-
 
     // refresh
     private void refreshRecycleViewList() {
@@ -436,14 +414,14 @@ public class DocumentsFragment extends Fragment {
             }
         }
 
-        SortFragment sortFragment = SortFragment.newInstance(arrayExtension, sortStatus, filterFileStatus, filterTimeStatus, iClickSortListener);
+        SortFragment sortFragment = SortFragment.newInstance(arrayExtension, sortStatus, filterFileStatus, filterTimeStatus);
         sortFragment.show(getActivity().getSupportFragmentManager(), sortFragment.getTag());
+        sortFragment.setTargetFragment(DocumentsFragment.this, 1);
     }
 
     private void clickOpenOptionSheetDialog(File file) {
         MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file, iClickFileOptionListener);
         myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
     }
-
 
 }

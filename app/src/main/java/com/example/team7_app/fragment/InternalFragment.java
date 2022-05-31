@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.StatFs;
-import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +22,6 @@ import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
 import com.example.team7_app.my_interface.IClickFileOptionListener;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
-import com.example.team7_app.my_interface.IClickSortListener;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -69,7 +64,6 @@ public class InternalFragment extends Fragment {
     private String sortStatus = "null";
     private String filterFileStatus = "File Type";
     private String filterTimeStatus = "Timeline";
-    private IClickSortListener iClickSortListener;
     private IClickFileOptionListener iClickFileOptionListener;
 
     public InternalFragment() {
@@ -160,26 +154,6 @@ public class InternalFragment extends Fragment {
                 return false;
             }
         });
-
-        iClickSortListener = new IClickSortListener() {
-            @Override
-            public void updateSort(String sort, String filterFile, String filterTime) {
-                sortStatus = sort;
-                filterFileStatus = filterFile;
-                filterTimeStatus = filterTime;
-                fileAdapter.searchItem(updateListSort());
-            }
-
-            @Override
-            public void resetSort() {
-                sortStatus = "null";
-                filterFileStatus = "File Type";
-                filterTimeStatus = "Timeline";
-                ArrayList<File> arrayList = new ArrayList<>();
-                arrayList.addAll(fileList);
-                fileAdapter.searchItem(arrayList);
-            }
-        };
 
         iClickFileOptionListener = new IClickFileOptionListener() {
             @Override
@@ -399,7 +373,7 @@ public class InternalFragment extends Fragment {
             }
         }
 
-        SortFragment sortFragment = SortFragment.newInstance(arrayExtension, sortStatus, filterFileStatus, filterTimeStatus, iClickSortListener);
+        SortFragment sortFragment = SortFragment.newInstance(arrayExtension, sortStatus, filterFileStatus, filterTimeStatus);
         sortFragment.show(getActivity().getSupportFragmentManager(), sortFragment.getTag());
     }
 
