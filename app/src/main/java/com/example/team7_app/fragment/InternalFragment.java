@@ -21,7 +21,6 @@ import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.File.MyBottomSheetFragment;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
-import com.example.team7_app.my_interface.IClickFileOptionListener;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -43,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  * Use the {@link InternalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InternalFragment extends Fragment implements SortFragment.IClickSortListener{
+public class InternalFragment extends Fragment implements SortFragment.IClickSortListener, MyBottomSheetFragment.IClickFileOptionListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,7 +64,6 @@ public class InternalFragment extends Fragment implements SortFragment.IClickSor
     private String sortStatus = "null";
     private String filterFileStatus = "File Type";
     private String filterTimeStatus = "Timeline";
-    private IClickFileOptionListener iClickFileOptionListener;
 
     public InternalFragment() {
         // Required empty public constructor
@@ -155,13 +153,6 @@ public class InternalFragment extends Fragment implements SortFragment.IClickSor
                 return false;
             }
         });
-
-        iClickFileOptionListener = new IClickFileOptionListener() {
-            @Override
-            public void refreshRecycleView() {
-                refreshRecycleViewList();
-            }
-        };
     }
 
     private void runtimePermission() {
@@ -384,6 +375,7 @@ public class InternalFragment extends Fragment implements SortFragment.IClickSor
 
         MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
         myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
+        myBottomSheetFragment.setTargetFragment(InternalFragment.this, 2);
     }
 
     @Override
@@ -402,5 +394,10 @@ public class InternalFragment extends Fragment implements SortFragment.IClickSor
         ArrayList<File> arrayList = new ArrayList<>();
         arrayList.addAll(fileList);
         fileAdapter.searchItem(arrayList);
+    }
+
+    @Override
+    public void refreshRecycleView() {
+        refreshRecycleViewList();
     }
 }

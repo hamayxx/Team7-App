@@ -196,7 +196,16 @@ public class HomeFragment extends Fragment {
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
         long totalBlocks = stat.getTotalBytes();
+        File pathDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         progressItemList = new ArrayList<ProgressItem>();
+        //System span
+        mProgressItem = new ProgressItem();
+        long remaining = (totalBlocks - sizeCategories[0] - sizeCategories[2]
+                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads));
+        mProgressItem.progressItemPercentage = ((float) (totalBlocks - remaining - sizeCategories[0] - sizeCategories[2]
+                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads))/totalBlocks)*100;
+        mProgressItem.color =  R.color.yellow2;
+        progressItemList.add(mProgressItem);
         //Documents span
         mProgressItem = new ProgressItem();
         mProgressItem.progressItemPercentage = ((float) sizeCategories[0]/totalBlocks)*100;
@@ -218,7 +227,6 @@ public class HomeFragment extends Fragment {
         mProgressItem.color =  R.color.red4;
         progressItemList.add(mProgressItem);
         //Downloads span
-        File pathDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         mProgressItem = new ProgressItem();
         mProgressItem.progressItemPercentage =  ((float) folderSize(pathDownloads)/totalBlocks)*100;
         mProgressItem.color =  R.color.red5;

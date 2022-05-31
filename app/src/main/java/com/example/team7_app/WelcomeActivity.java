@@ -6,6 +6,8 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class WelcomeActivity extends AppCompatActivity {
     CardView cv_start;
@@ -14,6 +16,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        //getSupportActionBar().hide();
         cv_start = findViewById(R.id.a_welcome_btn_start);
         cv_start.setOnClickListener(new View.OnClickListener() {
             @Override

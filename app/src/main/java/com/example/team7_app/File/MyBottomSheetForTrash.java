@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 
 import com.example.team7_app.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -67,6 +68,9 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         View viewOption = LayoutInflater.from(getContext()).inflate(R.layout.fragment_item_options_trash, null);
 
         bottomSheetDialog.setContentView(viewOption);
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         initView(viewOption);
         setDataFile();

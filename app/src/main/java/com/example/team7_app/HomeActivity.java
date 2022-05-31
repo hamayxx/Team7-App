@@ -75,6 +75,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //getSupportActionBar().hide();
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         init();

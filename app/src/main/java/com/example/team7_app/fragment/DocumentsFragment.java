@@ -23,16 +23,13 @@ import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.File.MyBottomSheetFragment;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
-import com.example.team7_app.my_interface.IClickFileOptionListener;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.comparator.SizeFileComparator;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -42,7 +39,7 @@ import java.util.concurrent.TimeUnit;
  * Use the {@link DocumentsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocumentsFragment extends Fragment implements SortFragment.IClickSortListener{
+public class DocumentsFragment extends Fragment implements SortFragment.IClickSortListener, MyBottomSheetFragment.IClickFileOptionListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,7 +69,6 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
     private String sortStatus = "null";
     private String filterFileStatus = "File Type";
     private String filterTimeStatus = "Timeline";
-    private IClickFileOptionListener iClickFileOptionListener;
 
     public DocumentsFragment() {
         // Required empty public constructor
@@ -192,13 +188,6 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
                 return false;
             }
         });
-
-        iClickFileOptionListener = new IClickFileOptionListener() {
-            @Override
-            public void refreshRecycleView() {
-                refreshRecycleViewList();
-            }
-        };
     }
 
     @Override
@@ -423,6 +412,11 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
     private void clickOpenOptionSheetDialog(File file) {
         MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
         myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
+        myBottomSheetFragment.setTargetFragment(DocumentsFragment.this, 2);
     }
 
+    @Override
+    public void refreshRecycleView() {
+        refreshRecycleViewList();
+    }
 }

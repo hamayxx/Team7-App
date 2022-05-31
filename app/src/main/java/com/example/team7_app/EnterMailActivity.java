@@ -13,6 +13,7 @@ public class EnterMailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_mail);
+        //getSupportActionBar().hide();
 
         cvToOPT= findViewById(R.id.a_enter_email_btn_login);
         cvToOPT.setOnClickListener(new View.OnClickListener() {

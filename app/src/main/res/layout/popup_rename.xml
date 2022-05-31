@@ -32,17 +32,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white">
+
                 <EditText
                     android:id="@+id/dl_popup_rename_et_text"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:textAlignment="center"
-                    android:text="dcvfvfvffdcdcdcdc"
-                    android:singleLine="true"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/heebo"
-                    android:textSize="28dp"
+                    android:singleLine="true"
+                    android:textAlignment="center"
                     android:textColor="@color/grey3"
-                    android:layout_centerInParent="true"/>
+                    android:textSize="28dp" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

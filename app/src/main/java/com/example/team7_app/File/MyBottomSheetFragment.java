@@ -2,6 +2,8 @@ package com.example.team7_app.File;
 
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -29,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
 import com.example.team7_app.fragment.InternalFragment;
+import com.example.team7_app.fragment.SortFragment;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -53,6 +56,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private TextView tvSize ;
     private CardView btnMove, btnRename, btnDelete ;
     private ImageView ivIcon;
+    private IClickFileOptionListener mIClickFileOptionListener;
 
     private RecyclerView rvItems;
     private IClickItemOptionListener iClickItemOptionListener;
@@ -275,8 +279,8 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         }
         dialog.show();
 
-        TextView tvYes = dialog.findViewById(R.id.dl_popup_rename_yes);
-        TextView tvCancel = dialog.findViewById(R.id.dl_popup_rename_cancel);
+        TextView tvYes = dialog.findViewById(R.id.dl_popup_rename_tv_yes);
+        TextView tvCancel = dialog.findViewById(R.id.dl_popup_rename_tv_cancel);
 
         tvYes.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -305,6 +309,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
                     try {
                         Files.move(mFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         Toast.makeText(getContext(), "Rename success", Toast.LENGTH_SHORT).show();
+                        tvName.setText(new_name + extention);
                         dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -390,10 +395,35 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            mIClickFileOptionListener = (IClickFileOptionListener) getTargetFragment();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement IClickFileOptionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mIClickFileOptionListener = null;
+        super.onDetach();
+    }
+
+    public interface IClickFileOptionListener {
+
+        void refreshRecycleView();
+    }
+
+    @Override
     public int getTheme() {
         return R.style.BottomSheetDialog;
     }
 
-
-
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        mIClickFileOptionListener.refreshRecycleView();
+    }
 }

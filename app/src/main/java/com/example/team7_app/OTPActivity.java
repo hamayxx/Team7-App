@@ -13,6 +13,7 @@ public class OTPActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpactivity);
+        //getSupportActionBar().hide();
 
         cvToNewPass=findViewById(R.id.a_otp_btn_enter);
         cvToNewPass.setOnClickListener(new View.OnClickListener() {

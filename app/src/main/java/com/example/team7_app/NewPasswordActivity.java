@@ -13,6 +13,7 @@ public class NewPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_password);
+        //getSupportActionBar().hide();
 
         cvToLogin=findViewById(R.id.a_new_password_btn_accept);
         cvToLogin.setOnClickListener(new View.OnClickListener() {

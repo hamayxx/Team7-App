@@ -196,16 +196,6 @@ public class SortFragment extends BottomSheetDialogFragment {
         return bottomSheetDialog;
     }
 
-    private List<SortCategory> getListFileCategory(ArrayList<String> listExtensions) {
-        List<SortCategory> list = new ArrayList<>();
-        for (String singleString: listExtensions) {
-            list.add(new SortCategory(singleString));
-        }
-
-        return list;
-
-    }
-
     private List<String> getListTimeCategory() {
         List<String> list = new ArrayList<>();
         list.add("Timeline");

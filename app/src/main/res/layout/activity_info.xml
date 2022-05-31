@@ -20,16 +20,16 @@
         android:id="@+id/a_info_tv_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="80dp"
+        android:fontFamily="@font/dosis_bold"
         android:text="[File Manager] is an Android mobile; it's also our project of Web Application Security subject. It supports user to manage all files on your phone, make a statistics for your datas. Besides, our app allows user to store their files in a higher secure layer and they can only see them in Security form.
-This app maybe have some mistakes, so in order to report or ask for helps, contact us in team7@gmail.com; we're  always open to suggestions.
+This app maybe have some mistakes, so in order to report or ask for helps, contact us in team8@gmail.com; we're  always open to suggestions.
 \nBest regards, Team 8."
         android:textColor="@color/red2"
-        android:textSize="25sp"
-        android:fontFamily="@font/dosis_bold"
         android:textFontWeight="700"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="80dp"/>
+        android:textSize="25sp" />
 
 </RelativeLayout>
