@@ -11,12 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="700dp">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rectangle"
+            android:layout_width="65dp"
+            android:layout_height="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:width="65dp"
+            android:height="5dp"
+            android:background="@color/bar"
+            app:cardCornerRadius="50dp" />
+
         <TextView
             android:id="@+id/fm_profile_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/iciel_smoothy_sans"
             android:text="PROFILE"
             android:textColor="@color/category_title"

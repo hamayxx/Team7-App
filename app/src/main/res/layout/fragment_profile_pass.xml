@@ -11,6 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="700dp">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rectangle"
+            android:layout_width="65dp"
+            android:layout_height="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:width="65dp"
+            android:height="5dp"
+            android:background="@color/bar"
+            app:cardCornerRadius="50dp" />
+
         <ImageButton
             android:id="@+id/fm_profile_pass_btn_return"
             android:layout_width="30dp"

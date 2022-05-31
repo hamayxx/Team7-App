@@ -1,7 +1,5 @@
 package com.example.team7_app.fragment;
 
-import android.Manifest;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,26 +23,26 @@ import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.File.MyBottomSheetFragment;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
+import com.example.team7_app.my_interface.IClickFileOptionListener;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.comparator.SizeFileComparator;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DocumentsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DocumentsFragment extends Fragment {
+public class DocumentsFragment extends Fragment implements SortFragment.IClickSortListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +69,10 @@ public class DocumentsFragment extends Fragment {
     private SearchView svSearch;
     private long size;
     private int count;
+    private String sortStatus = "null";
+    private String filterFileStatus = "File Type";
+    private String filterTimeStatus = "Timeline";
+    private IClickFileOptionListener iClickFileOptionListener;
 
     public DocumentsFragment() {
         // Required empty public constructor
@@ -146,7 +148,7 @@ public class DocumentsFragment extends Fragment {
                     tvTitle.setText("DOCUMENTS");
                     break;
                 case "Music":
-                    tvTitle.setText("MUSIC");
+                    tvTitle.setText("MUSICS");
                     break;
                 case "Videos":
                     tvTitle.setText("VIDEOS");
@@ -190,41 +192,31 @@ public class DocumentsFragment extends Fragment {
                 return false;
             }
         });
+
+        iClickFileOptionListener = new IClickFileOptionListener() {
+            @Override
+            public void refreshRecycleView() {
+                refreshRecycleViewList();
+            }
+        };
     }
 
-    private void runtimePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Dexter.withContext(getContext()).withPermissions(
-                    Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                    , Manifest.permission.READ_EXTERNAL_STORAGE
-                    , Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .withListener(new MultiplePermissionsListener() {
-                        @Override
-                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                            displayFiles();
-                        }
+    @Override
+    public void updateSort(String sort, String filterFile, String filterTime) {
+        sortStatus = sort;
+        filterFileStatus = filterFile;
+        filterTimeStatus = filterTime;
+        fileAdapter.searchItem(updateListSort());
+    }
 
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                            permissionToken.continuePermissionRequest();
-                        }
-                    }).check();
-        } else {
-            Dexter.withContext(getContext()).withPermissions(
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                    , Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .withListener(new MultiplePermissionsListener() {
-                        @Override
-                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                            displayFiles();
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                            permissionToken.continuePermissionRequest();
-                        }
-                    }).check();
-        }
+    @Override
+    public void resetSort() {
+        sortStatus = "null";
+        filterFileStatus = "File Type";
+        filterTimeStatus = "Timeline";
+        ArrayList<File> arrayList = new ArrayList<>();
+        arrayList.addAll(fileList);
+        fileAdapter.searchItem(arrayList);
     }
 
     public ArrayList<File> findFiles(File file){
@@ -343,19 +335,94 @@ public class DocumentsFragment extends Fragment {
         return arrayList;
     }
 
+    // sort
+    private ArrayList<File> updateListSort() {
+        ArrayList<File> arrayList = new ArrayList<>();
+        if (fileList != null) {
+            for (File singleFile: fileList) {
+                if (!filterFileStatus.equals("File Type") && singleFile.getName().endsWith(filterFileStatus)) {
+                    if (!filterTimeStatus.equals("Timeline")) {
+                        long now = System.currentTimeMillis();
+                        long diff = now - singleFile.lastModified();
+                        switch (filterTimeStatus) {
+                            case "A day":
+                                if (TimeUnit.MILLISECONDS.toHours(diff) < 24) {
+                                    arrayList.add(singleFile);
+                                }
+                                break;
+                            case "A week":
+                                if (TimeUnit.MILLISECONDS.toDays(diff) < 7) {
+                                    arrayList.add(singleFile);
+                                }
+                                break;
+                            case "A month":
+                                if (TimeUnit.MILLISECONDS.toDays(diff) < 31) {
+                                    arrayList.add(singleFile);
+                                }
+                                break;
+                        }
+                    }
+                    else {
+                        arrayList.add(singleFile);
+                    }
+                }
+                else if (filterFileStatus.equals("File Type")){
+                    arrayList.add(singleFile);
+                }
+            }
+        }
+
+        switch (sortStatus) {
+            case "az":
+                arrayList.sort(Comparator.comparing(File::getName));
+                break;
+            case "za":
+                arrayList.sort(Comparator.comparing(File::getName).reversed());
+                break;
+            case "descSize":
+                arrayList.sort(Comparator.comparingLong(File::length).reversed());
+                break;
+            case "incrSize":
+                arrayList.sort(Comparator.comparingLong(File::length));
+                break;
+        }
+        return arrayList;
+    }
+
+    // refresh
+    private void refreshRecycleViewList() {
+        fileList.clear();
+        fileList.addAll(findFiles(storage));
+        fileAdapter.notifyDataSetChanged();
+    }
+
+
     private void clickOpenAdjustSheetDialog() {
-        View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
+        /*View viewAdjust = getLayoutInflater().inflate(R.layout.fragment_sort, null);
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewAdjust);
         bottomSheetDialog.show();
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewAdjust.getParent());
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);*/
+
+        ArrayList<String> arrayExtension = new ArrayList<>();
+        arrayExtension.add("File Type");
+        for (File singleFile: fileList) {
+            if(!arrayExtension.contains(FilenameUtils.getExtension(singleFile.getName()))) {
+                arrayExtension.add(FilenameUtils.getExtension(singleFile.getName()));
+            }
+        }
+
+        SortFragment sortFragment = SortFragment.newInstance(arrayExtension, sortStatus, filterFileStatus, filterTimeStatus);
+        sortFragment.show(getActivity().getSupportFragmentManager(), sortFragment.getTag());
+        sortFragment.setTargetFragment(DocumentsFragment.this, 1);
     }
 
     private void clickOpenOptionSheetDialog(File file) {
         MyBottomSheetFragment myBottomSheetFragment = MyBottomSheetFragment.newInstance(file);
         myBottomSheetFragment.show(getActivity().getSupportFragmentManager(),myBottomSheetFragment.getTag());
     }
+
 }

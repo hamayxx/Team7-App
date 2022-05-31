@@ -27,27 +27,28 @@
             android:layout_below="@id/dl_popup_rename_tv_title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_blank">
+            android:background="@color/white">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:background="@color/white">
                 <EditText
                     android:id="@+id/dl_popup_rename_et_text"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/heebo"
-                    android:singleLine="true"
                     android:textAlignment="center"
+                    android:text="dcvfvfvffdcdcdcdc"
+                    android:singleLine="true"
+                    android:fontFamily="@font/heebo"
+                    android:textSize="28dp"
                     android:textColor="@color/grey3"
-                    android:textSize="28dp" />
+                    android:layout_centerInParent="true"/>
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/dl_popup_rename_yes"
+            android:id="@+id/dl_popup_rename_tv_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dl_popup_rename_iv_blank"
@@ -59,13 +60,13 @@
             android:textSize="28dp" />
 
         <TextView
-            android:id="@+id/dl_popup_rename_cancel"
+            android:id="@+id/dl_popup_rename_tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dl_popup_rename_iv_blank"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@id/dl_popup_rename_yes"
+            android:layout_toRightOf="@id/dl_popup_rename_tv_yes"
             android:fontFamily="@font/dosis_bold"
             android:text="CANCEL"
             android:textColor="@color/grey2"
