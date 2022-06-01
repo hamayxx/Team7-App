@@ -73,6 +73,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     private String mUsername;
     private String mEmail;
+    private String mToken;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
@@ -103,7 +104,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             {
                 mUsername = usr.getLogin().trim();
                 mEmail = usr.getEmail().trim();
-//                mToken = usr.getToken().trim();
+                mToken = usr.getToken().trim();
             }
         }
 
@@ -225,7 +226,6 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
 
-
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewProfile);
         bottomSheetDialog.show();
@@ -233,9 +233,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_et_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
-        tvDate.setText("19/05/1999");
+//        tvDate.setText("19/05/1999");
         TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
-        tvGender.setText("Male");
+//        tvGender.setText("Male");
         TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_et_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
@@ -246,7 +246,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveUser();
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(tvUsername.getText().toString(),  tvDate.getText().toString(), tvGender.getText().toString(), "en");
+                Log.e(TAG, "GENDER: " + tvGender.getText().toString());
+                updateProfile(updateUserDTO, mToken);
             }
         });
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
@@ -254,12 +256,8 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     }
 
-    private void saveUser() {
-        Toast.makeText(HomeActivity.this, "Save~", Toast.LENGTH_SHORT).show();
-    }
 
     private void updateProfile(UpdateUserDTO updateUserDTO, String token) {
-
         Log.i(TAG, "Start call update profile API");
         APIService updateService = ServiceGenerator.createService(APIService.class);
 

@@ -71,8 +71,8 @@
                     android:background="@drawable/icon_user"
                     android:backgroundTint="@color/icon_color" />
 
-                <EditText
-                    android:id="@+id/fm_profile_et_user"
+                <TextView
+                    android:id="@+id/fm_profile_tv_user"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -217,8 +217,8 @@
                     android:background="@drawable/icon_email"
                     android:backgroundTint="@color/icon_color" />
 
-                <EditText
-                    android:id="@+id/fm_profile_et_mail"
+                <TextView
+                    android:id="@+id/fm_profile_tv_mail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
