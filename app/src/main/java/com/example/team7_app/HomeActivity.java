@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.team7_app.API.APIService;
+import com.example.team7_app.API.ServiceGenerator;
+import com.example.team7_app.Model.UpdateUserDTO;
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
@@ -45,7 +49,14 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONObject;
+
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity  implements IClickHomeListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,6 +64,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     private static final int FRAGMENT_RECENTLY = 5;
     private static final int FRAGMENT_TRASH = 6;
+    private final static String TAG = "TEAM8_DEBUGGER";
 
     private int currentFragment = FRAGMENT_HOME;
     private User usr;
@@ -229,6 +241,54 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    private void updateProfile(UpdateUserDTO updateUserDTO, String token) {
+
+        Log.i(TAG, "Start call update profile API");
+        APIService updateService = ServiceGenerator.createService(APIService.class);
+
+        User user = new User();
+        Call<ResponseBody> postAccountInfoCaller = updateService.postAccountInfo("Bearer " + token, updateUserDTO);
+        Log.e(TAG, "AUTH HEADER: " + "Bearer " + token);
+        postAccountInfoCaller.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String status = "\n";
+                String message = "\n";
+                String details = "\n";
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Update info successfully");
+                }
+                try {
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    Log.e(TAG, response.body().string());
+
+                    status = jsonObject.getString("status");
+                    if (status.equals(400)) {
+                        Log.e(TAG, "NOT SUCCESSFULLY");
+                        message = jsonObject.getString("message");
+                    }
+                    else if (status.equals(500)) {
+                        Log.e(TAG, "NOT SUCCESSFULLY");
+                        details = jsonObject.getString("detail");
+                    }
+                    Log.e(TAG, status + message + details);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "FAILED PARSE OBJECT");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+                Toast.makeText(getApplicationContext(), "Cannot post account info!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void replaceFragment(Fragment fragment, String nameFrag) {
