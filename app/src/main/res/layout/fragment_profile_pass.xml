@@ -71,18 +71,18 @@
                     android:id="@+id/fm_profile_pass_et_pass"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:singleLine="true"
-                    android:background="@null"
-                    android:fontFamily="@font/dosis_semibold"
-                    android:textFontWeight="600"
-                    android:textColor="#25252D"
-                    android:inputType="textPassword"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/fm_profile_pass_icon_pass"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toEndOf="@id/fm_profile_pass_icon_pass"
+                    android:background="@null"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="#25252D"
+                    android:textFontWeight="600"
+                    android:textSize="20sp" />
 
 
             </RelativeLayout>

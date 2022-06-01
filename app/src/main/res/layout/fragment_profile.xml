@@ -275,6 +275,7 @@
                     android:fontFamily="@font/dosis_semibold"
                     android:inputType="textPassword"
                     android:singleLine="true"
+                    android:hint="Change your password here"
                     android:textColor="#25252D"
                     android:textFontWeight="600"
                     android:textSize="20sp" />

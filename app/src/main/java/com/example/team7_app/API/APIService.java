@@ -1,6 +1,7 @@
 package com.example.team7_app.API;
 
 import com.example.team7_app.Model.ChangePass;
+import com.example.team7_app.Model.ChangePassResponse;
 import com.example.team7_app.Model.LoginAuthenticateDTO;
 import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.UpdateUserDTO;
@@ -40,7 +41,7 @@ public interface APIService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/account/change-password")
-    Call<ResponseBody> changePass(@Header("Authorization") String authHeader, @Body ChangePass changePass);
+    Call<ChangePassResponse> changePass(@Header("Authorization") String authHeader, @Body ChangePass changePass);
 
 //    @Headers("Content-Type: application/json")
     @POST("/api/account/reset-password/init")

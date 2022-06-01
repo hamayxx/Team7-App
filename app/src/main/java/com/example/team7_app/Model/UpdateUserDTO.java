@@ -4,6 +4,7 @@ public class UpdateUserDTO {
     private String login;
     private String firstName; // GENDER
     private String lastName; // birthDay
+    private String password;
     private String langKey;
 
     public String getLogin() {
@@ -38,10 +39,19 @@ public class UpdateUserDTO {
         this.langKey = langKey;
     }
 
-    public UpdateUserDTO(String login, String firstName, String lastName, String langKey) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UpdateUserDTO(String login, String firstName, String lastName, String password, String langKey) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.langKey = langKey;
+        this.password = password;
     }
 }

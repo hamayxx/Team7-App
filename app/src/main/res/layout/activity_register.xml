@@ -53,8 +53,8 @@
                 android:layout_toEndOf="@id/a_register_icon_user"
                 android:background="@null"
                 android:fontFamily="@font/dosis_semibold"
-                android:singleLine="true"
                 android:hint="Enter your username"
+                android:singleLine="true"
                 android:textColor="#25252D"
                 android:textFontWeight="600"
                 android:textSize="20sp" />

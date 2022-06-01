@@ -34,6 +34,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
 import com.example.team7_app.Model.ChangePass;
+import com.example.team7_app.Model.ChangePassResponse;
 import com.example.team7_app.Model.UpdateUserDTO;
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
@@ -222,6 +223,34 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         });
     }
 
+    private void clickOpenPassSheetDialog(UpdateUserDTO updateUserDTO) {
+        View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile_pass, null);
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(viewProfile);
+        bottomSheetDialog.show();
+
+        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_pass_et_pass);
+
+        CardView btnSave = viewProfile.findViewById(R.id.fm_profile_pass_btn_next);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String oldPass = tvUsername.getText().toString();
+
+                updateProfile(updateUserDTO, mToken);
+
+                if (!oldPass.equals(updateUserDTO.getPassword())) {
+                    ChangePass changePass = new ChangePass(oldPass, updateUserDTO.getPassword());
+                    updatePassword(changePass, mToken);
+                }
+            }
+        });
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
 
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
@@ -230,25 +259,28 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         bottomSheetDialog.setContentView(viewProfile);
         bottomSheetDialog.show();
 
-        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_et_user);
+        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
 //        tvDate.setText("19/05/1999");
         TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
 //        tvGender.setText("Male");
-        TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_et_mail);
+        TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
-        tvPassword.setText("NotPasswordHereeeeeeeeeeeeeeeeeeeeeeeee");
 
         CardView btnSave = viewProfile.findViewById(R.id.fm_profile_cv_save);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UpdateUserDTO updateUserDTO = new UpdateUserDTO(tvUsername.getText().toString(),  tvDate.getText().toString(), tvGender.getText().toString(), "en");
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(tvUsername.getText().toString(),
+                        tvDate.getText().toString(),
+                        tvGender.getText().toString(),
+                        tvPassword.getText().toString(), "en");
+
                 Log.e(TAG, "GENDER: " + tvGender.getText().toString());
-                updateProfile(updateUserDTO, mToken);
+                clickOpenPassSheetDialog(updateUserDTO);
             }
         });
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
@@ -308,39 +340,31 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     }
 
     private void updatePassword(ChangePass changePass, String token) {
+        Log.i(TAG, "Start call CHANGE PASS API");
         APIService changePassService = ServiceGenerator.createService(APIService.class);
 
-        Call<ResponseBody> postAccountInfoCaller = changePassService.changePass("Bearer " + token, changePass);
+        Call<ChangePassResponse> postAccountInfoCaller = changePassService.changePass("Bearer " + token, changePass);
         Log.e(TAG, "AUTH HEADER: " + "Bearer " + token);
-        postAccountInfoCaller.enqueue(new Callback<ResponseBody>() {
+        postAccountInfoCaller.enqueue(new Callback<ChangePassResponse>() {
 
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<ChangePassResponse> call, Response<ChangePassResponse> response) {
                 String message = "\n";
                 if (response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "Update info successfully");
+                    Toast.makeText(getApplicationContext(), "Change pass successfully", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Change pass successfully");
+                    Log.e(TAG, response.toString());
                 }
                 else {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        Log.e(TAG, response.body().string());
-
-                        message = jsonObject.getString("title");
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "NOT SUCCESSFULLY");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Log.e(TAG, "FAILED PARSE OBJECT");
-                    }
+                    Toast.makeText(getApplicationContext(), response.body().getTitle(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ChangePassResponse> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
-                Toast.makeText(getApplicationContext(), "Update pass successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "ON FAILURE", Toast.LENGTH_SHORT).show();
             }
         });
     }
