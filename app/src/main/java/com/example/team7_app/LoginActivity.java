@@ -74,7 +74,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.clear();
+    }
     //login
     private void getListUsers() {
         Log.i("TEAM8", "Getting list users from server!!!");

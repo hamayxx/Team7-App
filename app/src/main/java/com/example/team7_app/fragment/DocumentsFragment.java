@@ -17,6 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.File.MyBottomSheetFragment;
@@ -68,7 +69,7 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
     private String sortStatus = "null";
     private String filterFileStatus = "File Type";
     private String filterTimeStatus = "Timeline";
-
+    private SwipeRefreshLayout srlItems;
     public DocumentsFragment() {
         // Required empty public constructor
 
@@ -99,6 +100,7 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -113,7 +115,15 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        srlItems = getView().findViewById(R.id.fm_documents_srl_items);
 
+        srlItems.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshRecycleViewList();
+                srlItems.setRefreshing(false);
+            }
+        });
         tvTitle = getView().findViewById(R.id.fm_documents_tv_title);
         ibBack = getView().findViewById(R.id.fm_documents_btn_return);
         ibAdjust = getView().findViewById(R.id.fm_documents_btn_adjust);
@@ -423,6 +433,73 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
 
     @Override
     public void refreshRecycleView() {
-        refreshRecycleViewList();
+        if (svSearch.getQuery().equals("")) {
+            fileList.clear();
+            fileList.addAll(findFiles(storage));
+            fileAdapter.searchItem(updateListSort());
+        }
+        else {
+            fileList.clear();
+            fileList.addAll(findFiles(storage));
+            fileAdapter.searchItem(searchAndSort(svSearch.getQuery().toString()));
+        }
+    }
+    private ArrayList<File> searchAndSort(String text) {
+        ArrayList<File> arrayList = new ArrayList<>();
+        if (fileList != null) {
+            for (File singleFile: fileList) {
+                if (singleFile.getName().toLowerCase().contains(text.toLowerCase())) {
+                    arrayList.add(singleFile);
+                }
+            }
+        }
+
+        ArrayList<File> sortList = new ArrayList<>();
+        for (File singleFile: arrayList) {
+            if (!filterFileStatus.equals("File Type") && singleFile.getName().endsWith(filterFileStatus)) {
+                if (!filterTimeStatus.equals("Timeline")) {
+                    long now = System.currentTimeMillis();
+                    long diff = now - singleFile.lastModified();
+                    switch (filterTimeStatus) {
+                        case "A day":
+                            if (TimeUnit.MILLISECONDS.toHours(diff) < 24) {
+                                sortList.add(singleFile);
+                            }
+                            break;
+                        case "A week":
+                            if (TimeUnit.MILLISECONDS.toDays(diff) < 7) {
+                                sortList.add(singleFile);
+                            }
+                            break;
+                        case "A month":
+                            if (TimeUnit.MILLISECONDS.toDays(diff) < 31) {
+                                sortList.add(singleFile);
+                            }
+                            break;
+                    }
+                }
+                else {
+                    sortList.add(singleFile);
+                }
+            }
+            else if (filterFileStatus.equals("File Type")){
+                sortList.add(singleFile);
+            }
+        }
+        switch (sortStatus) {
+            case "az":
+                sortList.sort(Comparator.comparing(File::getName));
+                break;
+            case "za":
+                sortList.sort(Comparator.comparing(File::getName).reversed());
+                break;
+            case "descSize":
+                sortList.sort(Comparator.comparingLong(File::length).reversed());
+                break;
+            case "incrSize":
+                sortList.sort(Comparator.comparingLong(File::length));
+                break;
+        }
+        return sortList;
     }
 }

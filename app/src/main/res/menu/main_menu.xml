@@ -12,10 +12,11 @@
             android:title="Recently"
             android:icon="@drawable/icon_recently"/>
 
-        <item
-            android:id="@+id/nav_trash"
-            android:title="Trash"
-            android:icon="@drawable/icon_trash"/>
+<!--        <item-->
+<!--            android:id="@+id/nav_trash"-->
+<!--            android:title="Trash"-->
+<!--            android:visible="false"-->
+<!--            android:icon="@drawable/icon_trash"/>-->
 
         <item
             android:id="@+id/nav_information"

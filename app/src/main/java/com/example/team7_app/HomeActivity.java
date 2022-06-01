@@ -465,12 +465,12 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             openRecentlyFragment();
             drawerLayout.closeDrawer(Gravity.LEFT);
         }
-        else if(id==R.id.nav_trash)
-        {
-            openTrashFragment();
-            drawerLayout.closeDrawer(Gravity.LEFT);
-
-        }
+//        else if(id==R.id.nav_trash)
+//        {
+//            openTrashFragment();
+//            drawerLayout.closeDrawer(Gravity.LEFT);
+//
+//        }
         else if(id==R.id.nav_information)
         {
             Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
