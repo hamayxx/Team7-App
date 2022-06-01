@@ -28,7 +28,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.team7_app.Database.DatabaseHandler;
 import com.example.team7_app.FileOpener;
+import com.example.team7_app.HomeActivity;
 import com.example.team7_app.R;
 import com.example.team7_app.fragment.InternalFragment;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
@@ -63,6 +65,8 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private File storage;
     private List<File> fileList;
     private FileAdapter fileAdapter;
+    private DatabaseHandler db;
+    private HomeActivity mHomeActivity;
 
     public static MyBottomSheetFragment newInstance(File file){
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
@@ -83,6 +87,9 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         {
             mFile = (File) bundleReceive.get(KEY_FILE_OBJ);
         }
+//        db = new DatabaseHandler(getContext());
+        mHomeActivity =(HomeActivity) getActivity();
+        db = mHomeActivity.getDB();
     }
 
     @NonNull
@@ -136,7 +143,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
             }
         });
     }
-
+    //move
     private void openDialogMove() {
         View viewMove = getLayoutInflater().inflate(R.layout.fragment_movetofile, null);
 
@@ -245,14 +252,18 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         return arrayList;
     }
 
+    // Delete
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteFile() {
         String dest = "/storage/emulated/0/Trash/";
         File deleteFile = new File(dest + mFile.getName());
-        File originalFile = new File(mFile.getAbsolutePath());
         Log.i("TEAM8", "deleteFile:"+ deleteFile);
         try {
+            db.insertFile(mFile);
             Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Log.i("TEAM8", "mFile deleteFile:" + mFile);
+            Log.i("TEAM8", "mFile originalPath deleteFile:" + mFile.getAbsolutePath());
+
             Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
             mIClickFileOptionListener.refreshRecycleView();
         }
@@ -260,7 +271,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
             Log.i("TEAM8", "deleteFile:" + exception.toString());
         }
     }
-
+    //rename
     private void openRenameDialog(int gravity) {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -332,10 +343,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         });
     }
 
-    private void moveFile() {
-        Toast.makeText(getContext(), "Move", Toast.LENGTH_SHORT).show();
-
-    }
 
     private void setDataFile()
     {

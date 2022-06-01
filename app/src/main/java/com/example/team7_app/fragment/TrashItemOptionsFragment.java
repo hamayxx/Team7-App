@@ -1,13 +1,13 @@
 package com.example.team7_app.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+//import com.example.team7_app.Database.DatabaseHandler;
 import com.example.team7_app.R;
 
 /**
@@ -55,6 +55,7 @@ public class TrashItemOptionsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+//        DatabaseHandler db = new DatabaseHandler(getContext());
     }
 
     @Override

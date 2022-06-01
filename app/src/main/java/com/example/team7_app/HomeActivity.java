@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.team7_app.Database.DatabaseHandler;
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
@@ -63,6 +64,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
+    private DatabaseHandler db;
 
     public String getUsername() {
         return mUsername;
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         return mEmail;
     }
 
+    public DatabaseHandler getDB() { return db;}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         init();
-
+        db = new DatabaseHandler(this);
         //login
         Bundle bundleRcvUser= getIntent().getExtras();
         if( bundleRcvUser != null)

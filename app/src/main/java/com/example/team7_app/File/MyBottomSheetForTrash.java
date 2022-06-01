@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 
+import com.example.team7_app.Database.DatabaseHandler;
+import com.example.team7_app.HomeActivity;
 import com.example.team7_app.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -38,7 +40,10 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
     private TextView tvOriginalPath ;
     private ImageView btnRestore,  btnDelete ;
     private ImageView ivIcon;
+    private MyBottomSheetFragment.IClickFileOptionListener mIClickFileOptionListener;
 
+    private DatabaseHandler db;
+    private HomeActivity mHomeActivity;
 
 
     public static MyBottomSheetForTrash newInstance(File file){
@@ -59,6 +64,8 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         {
             mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
         }
+            mHomeActivity =(HomeActivity) getActivity();
+            db = mHomeActivity.getDB();
     }
 
     @NonNull
@@ -106,10 +113,25 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
             }
         });
     }
-
+    // Restore
     private void restoreFile() {
-    }
+        Log.i("TEAM8", "mFile restoreFile:" + mFile);
 
+
+//        File restoreFile = new File(original) ;
+//
+//        Log.i("TEAM8", "restoreFile:"+ restoreFile);
+//        try {
+//            Files.move(mFile.toPath(), restoreFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//
+//            Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
+//            mIClickFileOptionListener.refreshRecycleView();
+//        }
+//        catch (IOException exception) {
+//            Log.i("TEAM8", "deleteFile:" + exception.toString());
+//        }
+    }
+    //Detele
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteFile() {
 
@@ -219,7 +241,8 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         String formattedDate = simpleDateFormatter.format(lastModified);
         tvDate.setText("Last modified: "+ formattedDate);
         tvSize.setText("Size : "+ Formatter.formatShortFileSize(getContext(), mFile.length()));
-
+        String original = db.getPath(mFile.getName()).toString();
+        tvOriginalPath.setText(original);
     }
 
     @Override
