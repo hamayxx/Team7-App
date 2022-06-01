@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
 import com.example.team7_app.fragment.InternalFragment;
-import com.example.team7_app.fragment.SortFragment;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -61,7 +60,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private RecyclerView rvItems;
     private IClickItemOptionListener iClickItemOptionListener;
     // feature
-    View mView;
     private File storage;
     private List<File> fileList;
     private FileAdapter fileAdapter;
@@ -262,6 +260,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
             Log.i("TEAM8", "deleteFile:" + exception.toString());
         }
     }
+
     private void openRenameDialog(int gravity) {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

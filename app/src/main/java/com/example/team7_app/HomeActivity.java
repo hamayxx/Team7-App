@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -212,24 +213,38 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
 
 
-        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_et_user);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(viewProfile);
+        bottomSheetDialog.show();
+
+        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
         tvDate.setText("19/05/1999");
         TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
         tvGender.setText("Male");
-        TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_et_mail);
+        TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
         tvPassword.setText("NotPasswordHere");
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
-        bottomSheetDialog.setContentView(viewProfile);
-        bottomSheetDialog.show();
+        CardView btnSave = viewProfile.findViewById(R.id.fm_profile_cv_save);
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveUser();
+            }
+        });
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
     }
+
+    private void saveUser() {
+        Toast.makeText(HomeActivity.this, "Save~", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void replaceFragment(Fragment fragment, String nameFrag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
