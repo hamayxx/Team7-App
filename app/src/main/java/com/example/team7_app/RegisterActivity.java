@@ -1,6 +1,5 @@
 package com.example.team7_app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -81,8 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
 
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
                 Toast.makeText(RegisterActivity.this, "Register successfully!!", Toast.LENGTH_SHORT).show();
                 finish();
             }
