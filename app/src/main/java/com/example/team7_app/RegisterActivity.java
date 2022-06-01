@@ -105,8 +105,6 @@ public class RegisterActivity extends AppCompatActivity {
         Log.e(TAG, "User check: "+ registerUserDTO.toString().trim());
 
         createUser(registerUserDTO);
-
-        //kiem tra da co user do chua
     }
 
     //   bam nut back thi ket thuc this, quay lai activity call this
