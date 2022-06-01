@@ -239,12 +239,12 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             public void onClick(View view) {
                 String oldPass = tvUsername.getText().toString();
 
-                updateProfile(updateUserDTO, mToken);
 
                 if (!oldPass.equals(updateUserDTO.getPassword())) {
                     ChangePass changePass = new ChangePass(oldPass, updateUserDTO.getPassword());
                     updatePassword(changePass, mToken);
                 }
+                updateProfile(updateUserDTO, mToken);
             }
         });
 
@@ -349,14 +349,12 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
             @Override
             public void onResponse(Call<ChangePassResponse> call, Response<ChangePassResponse> response) {
-                String message = "\n";
-                if (response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Change pass successfully", Toast.LENGTH_SHORT).show();
-                    Log.e(TAG, "Change pass successfully");
-                    Log.e(TAG, response.toString());
+                try {
+                    Toast.makeText(getApplicationContext(), "Check your current password again", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, response.body().getTitle());
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), response.body().getTitle(), Toast.LENGTH_SHORT).show();
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -364,7 +362,8 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             public void onFailure(Call<ChangePassResponse> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
-                Toast.makeText(getApplicationContext(), "ON FAILURE", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Change pass successfully", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Change pass successfully");
             }
         });
     }
