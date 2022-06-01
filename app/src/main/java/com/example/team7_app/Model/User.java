@@ -5,42 +5,15 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private String _id;
-    private String first_name;
-    private String last_name;
+    private String birth;
+    private String gender;
     private String login;
 
     private String email;
     private String password_hash;
     private String token;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public boolean isMale() {
-        return isMale;
-    }
-
-    public void setMale(boolean male) {
-        isMale = male;
-    }
-
-    private boolean isMale;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "_id='" + _id + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", login='" + login + '\'' +
-                ", email='" + email + '\'' +
-                ", password_hash='" + password_hash + '\'' +
-                '}';
+    public User() {
     }
 
     public String get_id() {
@@ -51,20 +24,20 @@ public class User implements Serializable {
         this._id = _id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getBirth() {
+        return birth;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getGender() {
+        return gender;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getLogin() {
@@ -89,5 +62,23 @@ public class User implements Serializable {
 
     public void setPassword_hash(String password_hash) {
         this.password_hash = password_hash;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public User(String _id, String birth, String gender, String login, String email, String password_hash, String token) {
+        this._id = _id;
+        this.birth = birth;
+        this.gender = gender;
+        this.login = login;
+        this.email = email;
+        this.password_hash = password_hash;
+        this.token = token;
     }
 }

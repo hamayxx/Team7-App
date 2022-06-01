@@ -175,6 +175,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         user.setEmail(jsonObject.getString("email"));
                         user.setLogin(jsonObject.getString("login"));
+                        user.setBirth(jsonObject.getString("firstName"));
+                        user.setGender(jsonObject.getString("lastName"));
 
                         Log.e(TAG, "EMAIL NE: " + jsonObject.getString("email"));
                     } catch (Exception e) {

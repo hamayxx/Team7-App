@@ -75,6 +75,8 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private String mUsername;
     private String mEmail;
     private String mToken;
+    private String mBirth;
+    private String mGender;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
@@ -106,6 +108,8 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                 mUsername = usr.getLogin().trim();
                 mEmail = usr.getEmail().trim();
                 mToken = usr.getToken().trim();
+                mBirth = usr.getBirth().trim();
+                mGender = usr.getGender().trim();
             }
         }
 
@@ -264,9 +268,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
-//        tvDate.setText("19/05/1999");
+        tvDate.setText(mBirth);
         TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
-//        tvGender.setText("Male");
+        tvGender.setText(mGender);
         TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
