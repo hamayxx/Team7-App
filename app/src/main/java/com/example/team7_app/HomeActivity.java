@@ -304,9 +304,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                String status = "\n";
                 String message = "\n";
-                String details = "\n";
                 if (response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Update info successfully");
@@ -316,18 +314,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         Log.e(TAG, response.body().string());
 
-                        status = jsonObject.getString("status");
-                        if (status.equals(500)) {
-                            Log.e(TAG, "NOT SUCCESSFULLY");
-                            details = jsonObject.getString("detail");
-                            Toast.makeText(getApplicationContext(), details, Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Log.e(TAG, "NOT SUCCESSFULLY");
-                            message = jsonObject.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                        Log.e(TAG, status + message + details);
+                        message = jsonObject.getString("title");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "NOT SUCCESSFULLY");
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.e(TAG, "FAILED PARSE OBJECT");
