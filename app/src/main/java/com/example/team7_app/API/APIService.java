@@ -29,6 +29,11 @@ public interface APIService {
     @Headers("Content-Type: application/json")
     @GET("/api/account")
     Call<ResponseBody> getAccountInfo(@Header("Authorization") String authHeader);
+
+//    @Headers("Content-Type: application/json")
+    @POST("/api/account/reset-password/init")
+    Call<String> resetPassword(@Body String email);
+
 }
 
 
