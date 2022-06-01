@@ -64,8 +64,6 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         {
             mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
         }
-            mHomeActivity =(HomeActivity) getActivity();
-            db = mHomeActivity.getDB();
     }
 
     @NonNull
@@ -241,8 +239,7 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         String formattedDate = simpleDateFormatter.format(lastModified);
         tvDate.setText("Last modified: "+ formattedDate);
         tvSize.setText("Size : "+ Formatter.formatShortFileSize(getContext(), mFile.length()));
-        String original = db.getPath(mFile.getName()).toString();
-        tvOriginalPath.setText("Original Path:"+ original);
+        tvOriginalPath.setText("Original Path: none");
         Log.i("TEAM8", " restoreFile:" + tvOriginalPath);
 
     }

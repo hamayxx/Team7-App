@@ -88,8 +88,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
             mFile = (File) bundleReceive.get(KEY_FILE_OBJ);
         }
 //        db = new DatabaseHandler(getContext());
-        mHomeActivity =(HomeActivity) getActivity();
-        db = mHomeActivity.getDB();
     }
 
     @NonNull

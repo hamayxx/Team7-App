@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,8 +73,8 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
     private int currentFragment = FRAGMENT_HOME;
     private User usr;
 
-    private String mUsername;
-    private String mEmail;
+    private String mUsername, mBirth;
+    private String mEmail, mGender;
     private String mToken;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
@@ -81,10 +82,6 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     public String getUsername() {
         return mUsername;
-    }
-
-    public String getEmail() {
-        return mEmail;
     }
 
     @Override
@@ -106,6 +103,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                 mUsername = usr.getLogin().trim();
                 mEmail = usr.getEmail().trim();
                 mToken = usr.getToken().trim();
+                mGender = "";
+                mBirth = "";
+
             }
         }
 
@@ -222,7 +222,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             }
         });
     }
-
+    // change pass
     private void clickOpenPassSheetDialog(UpdateUserDTO updateUserDTO) {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile_pass, null);
 
@@ -232,13 +232,12 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
         TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_pass_et_pass);
 
-        CardView btnSave = viewProfile.findViewById(R.id.fm_profile_pass_btn_next);
+        CardView btnNext = viewProfile.findViewById(R.id.fm_profile_pass_btn_next);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String oldPass = tvUsername.getText().toString();
-
 
                 if (!oldPass.equals(updateUserDTO.getPassword())) {
                     ChangePass changePass = new ChangePass(oldPass, updateUserDTO.getPassword());
@@ -250,6 +249,16 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             }
         });
 
+
+        ImageView btnBack = viewProfile.findViewById(R.id.fm_profile_pass_btn_return);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGender = updateUserDTO.getFirstName().trim();
+                mBirth = updateUserDTO.getLastName().trim();
+                clickOpenProfileSheetDialog();
+            }
+        });
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
@@ -264,9 +273,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
-//        tvDate.setText("19/05/1999");
+        tvDate.setText(mBirth);
         TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
-//        tvGender.setText("Male");
+        tvGender.setText(mGender);
         TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);

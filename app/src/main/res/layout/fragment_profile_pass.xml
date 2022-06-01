@@ -27,16 +27,16 @@
             android:id="@+id/fm_profile_pass_btn_return"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/icon_back"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="25dp"
+            android:background="@drawable/icon_back" />
 
         <TextView
             android:id="@+id/fm_profile_pass_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
             android:fontFamily="@font/dosis_semibold"
             android:text="Enter your password"
             android:textColor="@color/white"
@@ -47,11 +47,11 @@
             android:id="@+id/fm_profile_pass_cv_pass"
             android:layout_width="340dp"
             android:layout_height="57dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/white"
-
             android:layout_below="@id/fm_profile_pass_tv_title"
             android:layout_centerHorizontal="true"
+
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="15dp">
 
             <RelativeLayout
@@ -62,10 +62,10 @@
                     android:id="@+id/fm_profile_pass_icon_pass"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/icon_pass"
-                    android:backgroundTint="@color/icon_color"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"/>
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/icon_pass"
+                    android:backgroundTint="@color/icon_color" />
 
                 <EditText
                     android:id="@+id/fm_profile_pass_et_pass"
@@ -93,12 +93,12 @@
             android:id="@+id/fm_profile_pass_btn_next"
             android:layout_width="132dp"
             android:layout_height="45dp"
-            android:backgroundTint="@color/button_background"
-            app:cardCornerRadius="238dp"
-            android:elevation="4dp"
-            android:layout_marginTop="24dp"
             android:layout_below="@id/fm_profile_pass_cv_pass"
-            android:layout_alignRight="@id/fm_profile_pass_cv_pass">
+            android:layout_alignRight="@id/fm_profile_pass_cv_pass"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/button_background"
+            android:elevation="4dp"
+            app:cardCornerRadius="238dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -108,26 +108,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/heebo"
                     android:text="Next"
                     android:textColor="@color/text_button"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/heebo"
-                    android:textFontWeight="800" />
+                    android:textFontWeight="800"
+                    android:textSize="20sp" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-        
+
         <TextView
             android:id="@+id/fm_profile_pass_tv_forgetpass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forget password?"
-            android:textSize="20sp"
-            android:fontFamily="@font/heebo"
-            android:textColor="@color/white"
-            android:layout_marginTop="42dp"
+            android:layout_below="@id/fm_profile_pass_btn_next"
             android:layout_marginStart="10dp"
-            android:layout_below="@id/fm_profile_pass_btn_next"/>
+            android:layout_marginTop="42dp"
+            android:fontFamily="@font/heebo"
+            android:text="Forget password?"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </RelativeLayout>
 
 
