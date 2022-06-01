@@ -62,7 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RegisterUserDTO> call, Response<RegisterUserDTO> response) {
                 if (response.isSuccessful()) {
-                    Log.i(TAG, "Respone" + response.toString());
+                    Log.i(TAG, "Respone" + response);
+                    Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(RegisterActivity.this, "Call API <post> success", Toast.LENGTH_SHORT).show();
 //
 //                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -70,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     // error response, no access to resource?
                     Log.e(TAG, "Register FAILED!!!"+ response.toString());
+                    Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }

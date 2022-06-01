@@ -32,7 +32,6 @@ public class EnterMailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetPassword(email.getText().toString().trim());
-                finish();
             }
         });
     }
@@ -47,14 +46,8 @@ public class EnterMailActivity extends AppCompatActivity {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "Respone " + response.toString());
-                    Toast.makeText(getApplicationContext(), "SUCCESS!\nOpen link in your email for resetting password", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    // error response, no access to resource?
-                    Log.e(TAG, "Register FAILED!!!"+ response.toString());
-                }
+                Log.e(TAG, "Register FAILED!!! "+ response);
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -62,7 +55,8 @@ public class EnterMailActivity extends AppCompatActivity {
                 // something went completely south (like no internet connection)
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
-                Toast.makeText(getApplicationContext(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "SUCCESS!\nOpen link in your email for resetting password", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
