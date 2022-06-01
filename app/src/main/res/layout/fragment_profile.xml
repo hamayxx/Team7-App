@@ -114,7 +114,7 @@
                     android:background="@drawable/icon_birthday"
                     android:backgroundTint="@color/icon_color" />
 
-                <TextView
+                <EditText
                     android:id="@+id/fm_profile_et_birthday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                     android:background="@drawable/icon_male_and_female"
                     android:backgroundTint="@color/icon_color" />
 
-                <TextView
+                <EditText
                     android:id="@+id/fm_profile_et_gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -173,6 +173,7 @@
                     android:singleLine="true"
                     android:textColor="#25252D"
                     android:textFontWeight="600"
+                    android:inputType="textCapCharacters"
                     android:textSize="20sp" />
 
             </RelativeLayout>
@@ -261,7 +262,7 @@
                     android:background="@drawable/icon_pass"
                     android:backgroundTint="@color/icon_color" />
 
-                <TextView
+                <EditText
                     android:id="@+id/fm_profile_et_pass"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -274,6 +275,7 @@
                     android:fontFamily="@font/dosis_semibold"
                     android:inputType="textPassword"
                     android:singleLine="true"
+                    android:hint="Change your password here"
                     android:textColor="#25252D"
                     android:textFontWeight="600"
                     android:textSize="20sp" />

@@ -55,7 +55,7 @@ public class EnterMailActivity extends AppCompatActivity {
                 // something went completely south (like no internet connection)
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
-                Toast.makeText(getApplicationContext(), "SUCCESS!\nOpen link in your email for resetting password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "SUCCESS!\nOpen link in your email for resetting password", Toast.LENGTH_LONG).show();
                 finish();
             }
         });

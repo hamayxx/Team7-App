@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -145,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // error response, no access to resource?
                     Log.e(TAG, "FAILED, Status code not 200!!!");
-                    Toast.makeText(LoginActivity.this, "Response not success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -161,6 +159,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getAccountInfo(LoginAuthenticateDTO loginUser) {
         User user = new User();
+        user.setToken(loginUser.getToken());
+
         APIService loginService = ServiceGenerator.createService(APIService.class);
         Call<ResponseBody> getAccountInfoCaller = loginService.getAccountInfo("Bearer " + loginUser.getToken());
         Log.e(TAG, "AUTH HEADER: " + "Bearer " + loginUser.getToken());
@@ -175,8 +175,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         user.setEmail(jsonObject.getString("email"));
                         user.setLogin(jsonObject.getString("login"));
-//                        user.setEmail(jsonObject.getString("email"));
-//                        user.setEmail(jsonObject.getString("email"));
+
                         Log.e(TAG, "EMAIL NE: " + jsonObject.getString("email"));
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.team7_app.Database.DatabaseHandler;
+import com.example.team7_app.API.APIService;
+import com.example.team7_app.API.ServiceGenerator;
+import com.example.team7_app.Model.ChangePass;
+import com.example.team7_app.Model.ChangePassResponse;
+import com.example.team7_app.Model.UpdateUserDTO;
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
 import com.example.team7_app.fragment.RecentlyFragment;
@@ -47,7 +52,14 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONObject;
+
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity  implements IClickHomeListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,16 +67,17 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     private static final int FRAGMENT_RECENTLY = 5;
     private static final int FRAGMENT_TRASH = 6;
+    private final static String TAG = "TEAM8_DEBUGGER";
 
     private int currentFragment = FRAGMENT_HOME;
     private User usr;
 
     private String mUsername;
     private String mEmail;
+    private String mToken;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
-    private DatabaseHandler db;
 
     public String getUsername() {
         return mUsername;
@@ -74,7 +87,6 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         return mEmail;
     }
 
-    public DatabaseHandler getDB() { return db;}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +95,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         init();
-        db = new DatabaseHandler(this);
+
         //login
         Bundle bundleRcvUser= getIntent().getExtras();
         if( bundleRcvUser != null)
@@ -93,7 +105,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             {
                 mUsername = usr.getLogin().trim();
                 mEmail = usr.getEmail().trim();
-//                mToken = usr.getToken().trim();
+                mToken = usr.getToken().trim();
             }
         }
 
@@ -211,10 +223,39 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         });
     }
 
+    private void clickOpenPassSheetDialog(UpdateUserDTO updateUserDTO) {
+        View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile_pass, null);
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(viewProfile);
+        bottomSheetDialog.show();
+
+        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_pass_et_pass);
+
+        CardView btnSave = viewProfile.findViewById(R.id.fm_profile_pass_btn_next);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String oldPass = tvUsername.getText().toString();
+
+
+                if (!oldPass.equals(updateUserDTO.getPassword())) {
+                    ChangePass changePass = new ChangePass(oldPass, updateUserDTO.getPassword());
+                    updatePassword(updateUserDTO, changePass, mToken);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Your new password must different from your current one", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
 
     private void clickOpenProfileSheetDialog() {
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
-
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewProfile);
@@ -223,20 +264,25 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
-        tvDate.setText("19/05/1999");
+//        tvDate.setText("19/05/1999");
         TextView tvGender = (TextView) viewProfile.findViewById(R.id.fm_profile_et_gender);
-        tvGender.setText("Male");
+//        tvGender.setText("Male");
         TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_tv_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
-        tvPassword.setText("NotPasswordHere");
 
         CardView btnSave = viewProfile.findViewById(R.id.fm_profile_cv_save);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveUser();
+                UpdateUserDTO updateUserDTO = new UpdateUserDTO(tvUsername.getText().toString(),
+                        tvDate.getText().toString(),
+                        tvGender.getText().toString(),
+                        tvPassword.getText().toString(), "en");
+
+                Log.e(TAG, "GENDER: " + tvGender.getText().toString());
+                clickOpenPassSheetDialog(updateUserDTO);
             }
         });
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
@@ -244,10 +290,86 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
     }
 
-    private void saveUser() {
-        Toast.makeText(HomeActivity.this, "Save~", Toast.LENGTH_SHORT).show();
+
+    private void updateProfile(UpdateUserDTO updateUserDTO, String token) {
+        Log.i(TAG, "Start call update profile API");
+        APIService updateService = ServiceGenerator.createService(APIService.class);
+
+        Call<ResponseBody> postAccountInfoCaller = updateService.postAccountInfo("Bearer " + token, updateUserDTO);
+        Log.e(TAG, "AUTH HEADER: " + "Bearer " + token);
+        postAccountInfoCaller.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String status = "\n";
+                String message = "\n";
+                String details = "\n";
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Update info successfully");
+                }
+                else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        Log.e(TAG, response.body().string());
+
+                        status = jsonObject.getString("status");
+                        if (status.equals(500)) {
+                            Log.e(TAG, "NOT SUCCESSFULLY");
+                            details = jsonObject.getString("detail");
+                            Toast.makeText(getApplicationContext(), details, Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Log.e(TAG, "NOT SUCCESSFULLY");
+                            message = jsonObject.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e(TAG, status + message + details);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "FAILED PARSE OBJECT");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+                Toast.makeText(getApplicationContext(), "Cannot post account info!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    private void updatePassword(UpdateUserDTO updateUserDTO, ChangePass changePass, String token) {
+        Log.i(TAG, "Start call CHANGE PASS API");
+        APIService changePassService = ServiceGenerator.createService(APIService.class);
+
+        Call<ChangePassResponse> postAccountInfoCaller = changePassService.changePass("Bearer " + token, changePass);
+        Log.e(TAG, "AUTH HEADER: " + "Bearer " + token);
+        postAccountInfoCaller.enqueue(new Callback<ChangePassResponse>() {
+
+            @Override
+            public void onResponse(Call<ChangePassResponse> call, Response<ChangePassResponse> response) {
+                try {
+                    Toast.makeText(getApplicationContext(), "Check your current password again", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, response.body().getTitle());
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ChangePassResponse> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+//                Toast.makeText(getApplicationContext(), "Change pass successfully", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Change pass successfully");
+                updateProfile(updateUserDTO, mToken);
+            }
+        });
+    }
 
     private void replaceFragment(Fragment fragment, String nameFrag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
