@@ -380,9 +380,16 @@ public class DocumentsFragment extends Fragment implements SortFragment.IClickSo
 
     // refresh
     private void refreshRecycleViewList() {
-        fileList.clear();
-        fileList.addAll(findFiles(storage));
-        fileAdapter.notifyDataSetChanged();
+        if (svSearch.getQuery().equals("")) {
+            fileList.clear();
+            fileList.addAll(findFiles(storage));
+            fileAdapter.notifyDataSetChanged();
+        }
+        else {
+            fileList.clear();
+            fileList.addAll(findFiles(storage));
+            fileAdapter.searchItem(search(svSearch.getQuery().toString()));
+        }
     }
 
 

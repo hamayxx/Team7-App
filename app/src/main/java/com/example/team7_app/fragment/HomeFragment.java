@@ -193,17 +193,19 @@ public class HomeFragment extends Fragment {
     }
 
     private void initDataToSeekbar() {
-        File path = Environment.getDataDirectory();
+        File path = Environment.getExternalStorageDirectory();
+        //File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
         long totalBlocks = stat.getTotalBytes();
         File pathDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         progressItemList = new ArrayList<ProgressItem>();
         //System span
         mProgressItem = new ProgressItem();
-        long remaining = (totalBlocks - sizeCategories[0] - sizeCategories[2]
-                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads));
-        mProgressItem.progressItemPercentage = ((float) (totalBlocks - remaining - sizeCategories[0] - sizeCategories[2]
-                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads))/totalBlocks)*100;
+        long remaining = totalBlocks - sizeCategories[0] - sizeCategories[2]
+                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads);
+        long other = totalBlocks - remaining - sizeCategories[0] - sizeCategories[2]
+                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads);
+        mProgressItem.progressItemPercentage = ((float) other/totalBlocks)*100;
         mProgressItem.color =  R.color.yellow2;
         progressItemList.add(mProgressItem);
         //Documents span
@@ -233,8 +235,7 @@ public class HomeFragment extends Fragment {
         progressItemList.add(mProgressItem);
         //Remaining span
         mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (totalBlocks - sizeCategories[0] - sizeCategories[2]
-                                                        - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads)) * 100;
+        mProgressItem.progressItemPercentage = ((float) remaining/ totalBlocks) * 100;
         mProgressItem.color =  R.color.white;
         progressItemList.add(mProgressItem);
 
