@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -225,6 +226,10 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         View viewProfile = getLayoutInflater().inflate(R.layout.fragment_profile, null);
 
 
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(viewProfile);
+        bottomSheetDialog.show();
+
         TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_et_user);
         tvUsername.setText(mUsername);
         TextView tvDate = (TextView) viewProfile.findViewById(R.id.fm_profile_et_birthday);
@@ -236,12 +241,21 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
         tvPassword.setText("NotPasswordHereeeeeeeeeeeeeeeeeeeeeeeee");
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
-        bottomSheetDialog.setContentView(viewProfile);
-        bottomSheetDialog.show();
+        CardView btnSave = viewProfile.findViewById(R.id.fm_profile_cv_save);
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveUser();
+            }
+        });
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewProfile.getParent());
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+    }
+
+    private void saveUser() {
+        Toast.makeText(HomeActivity.this, "Save~", Toast.LENGTH_SHORT).show();
     }
 
     private void updateProfile(UpdateUserDTO updateUserDTO, String token) {

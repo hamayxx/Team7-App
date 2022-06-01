@@ -1,6 +1,5 @@
 package com.example.team7_app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(RegisterUserDTO registerUserDTO) {
-        Log.i("TEAM8", "Getting list users from server!!!");
+        Log.i("TEAM8", "Start register user");
         APIService signupService = ServiceGenerator.createService(APIService.class);
         Call<RegisterUserDTO> call = signupService.createUser(registerUserDTO);
         Log.e(TAG, "User API: "+ registerUserDTO.toString().trim());
@@ -63,7 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RegisterUserDTO> call, Response<RegisterUserDTO> response) {
                 if (response.isSuccessful()) {
-                    Log.i(TAG, "Respone" + response.toString());
+                    Log.i(TAG, "Respone" + response);
+                    Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(RegisterActivity.this, "Call API <post> success", Toast.LENGTH_SHORT).show();
 //
 //                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -71,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     // error response, no access to resource?
                     Log.e(TAG, "Register FAILED!!!"+ response.toString());
+                    Toast.makeText(RegisterActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -81,8 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
 
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
                 Toast.makeText(RegisterActivity.this, "Register successfully!!", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -108,8 +107,6 @@ public class RegisterActivity extends AppCompatActivity {
         Log.e(TAG, "User check: "+ registerUserDTO.toString().trim());
 
         createUser(registerUserDTO);
-
-        //kiem tra da co user do chua
     }
 
     //   bam nut back thi ket thuc this, quay lai activity call this

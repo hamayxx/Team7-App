@@ -1,28 +1,20 @@
 package com.example.team7_app.fragment;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.CustomProgressBar.CustomProgressBar;
 import com.example.team7_app.CustomProgressBar.ProgressItem;
@@ -193,17 +185,19 @@ public class HomeFragment extends Fragment {
     }
 
     private void initDataToSeekbar() {
-        File path = Environment.getDataDirectory();
+        File path = Environment.getExternalStorageDirectory();
+        //File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
         long totalBlocks = stat.getTotalBytes();
         File pathDownloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         progressItemList = new ArrayList<ProgressItem>();
         //System span
         mProgressItem = new ProgressItem();
-        long remaining = (totalBlocks - sizeCategories[0] - sizeCategories[2]
-                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads));
-        mProgressItem.progressItemPercentage = ((float) (totalBlocks - remaining - sizeCategories[0] - sizeCategories[2]
-                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads))/totalBlocks)*100;
+        long remaining = totalBlocks - sizeCategories[0] - sizeCategories[2]
+                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads);
+        long other = totalBlocks - remaining - sizeCategories[0] - sizeCategories[2]
+                - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads);
+        mProgressItem.progressItemPercentage = ((float) other/totalBlocks)*100;
         mProgressItem.color =  R.color.yellow2;
         progressItemList.add(mProgressItem);
         //Documents span
@@ -233,8 +227,7 @@ public class HomeFragment extends Fragment {
         progressItemList.add(mProgressItem);
         //Remaining span
         mProgressItem = new ProgressItem();
-        mProgressItem.progressItemPercentage = (float) (totalBlocks - sizeCategories[0] - sizeCategories[2]
-                                                        - sizeCategories[4] - sizeCategories[6] - folderSize(pathDownloads)) * 100;
+        mProgressItem.progressItemPercentage = ((float) remaining/ totalBlocks) * 100;
         mProgressItem.color =  R.color.white;
         progressItemList.add(mProgressItem);
 

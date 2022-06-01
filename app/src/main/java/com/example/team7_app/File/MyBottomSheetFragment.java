@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.team7_app.FileOpener;
 import com.example.team7_app.R;
 import com.example.team7_app.fragment.InternalFragment;
-import com.example.team7_app.fragment.SortFragment;
 import com.example.team7_app.my_interface.IClickItemOptionListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -61,7 +60,6 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private RecyclerView rvItems;
     private IClickItemOptionListener iClickItemOptionListener;
     // feature
-    View mView;
     private File storage;
     private List<File> fileList;
     private FileAdapter fileAdapter;
@@ -80,10 +78,10 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle bundleRecvive = getArguments();
-        if(bundleRecvive != null)
+        Bundle bundleReceive = getArguments();
+        if(bundleReceive != null)
         {
-            mFile = (File) bundleRecvive.get(KEY_FILE_OBJ);
+            mFile = (File) bundleReceive.get(KEY_FILE_OBJ);
         }
     }
 
@@ -94,6 +92,9 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         View viewOption = LayoutInflater.from(getContext()).inflate(R.layout.fragment_item_options, null);
 
         bottomSheetDialog.setContentView(viewOption);
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) viewOption.getParent());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         initView(viewOption);
         setDataFile();
@@ -139,7 +140,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     private void openDialogMove() {
         View viewMove = getLayoutInflater().inflate(R.layout.fragment_movetofile, null);
 
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(),R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewMove);
         bottomSheetDialog.show();
 
@@ -253,11 +254,13 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
         try {
             Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
+            mIClickFileOptionListener.refreshRecycleView();
         }
         catch (IOException exception) {
             Log.i("TEAM8", "deleteFile:" + exception.toString());
         }
     }
+
     private void openRenameDialog(int gravity) {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -295,9 +298,9 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
                     dialog.dismiss();
                     return;
                 }
-                String extention = mFile.getAbsolutePath().substring(mFile.getAbsolutePath().lastIndexOf("."));
+                String extension = mFile.getAbsolutePath().substring(mFile.getAbsolutePath().lastIndexOf("."));
 
-                File destination = new File(mFile.getAbsolutePath().replace(mFile.getName(), new_name) + extention);
+                File destination = new File(mFile.getAbsolutePath().replace(mFile.getName(), new_name) + extension);
                 Log.i("TEAM8", "mFile:"+ mFile);
                 Log.i("TEAM8", "destination:"+ destination);
                 if(destination.exists())
@@ -309,7 +312,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
                     try {
                         Files.move(mFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
                         Toast.makeText(getContext(), "Rename success", Toast.LENGTH_SHORT).show();
-                        tvName.setText(new_name + extention);
+                        tvName.setText(new_name + extension);
                         dialog.dismiss();
                     } catch (IOException e) {
                         e.printStackTrace();

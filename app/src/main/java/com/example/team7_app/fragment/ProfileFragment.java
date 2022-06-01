@@ -31,12 +31,9 @@ public class ProfileFragment extends Fragment {
     private String email;
     private boolean isMale;
 
-    private TextView tvUsername;
-    private TextView tvEmail;
-    private TextView gender;
 
-    View viewOption;
-    CardView cardView;
+    private View mView;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -67,14 +64,6 @@ public class ProfileFragment extends Fragment {
             username = getArguments().getString(ARG_PARAM1);
             email = getArguments().getString(ARG_PARAM2);
         }
-        viewOption = LayoutInflater.from(getContext()).inflate(R.layout.fragment_profile, null);
-        cardView = viewOption.findViewById(R.id.fm_profile_cv_save);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Click successfully", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
