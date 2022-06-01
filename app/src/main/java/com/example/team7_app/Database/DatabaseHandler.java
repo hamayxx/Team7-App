@@ -72,7 +72,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 parameters, groupby, having, orderby);
         if (cursor != null)
             cursor.moveToFirst();
-        MyFile myFile = new MyFile(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(2));
+       MyFile myFile = null;
+        // new MyFile(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(2));
+
+        cursor.close();
+
         return myFile;
     }
 

@@ -255,21 +255,23 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     // Delete
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void deleteFile() {
-        String dest = "/storage/emulated/0/Trash/";
-        File deleteFile = new File(dest + mFile.getName());
-        Log.i("TEAM8", "deleteFile:"+ deleteFile);
-        try {
-            db.insertFile(mFile);
-            Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            Log.i("TEAM8", "mFile deleteFile:" + mFile);
-            Log.i("TEAM8", "mFile originalPath deleteFile:" + mFile.getAbsolutePath());
-
-            Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
-            mIClickFileOptionListener.refreshRecycleView();
-        }
-        catch (IOException exception) {
-            Log.i("TEAM8", "deleteFile:" + exception.toString());
-        }
+//        String dest = "/storage/emulated/0/Trash/";
+//        File deleteFile = new File(dest + mFile.getName());
+//        Log.i("TEAM8", "deleteFile:"+ deleteFile);
+//        try {
+//            db.insertFile(mFile);
+//            Files.move(mFile.toPath(), deleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//            Log.i("TEAM8", "mFile deleteFile:" + mFile);
+//            Log.i("TEAM8", "mFile originalPath deleteFile:" + mFile.getAbsolutePath());
+//
+//            Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
+//            mIClickFileOptionListener.refreshRecycleView();
+//        }
+//        catch (IOException exception) {
+//            Log.i("TEAM8", "deleteFile:" + exception.toString());
+//        }
+        mFile.delete();
+        Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
     }
     //rename
     private void openRenameDialog(int gravity) {

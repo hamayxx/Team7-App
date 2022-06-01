@@ -3,14 +3,6 @@ package com.example.team7_app.fragment;
 import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
@@ -21,6 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.team7_app.File.FileAdapter;
 import com.example.team7_app.File.MyBottomSheetForTrash;
@@ -290,8 +289,12 @@ public class TrashFragment extends Fragment {
     }
 
     private void clickOpenOptionSheetDialog(File file) {
+//        MyBottomSheetForTrash myBottomSheetForTrash = MyBottomSheetForTrash.newInstance(file);
+//        myBottomSheetForTrash.show(getActivity().getSupportFragmentManager(), myBottomSheetForTrash.getTag());
+
         MyBottomSheetForTrash myBottomSheetForTrash = MyBottomSheetForTrash.newInstance(file);
-        myBottomSheetForTrash.show(getActivity().getSupportFragmentManager(), myBottomSheetForTrash.getTag());
+        myBottomSheetForTrash.show(getActivity().getSupportFragmentManager(),myBottomSheetForTrash.getTag());
+        myBottomSheetForTrash.setTargetFragment(TrashFragment.this, 2);
     }
 
     private void clickOpenAdjustSheetDialog() {

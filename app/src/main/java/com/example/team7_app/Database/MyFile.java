@@ -5,7 +5,7 @@ public class MyFile {
     private String originalPath;
 
 
-    public MyFile(int i, String file, String path)
+    public MyFile( String file, String path)
     {
         this.mFile = file;
         this.originalPath = path;

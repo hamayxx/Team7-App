@@ -242,7 +242,9 @@ public class MyBottomSheetForTrash extends BottomSheetDialogFragment {
         tvDate.setText("Last modified: "+ formattedDate);
         tvSize.setText("Size : "+ Formatter.formatShortFileSize(getContext(), mFile.length()));
         String original = db.getPath(mFile.getName()).toString();
-        tvOriginalPath.setText(original);
+        tvOriginalPath.setText("Original Path:"+ original);
+        Log.i("TEAM8", " restoreFile:" + tvOriginalPath);
+
     }
 
     @Override
