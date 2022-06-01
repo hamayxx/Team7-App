@@ -242,9 +242,11 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
 
                 if (!oldPass.equals(updateUserDTO.getPassword())) {
                     ChangePass changePass = new ChangePass(oldPass, updateUserDTO.getPassword());
-                    updatePassword(changePass, mToken);
+                    updatePassword(updateUserDTO, changePass, mToken);
                 }
-                updateProfile(updateUserDTO, mToken);
+                else {
+                    Toast.makeText(getApplicationContext(), "Your new password must different from your current one", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -339,7 +341,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         });
     }
 
-    private void updatePassword(ChangePass changePass, String token) {
+    private void updatePassword(UpdateUserDTO updateUserDTO, ChangePass changePass, String token) {
         Log.i(TAG, "Start call CHANGE PASS API");
         APIService changePassService = ServiceGenerator.createService(APIService.class);
 
@@ -362,8 +364,9 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
             public void onFailure(Call<ChangePassResponse> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
-                Toast.makeText(getApplicationContext(), "Change pass successfully", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Change pass successfully", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "Change pass successfully");
+                updateProfile(updateUserDTO, mToken);
             }
         });
     }
