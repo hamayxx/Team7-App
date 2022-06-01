@@ -221,7 +221,7 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         TextView tvEmail = (TextView) viewProfile.findViewById(R.id.fm_profile_et_mail);
         tvEmail.setText(mEmail);
         TextView tvPassword = (TextView) viewProfile.findViewById(R.id.fm_profile_et_pass);
-        tvPassword.setText("NotPasswordHere");
+        tvPassword.setText("NotPasswordHereeeeeeeeeeeeeeeeeeeeeeeee");
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,R.style.BottomSheetDialog);
         bottomSheetDialog.setContentView(viewProfile);
