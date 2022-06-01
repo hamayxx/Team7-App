@@ -1,5 +1,6 @@
 package com.example.team7_app.API;
 
+import com.example.team7_app.Model.ChangePass;
 import com.example.team7_app.Model.LoginAuthenticateDTO;
 import com.example.team7_app.Model.RegisterUserDTO;
 import com.example.team7_app.Model.UpdateUserDTO;
@@ -35,6 +36,11 @@ public interface APIService {
     @Headers("Content-Type: application/json")
     @POST("/api/account")
     Call<ResponseBody> postAccountInfo(@Header("Authorization") String authHeader, @Body UpdateUserDTO updateUserDTO);
+
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/account/change-password")
+    Call<ResponseBody> changePass(@Header("Authorization") String authHeader, @Body ChangePass changePass);
 }
 
 

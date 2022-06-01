@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.team7_app.API.APIService;
 import com.example.team7_app.API.ServiceGenerator;
+import com.example.team7_app.Model.ChangePass;
 import com.example.team7_app.Model.UpdateUserDTO;
 import com.example.team7_app.Model.User;
 import com.example.team7_app.fragment.HomeFragment;
@@ -248,7 +249,6 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         Log.i(TAG, "Start call update profile API");
         APIService updateService = ServiceGenerator.createService(APIService.class);
 
-        User user = new User();
         Call<ResponseBody> postAccountInfoCaller = updateService.postAccountInfo("Bearer " + token, updateUserDTO);
         Log.e(TAG, "AUTH HEADER: " + "Bearer " + token);
         postAccountInfoCaller.enqueue(new Callback<ResponseBody>() {
@@ -262,23 +262,27 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                     Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Update info successfully");
                 }
-                try {
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    Log.e(TAG, response.body().string());
+                else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        Log.e(TAG, response.body().string());
 
-                    status = jsonObject.getString("status");
-                    if (status.equals(400)) {
-                        Log.e(TAG, "NOT SUCCESSFULLY");
-                        message = jsonObject.getString("message");
+                        status = jsonObject.getString("status");
+                        if (status.equals(500)) {
+                            Log.e(TAG, "NOT SUCCESSFULLY");
+                            details = jsonObject.getString("detail");
+                            Toast.makeText(getApplicationContext(), details, Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Log.e(TAG, "NOT SUCCESSFULLY");
+                            message = jsonObject.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e(TAG, status + message + details);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "FAILED PARSE OBJECT");
                     }
-                    else if (status.equals(500)) {
-                        Log.e(TAG, "NOT SUCCESSFULLY");
-                        details = jsonObject.getString("detail");
-                    }
-                    Log.e(TAG, status + message + details);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e(TAG, "FAILED PARSE OBJECT");
                 }
             }
 
@@ -287,6 +291,55 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
                 Log.e(TAG, t.getMessage());
                 Log.e(TAG, call.toString());
                 Toast.makeText(getApplicationContext(), "Cannot post account info!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updatePassword(ChangePass changePass, String token) {
+        APIService changePassService = ServiceGenerator.createService(APIService.class);
+
+        Call<ResponseBody> postAccountInfoCaller = changePassService.changePass("Bearer " + token, changePass);
+        Log.e(TAG, "AUTH HEADER: " + "Bearer " + token);
+        postAccountInfoCaller.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String status = "\n";
+                String message = "\n";
+                String details = "\n";
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Update info successfully");
+                }
+                else {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        Log.e(TAG, response.body().string());
+
+                        status = jsonObject.getString("status");
+                        if (status.equals(500)) {
+                            Log.e(TAG, "NOT SUCCESSFULLY");
+                            details = jsonObject.getString("detail");
+                            Toast.makeText(getApplicationContext(), details, Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Log.e(TAG, "NOT SUCCESSFULLY");
+                            message = jsonObject.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e(TAG, status + message + details);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "FAILED PARSE OBJECT");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+                Log.e(TAG, call.toString());
+                Toast.makeText(getApplicationContext(), "Update pass successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
