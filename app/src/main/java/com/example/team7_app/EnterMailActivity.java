@@ -41,8 +41,6 @@ public class EnterMailActivity extends AppCompatActivity {
 //        Toast.makeText(getApplicationContext(), email, Toast.LENGTH_SHORT).show();
         Log.i(TAG, "Email for reset pass is: " + email);
 
-        Log.i("TEAM8", "Getting list users from server!!!");
-
         APIService resetPasswordService = ServiceGenerator.createService(APIService.class);
         Call<String> call = resetPasswordService.resetPassword(email);
 

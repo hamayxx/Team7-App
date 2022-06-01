@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(RegisterUserDTO registerUserDTO) {
-        Log.i("TEAM8", "Getting list users from server!!!");
+        Log.i("TEAM8", "Start register user");
         APIService signupService = ServiceGenerator.createService(APIService.class);
         Call<RegisterUserDTO> call = signupService.createUser(registerUserDTO);
         Log.e(TAG, "User API: "+ registerUserDTO.toString().trim());
