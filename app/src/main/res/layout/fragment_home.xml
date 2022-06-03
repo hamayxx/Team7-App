@@ -73,7 +73,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/fm_home_v_storage"
                 android:elevation="2dp"/>
 
-            <com.example.team7_app.CustomProgressBar.CustomProgressBar
+            <vn.uit.nt213.m21.team8.file_manager.CustomProgressBar.CustomProgressBar
                 android:id="@+id/fm_home_pb_mainstorage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
