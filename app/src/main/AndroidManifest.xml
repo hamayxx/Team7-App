@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.team7_app">
+    package="vn.uit.nt213.m21.team8.file_manager">
     <permission android:name="my_custom_permission_name"
         android:protectionLevel="signature" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -19,24 +19,24 @@
         android:theme="@style/Theme.Team7App"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".InfoActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.InfoActivity"
             android:exported="false" />
         <activity
-            android:name=".NewPasswordActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.NewPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".OTPActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.OTPActivity"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".EnterMailActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.EnterMailActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.WelcomeActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -46,12 +46,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.LoginActivity"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name="vn.uit.nt213.m21.team8.file_manager.HomeActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
         </activity>
