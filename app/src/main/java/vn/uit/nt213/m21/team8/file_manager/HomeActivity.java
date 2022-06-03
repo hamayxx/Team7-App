@@ -32,16 +32,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import vn.uit.nt213.m21.team8.file_manager.API.APIService;
-import vn.uit.nt213.m21.team8.file_manager.API.ServiceGenerator;
-import vn.uit.nt213.m21.team8.file_manager.Model.ChangePass;
-import vn.uit.nt213.m21.team8.file_manager.Model.ChangePassResponse;
-import vn.uit.nt213.m21.team8.file_manager.Model.UpdateUserDTO;
-import vn.uit.nt213.m21.team8.file_manager.Model.User;
-import vn.uit.nt213.m21.team8.file_manager.fragment.HomeFragment;
-import vn.uit.nt213.m21.team8.file_manager.fragment.RecentlyFragment;
-import vn.uit.nt213.m21.team8.file_manager.fragment.TrashFragment;
-import vn.uit.nt213.m21.team8.file_manager.my_interface.IClickHomeListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -61,6 +51,16 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.uit.nt213.m21.team8.file_manager.API.APIService;
+import vn.uit.nt213.m21.team8.file_manager.API.ServiceGenerator;
+import vn.uit.nt213.m21.team8.file_manager.Model.ChangePass;
+import vn.uit.nt213.m21.team8.file_manager.Model.ChangePassResponse;
+import vn.uit.nt213.m21.team8.file_manager.Model.UpdateUserDTO;
+import vn.uit.nt213.m21.team8.file_manager.Model.User;
+import vn.uit.nt213.m21.team8.file_manager.fragment.HomeFragment;
+import vn.uit.nt213.m21.team8.file_manager.fragment.RecentlyFragment;
+import vn.uit.nt213.m21.team8.file_manager.fragment.TrashFragment;
+import vn.uit.nt213.m21.team8.file_manager.my_interface.IClickHomeListener;
 
 public class HomeActivity extends AppCompatActivity  implements IClickHomeListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -230,16 +230,22 @@ public class HomeActivity extends AppCompatActivity  implements IClickHomeListen
         bottomSheetDialog.setContentView(viewProfile);
         bottomSheetDialog.show();
 
-        TextView tvUsername = (TextView) viewProfile.findViewById(R.id.fm_profile_pass_et_pass);
+        TextView tvOldPass = (TextView) viewProfile.findViewById(R.id.fm_profile_pass_et_pass);
 
         CardView btnNext = viewProfile.findViewById(R.id.fm_profile_pass_btn_next);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String oldPass = tvUsername.getText().toString();
+                String oldPass = tvOldPass.getText().toString();
 
-                if (!oldPass.equals(updateUserDTO.getPassword())) {
+                if (updateUserDTO.getFirstName().isEmpty()) {
+                    updateProfile(updateUserDTO, mToken);
+
+                    Toast.makeText(getApplicationContext(), "Update info successfully", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Update info successfully");
+                }
+                else if (!oldPass.equals(updateUserDTO.getPassword())) {
                     ChangePass changePass = new ChangePass(oldPass, updateUserDTO.getPassword());
                     updatePassword(updateUserDTO, changePass, mToken);
                 }
