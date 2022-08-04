@@ -4,7 +4,7 @@
 ### This app help you easily manage your files and folders on your device. What’s more, you can find how many files & apps you have on your device at a glance immediately after opening FiMa.
 ### It supports every file management actions (open, search, delete, rename)
 
-Tech skill: java, spring boot, AWS (server)
+Tech skill: java, spring boot, GCP (server)
 
 ### Screen
  **Main screnn**
